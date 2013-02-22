@@ -1,3 +1,4 @@
+# dont use this file for now
 df='~/Dropbox/m3e/.dotfiles'
 ln -s $df/vim ~/.vim
 ln -s $df/zsh/zshrc ~/.zshrc
