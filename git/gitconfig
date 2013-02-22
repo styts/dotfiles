@@ -1,0 +1,33 @@
+[user]
+	name = styts
+	email = kirstyts@gmail.com
+[github]
+    user = styts
+    token = 318595b058bbd070a291c66bc01a7394
+[core]
+    excludesfile = /Users/kirill/.gitignore
+	editor = vim
+
+# colorize
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[push]
+	;default = simple
