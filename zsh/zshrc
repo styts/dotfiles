@@ -1,6 +1,6 @@
 # Zsh / oh-my-zsh stuff
-ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
-ZSH_THEME="clean"
+ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="kirill"
 CASE_SENSITIVE="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
@@ -50,11 +50,6 @@ alias vz='vim ~/.zshrc'
 # keybindings
 bindkey -s "^Z" "fg\n"
 
-# Sublme helpers
-alias sublavs='echo "sys.path.append(\"/Users/kirill/.virtualenvs/avs/lib/python2.7/site-packages\")" | pbcopy'
-alias sublpath='echo "sys.path.append(\"$VIRTUAL_ENV/lib/python2.7/site-packages\")" | pbcopy'
-
-
 # Zsh modules (no idea what those do)
 autoload -U zutil
 autoload -U compinit
@@ -83,5 +78,3 @@ source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
-
-
