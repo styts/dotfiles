@@ -20,7 +20,8 @@ if [[ $('hostname') == 'rantanplan.bemaw.meduniwien.ac.at' ]]; then
     alias site-packages="$E/env/lib/python2.7/site-packages"
 
     # svn diff
-    alias svnd="svn diff > /tmp/svn.diff ; s /tmp/svn.diff"
+    #alias svnd="svn diff > /tmp/svn.diff ; s /tmp/svn.diff"
+    alias svnd="svn diff | less"
 
     # svn st
     alias gs="svn st"
@@ -34,4 +35,10 @@ if [[ $('hostname') == 'rantanplan.bemaw.meduniwien.ac.at' ]]; then
 
     # test alias
     alias t="./manage.py test -x"
+
+    # activate exam2 Virtualenv
+    workon exam2
+
+    # latex
+    export PATH=/usr/local/texlive/2012/bin/x86_64-darwin:$PATH
 fi

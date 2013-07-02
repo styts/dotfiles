@@ -4,8 +4,15 @@ if has("gui_macvim")
     map <D-p> :CtrlP<CR>
 
     " start full screen
-    set fullscreen
+    "set fullscreen
 
     " tab navigation
     :map <C-Tab> gt
+
+    " don't want transparency
+    set transparency=0
+
+    set lines=55
+
+    autocmd VimLeave * macaction terminate:
 endif

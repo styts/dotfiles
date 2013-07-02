@@ -22,6 +22,7 @@ alias zs='sz'
 alias zv='vz'
 alias fab='nocorrect fab'
 alias ffind='nocorrect ffind'
+alias lein='nocorrect lein'
 
 # aliases
 alias sz="source ~/.zshrc"
@@ -33,7 +34,6 @@ alias la='ls -la'
 alias du='du -h'
 alias df='df -h'
 alias gs='gst'
-alias s='subl'
 alias pyclean='find . -name "*.pyc" -delete'
 alias ip='ipython'
 alias cdp='cdproject'
