@@ -12,7 +12,7 @@ if has("gui_macvim")
     " don't want transparency
     set transparency=0
 
-    set lines=55
+    set lines=60
 
     autocmd VimLeave * macaction terminate:
 endif
