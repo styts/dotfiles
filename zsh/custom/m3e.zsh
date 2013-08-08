@@ -34,7 +34,7 @@ if [[ $('hostname') == 'rantanplan.bemaw.meduniwien.ac.at' ]]; then
     source /Users/kirill/software/autols/shell/zsh
 
     # test alias
-    alias t="./manage.py test -x"
+    alias t="py.test -x"
 
     # activate exam2 Virtualenv
     workon exam2

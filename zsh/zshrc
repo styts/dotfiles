@@ -6,6 +6,7 @@ DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 plugins=(svn django brew dircycle git history-substring-search m3e air dict extract
 themes
+web-search
 )
 
 ### useful hacks from StackOverflow
@@ -14,6 +15,7 @@ setopt AUTO_PUSHD
 setopt RM_STAR_WAIT
 
 # common typos
+alias ls='ls -G --color'
 alias sl=ls
 alias ks=ls
 alias oepn='open'
@@ -28,13 +30,12 @@ alias lein='nocorrect lein'
 alias sz="source ~/.zshrc"
 alias df='df -h'
 alias ds='ds -sh'
-alias ls='ls -G'
-alias ll='ls -lG'
-alias la='ls -la'
+alias ll='ls -lG --color'
+alias la='ls -la --color'
 alias du='du -h'
 alias df='df -h'
 alias gs='gst'
-alias pyclean='find . -name "*.pyc" -delete'
+alias pyclean='find . -name "*.pyc" -delete ; find . -name __pycache__ -exec rm -rf {} \; '
 alias ip='ipython'
 alias cdp='cdproject'
 
@@ -78,3 +79,9 @@ source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
+
+alias ls='ls --color'
+
+alias mkae='make'
+
+alias git='hub'
