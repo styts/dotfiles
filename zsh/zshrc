@@ -1,70 +1,21 @@
 # Zsh / oh-my-zsh stuff
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="kirill"
+ZSH_THEME="styts"
 CASE_SENSITIVE="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
-plugins=(svn django brew dircycle git history-substring-search m3e air dict extract
-themes
-web-search
-)
+plugins=(svn django brew dircycle git history-substring-search m3e air dict
+extract themes web-search aliases)
 
-### useful hacks from StackOverflow
-setopt AUTO_PUSHD
 # 10 second wait if you do something that will delete everything.
 setopt RM_STAR_WAIT
 
-# common typos
-alias ls='ls -G --color'
-alias sl=ls
-alias ks=ls
-alias oepn='open'
-alias pyhton='python'
-alias zs='sz'
-alias zv='vz'
-alias fab='nocorrect fab'
-alias ffind='nocorrect ffind'
-alias lein='nocorrect lein'
-
-# aliases
-alias sz="source ~/.zshrc"
-alias df='df -h'
-alias ds='ds -sh'
-alias ll='ls -lG --color'
-alias la='ls -la --color'
-alias du='du -h'
-alias df='df -h'
-alias gs='gst'
-alias pyclean='find . -name "*.pyc" -delete ; find . -name __pycache__ -exec rm -rf {} \; '
-alias ip='ipython'
-alias cdp='cdproject'
-
-# shortcuts
-alias c=clear
-alias v='vim'
-alias p='python'
-alias b='pbcopy'
-alias o='open'
-alias pb='pwd | pbcopy'
-alias vz='vim ~/.zshrc'
-
-# keybindings
+# toggle bg/fg
 bindkey -s "^Z" "fg\n"
-
-# Zsh modules (no idea what those do)
-autoload -U zutil
-autoload -U compinit
-autoload -U complist
-autoload -U compinit promptinit zcalc zsh-mime-setup
-compinit
-promptinit
-zsh-mime-setup
-
-# for vim solarized? lt. http://mirnazim.org/writings/vim-plugins-i-use/
 export TERM="xterm-256color"
 
 # disable annoying autocorrect questions
-unsetopt correct_all
+#unsetopt correct_all
 
 # Django
 export DJANGO_COLORS="dark"
@@ -79,9 +30,3 @@ source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
-
-alias ls='ls --color'
-
-alias mkae='make'
-
-alias git='hub'
