@@ -1,14 +1,10 @@
-[user]
-	name = styts
-	email = kirstyts@gmail.com
-[github]
-    user = styts
-    token = 318595b058bbd070a291c66bc01a7394
-[core]
-    excludesfile = /Users/kirill/.gitignore
-	editor = vim
+[include]
+    path = ~/.gitconfig.local
 
-# colorize
+[core]
+    excludesfile = ~/.gitignore
+    editor = vim
+
 [color]
     branch = auto
     diff = auto
@@ -29,7 +25,6 @@
     added = yellow
     changed = green
     untracked = cyan
-[push]
-	;default = simple
+
 [push]
 	default = simple
