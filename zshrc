@@ -38,3 +38,12 @@ source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
+
+# vim mode
+bindkey -v
+bindkey '^R' history-incremental-search-backward
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# pass completion
+source /usr/local/share/zsh/site-functions/_pass

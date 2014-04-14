@@ -1,4 +1,3 @@
 *.DS_Store
 *.pyc
 .ropeproject
-ml_login_data.mat
