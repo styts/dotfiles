@@ -46,4 +46,4 @@ bindkey '^R' history-incremental-search-backward
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # pass completion
-source /usr/local/share/zsh/site-functions/_pass
+[ -f /usr/local/share/zsh/site-functions/_pass ] && source /usr/local/share/zsh/site-functions/_pass
