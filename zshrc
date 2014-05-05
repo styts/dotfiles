@@ -47,3 +47,12 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # pass completion
 [ -f /usr/local/share/zsh/site-functions/_pass ] && source /usr/local/share/zsh/site-functions/_pass
+
+# ubuntu vm needs the 'workon', etc. commands
+export VENVWRAPPER=/usr/share/virtualenvwrapper/virtualenvwrapper.sh
+[ -f $VENVWRAPPER ] && source $VENVWRAPPER
+
+# ubuntu vm runs inside OSX host and needs to use gvim to share clipboard with OSX
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    alias vim="gvim -v"
+fi
