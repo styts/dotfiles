@@ -1,3 +1,4 @@
+" hello world
 " General
 set nocompatible
 syntax on
@@ -17,6 +18,9 @@ set expandtab                   " Tabs are spaces, not tabs
 set tabstop=4                   " An indentation every four columns
 set softtabstop=4               " Let backspace delete indent
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
+set wildmenu                    " Show list instead of just completing
+set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest commonart, then all.
+set colorcolumn=80              " visually limit text length
 
 " Vundle
 filetype off
@@ -24,14 +28,19 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim.git'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'cyplo/vim-colors-solarized'
 Plugin 'valloric/YouCompleteMe'
 Plugin 'rking/ag.vim'
+Plugin 'skammer/vim-css-color'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'airblade/vim-gitgutter'
 call vundle#end()
 filetype plugin indent on
 
@@ -72,6 +81,7 @@ set nofoldenable
 
 " edit .vimrc
 map <Leader>v :e ~/.vimrc<CR>
+map <Leader>V :source ~/.vimrc<CR>
 
 " split locations
 set splitright
@@ -94,12 +104,6 @@ set scrolloff=9999
 cabbrev Q q
 cabbrev W w
 cabbrev X x
-"if has("user_commands")
-    "command! -bang -nargs=* -complete=file E e<bang> <args>
-    "command! -bang -nargs=* -complete=file W w<bang> <args>
-    "command! -bang Q q<bang>
-    "command! -bang X x<bang>
-"endif
 
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
@@ -130,6 +134,30 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+let g:rbpt_colorpairs = [
+    \ ['blue',       '#FF6000'],
+    \ ['cyan', '#00FFFF'],
+    \ ['darkmagenta',    '#CC00FF'],
+    \ ['yellow',   '#FFFF00'],
+    \ ['red',     '#FF0000'],
+    \ ['darkgreen',    '#00FF00'],
+    \ ['White',         '#c0c0c0'],
+    \ ['blue',       '#FF6000'],
+    \ ['cyan', '#00FFFF'],
+    \ ['darkmagenta',    '#CC00FF'],
+    \ ['yellow',   '#FFFF00'],
+    \ ['red',     '#FF0000'],
+    \ ['darkgreen',    '#00FF00'],
+    \ ['White',         '#c0c0c0'],
+    \ ['blue',       '#FF6000'],
+    \ ['cyan', '#00FFFF'],
+    \ ['darkmagenta',    '#CC00FF'],
+    \ ['yellow',   '#FFFF00'],
+    \ ['red',     '#FF0000'],
+    \ ['darkgreen',    '#00FF00'],
+    \ ['White',         '#a0a0a0'],
+    \ ]
+let g:rbpt_max = 21
 
 " NERDTreeTabs
 let NERDTreeIgnore=['\.DS_Store$', '.ropeproject', '\.pyc', '\~$', '\.swo$']
@@ -141,3 +169,8 @@ map <Leader>f :NERDTreeFind<CR>
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+
+" UltiSnip
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
