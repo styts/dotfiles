@@ -21,6 +21,7 @@ set nojoinspaces                " Prevents inserting two spaces after punctuatio
 set wildmenu                    " Show list instead of just completing
 set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest commonart, then all.
 set colorcolumn=80              " visually limit text length
+set smartcase                   " search case-sensitive if term includes uppercase letters
 
 " Vundle
 filetype off
@@ -31,6 +32,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim.git'
+Plugin 'klen/python-mode'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -41,6 +43,7 @@ Plugin 'skammer/vim-css-color'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'airblade/vim-gitgutter'
+Bundle 'plasticboy/vim-markdown'
 call vundle#end()
 filetype plugin indent on
 
@@ -80,7 +83,7 @@ map <Leader>h :set nohlsearch<CR>
 set nofoldenable
 
 " edit .vimrc
-map <Leader>v :e ~/.vimrc<CR>
+map <Leader>v :e ~/.dotfiles/vimrc<CR>
 map <Leader>V :source ~/.vimrc<CR>
 
 " split locations
@@ -124,7 +127,18 @@ match OverLength /\%81v.\+/
 set background=dark
 colorscheme solarized
 
+" sane pasting
 set pastetoggle=<Leader>p
+
+" equalize windows
+"nnoremap <Leader>= ^W=<CR>
+nnoremap <Leader>= <C-w>=<CR>
+
+" markdown
+au FileType md set filetype=markdown
+
+" gt / tg tab navigation
+nnoremap tg gT
 
 "########### Plugin-specific settings ##############
 
@@ -154,23 +168,59 @@ let g:rbpt_colorpairs = [
     \ ['darkmagenta',    '#CC00FF'],
     \ ['yellow',   '#FFFF00'],
     \ ['red',     '#FF0000'],
-    \ ['darkgreen',    '#00FF00'],
-    \ ['White',         '#a0a0a0'],
     \ ]
-let g:rbpt_max = 21
+let g:rbpt_max = 18
 
 " NERDTreeTabs
 let NERDTreeIgnore=['\.DS_Store$', '.ropeproject', '\.pyc', '\~$', '\.swo$']
-"let NERDTreeIgnore += ['\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 map <Leader>f :NERDTreeFind<CR>
+
+" NERDCommenter
+let g:NERDCustomDelimiters = {'python': {'left': '# '}}
 
 " CtrlP
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+nnoremap <c-o> :CtrlPMRUFiles<CR>
 
 " UltiSnip
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-e>"
+" this mapping Enter key to <C-y> to chose the current highlight item 
+" and close the selection list, same as other IDEs.
+" CONFLICT with some plugins like tpope/Endwise
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Pymode
+let g:pymode_rope = 1
+let g:pymode_rope_goto_definition_bind = '<Leader>j'
+let g:pymode_rope_goto_definition_cmd = 'e'
+nnoremap <Leader>j <c-c>g<CR>
+
+" Markdown
+let g:vim_markdown_folding_disabled=1
+
+" surround
+vnoremap s S
