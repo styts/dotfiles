@@ -170,6 +170,8 @@ let g:rbpt_colorpairs = [
 let g:rbpt_max = 18
 
 " NERDTreeTabs
+let g:nerdtree_tabs_open_on_console_startup = 1
+let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore=['\.DS_Store$', '.ropeproject', '\.pyc', '\~$', '\.swo$']
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 map <Leader>f :NERDTreeFind<CR>
@@ -194,4 +196,4 @@ nnoremap <Leader>j <c-c>g<CR>
 let g:vim_markdown_folding_disabled=1
 
 " surround
-vnoremap s S
+vmap s S
