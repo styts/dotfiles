@@ -12,7 +12,7 @@ Install my fork of oh-my-zsh under `~/.oh-my-zsh`
 
 Clone this repo under `~./dotfiles`
 
-    git clone git@github.com:styts/dotfiles-my-zsh.git .dotfiles
+    git clone git@github.com:styts/dotfiles.git .dotfiles
 
 Linking
 -------
