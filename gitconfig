@@ -1,5 +1,5 @@
 [include]
-    path = ~/.gitconfig.local
+    path = ~/.gitconfig.local # this should inklude user, email and github token
 
 [core]
     excludesfile = ~/.gitignore
@@ -28,10 +28,13 @@
 
 [push]
 	default = simple
+
 [user]
 	name = Kir Styts
 	email = kirstyts@gmail.com
+
 [pull]
 	rebase = true
+
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit

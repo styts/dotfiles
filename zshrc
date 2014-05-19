@@ -22,7 +22,7 @@ export TERM="xterm-256color"
 export DJANGO_COLORS="dark"
 
 # Obvious...
-export EDITOR="vim"
+export EDITOR="gvim -v"
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/local/share/python:/usr/local/share/npm/bin:/bin:/usr/sbin:/sbin:/usr/bin:/usr/X11/bin:$HOME/bin

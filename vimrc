@@ -40,7 +40,7 @@ Plugin 'cyplo/vim-colors-solarized'
 Plugin 'valloric/YouCompleteMe'
 Plugin 'rking/ag.vim'
 Plugin 'skammer/vim-css-color'
-Plugin 'airblade/vim-gitgutter'
+"Plugin 'airblade/vim-gitgutter'
 Bundle 'plasticboy/vim-markdown'
 call vundle#end()
 filetype plugin indent on
