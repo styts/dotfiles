@@ -21,6 +21,14 @@ Install gvim for clipboard over ssh support
 
     sudo apt-get install gvim-gtk
     
+Link the dotfiles
+
+    ln -s .dotfiles/gitconfig .gitconfig
+    ln -s .dotfiles/gitignore .gitignore
+    ln -s .dotfiles/tmux.conf .tmux.conf
+    ln -s .dotfiles/vimrc .vimrc
+    ln -s .dotfiles/zshrc .zshrc
+    
 Install Vundle and update the vim plugins
 
     mkdir ~/.vimbackup
@@ -29,11 +37,5 @@ Install Vundle and update the vim plugins
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +BundleInstall
 
-Linking
--------
 
-    ln -s .dotfiles/gitconfig .gitconfig
-    ln -s .dotfiles/gitignore .gitignore
-    ln -s .dotfiles/tmux.conf .tmux.conf
-    ln -s .dotfiles/vimrc .vimrc
-    ln -s .dotfiles/zshrc .zshrc
+
