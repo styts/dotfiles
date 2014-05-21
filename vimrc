@@ -200,3 +200,6 @@ vmap s S
 
 " airline
 let g:airline_powerline_fonts = 1  " use powerline fonts
+
+" russian specific
+:set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz

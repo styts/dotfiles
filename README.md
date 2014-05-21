@@ -4,6 +4,7 @@ Install common system packages
     # install ffind
     git clone https://github.com/jaimebuelta/ffind.git
     cd ffind && sudo python setup.py install && cd .. && rm -rf ffind
+    # TODO: install ag
 
 Change user shell to zsh
 
@@ -36,6 +37,3 @@ Install Vundle and update the vim plugins
     mkdir ~/.vimundo
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +BundleInstall
-
-
-

@@ -33,6 +33,9 @@ export PATH=/usr/local/bin:/usr/local/share/npm/bin:/bin:/usr/sbin:/sbin:/usr/bi
 # brew does not link gettext
 export PATH=/usr/local/Cellar/gettext/0.18.2/bin:$PATH
 
+# on mac, gnu utils should be before mac defaults, (otherwise ls is gls, etc.)
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
 # wordnet path
 export PATH=/usr/local/WordNet-3.0/bin:$PATH
 
@@ -53,6 +56,9 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 # ubuntu vm needs the 'workon', etc. commands
 export VENVWRAPPER=/usr/share/virtualenvwrapper/virtualenvwrapper.sh
 [ -f $VENVWRAPPER ] && source $VENVWRAPPER
+# same for mac (homebrew)
+export VENVWRAPPER=/usr/local/bin/virtualenvwrapper.sh
+[ -f $VENVWRAPPER ] && source $VENVWRAPPER
 
 # same on debian
 VW="/etc/bash_completion.d/virtualenvwrapper" 
@@ -62,3 +68,6 @@ VW="/etc/bash_completion.d/virtualenvwrapper"
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     alias vim="gvim -v"
 fi
+
+# enable virtualenvwrapper shims and autocompletion
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
