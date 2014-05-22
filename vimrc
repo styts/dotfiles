@@ -37,7 +37,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'cyplo/vim-colors-solarized'
-Plugin 'valloric/YouCompleteMe'
+"Plugin 'valloric/YouCompleteMe' "requires vim 7.3.584+
 Plugin 'rking/ag.vim'
 Plugin 'skammer/vim-css-color'
 "Plugin 'airblade/vim-gitgutter'
