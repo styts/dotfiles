@@ -26,9 +26,6 @@
     changed = green
     untracked = cyan
 
-[push]
-	default = simple
-
 [user]
 	name = Kir Styts
 	email = kirstyts@gmail.com
@@ -38,3 +35,4 @@
 
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	
