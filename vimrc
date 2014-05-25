@@ -45,6 +45,12 @@ Plugin 'cyplo/vim-colors-solarized'
 Plugin 'rking/ag.vim'
 Plugin 'skammer/vim-css-color'
 Bundle 'plasticboy/vim-markdown'
+Plugin 'guns/vim-clojure-static'
+Plugin 'guns/vim-clojure-highlight'
+Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-classpath'
+Plugin 'vim-scripts/paredit.vim'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -125,6 +131,7 @@ match OverLength /\%81v.\+/
 " colorscheme
 set background=light
 colorscheme solarized
+map <F5> :set background=dark<CR>:let solarized_termtrans=0<CR>:colorscheme solarized<CR>
 
 " sane pasting
 set pastetoggle=<F2>
@@ -203,3 +210,5 @@ let g:airline_powerline_fonts = 1  " use powerline fonts
 
 " russian specific
 :set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+
+
