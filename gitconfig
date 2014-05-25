@@ -27,7 +27,7 @@
     untracked = cyan
 
 [push]
-	default = simple
+	default = matching
 
 [user]
 	name = Kir Styts
