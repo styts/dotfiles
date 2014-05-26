@@ -30,12 +30,11 @@
 	default = matching
 
 [user]
-	name = Kir Styts
-	email = kirstyts@gmail.com
+	name = Kirill Stytsenko
+	email = kstytsenko@yelsterdigital.com
 
 [pull]
 	rebase = true
 
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	

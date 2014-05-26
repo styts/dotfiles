@@ -6,6 +6,7 @@ DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 plugins=(svn django brew dircycle git history-substring-search m3e air
 #dict  # started using dict.cc.py insted
+virtualenvwrapper
 extract themes web-search aliases)
 
 # 10 second wait if you do something that will delete everything.
@@ -24,15 +25,16 @@ export DJANGO_COLORS="dark"
 # Obvious...
 export EDITOR="gvim -v"
 
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/share/python:/usr/local/share/npm/bin:/bin:/usr/sbin:/sbin:/usr/bin:/usr/X11/bin:$HOME/bin
+export PATH=/usr/local/bin:/usr/local/share/npm/bin:/bin:/usr/sbin:/sbin:/usr/bin:/usr/X11/bin:$HOME/bin
 
 # brew does not link gettext
 export PATH=/usr/local/Cellar/gettext/0.18.2/bin:$PATH
 
 # wordnet path
 export PATH=/usr/local/WordNet-3.0/bin:$PATH
-
 
 source $ZSH/oh-my-zsh.sh
 
