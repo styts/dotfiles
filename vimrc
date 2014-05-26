@@ -184,7 +184,7 @@ let g:NERDCustomDelimiters = {'python': {'left': '# '}}
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
-nnoremap <c-o> :CtrlPMRUFiles<CR>
+"nnoremap <c-o> :CtrlPMRUFiles<CR>
 
 " Pymode
 let g:pymode_warnings = 0
