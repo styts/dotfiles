@@ -27,6 +27,7 @@ set smartcase                   " search case-sensitive if term includes upperca
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'bling/vim-airline'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
@@ -122,11 +123,11 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
 " colorscheme
-set background=dark
+set background=light
 colorscheme solarized
 
 " sane pasting
-set pastetoggle=<Leader>p
+"set pastetoggle=<Leader>p
 
 " equalize windows
 "nnoremap <Leader>= ^W=<CR>
@@ -197,3 +198,6 @@ let g:vim_markdown_folding_disabled=1
 
 " surround
 vmap s S
+
+" airline
+let g:airline_powerline_fonts = 1  " use powerline fonts

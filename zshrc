@@ -7,6 +7,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(svn django brew dircycle git history-substring-search m3e air
 #dict  # started using dict.cc.py insted
 virtualenvwrapper
+iterm2
 extract themes web-search aliases)
 
 # 10 second wait if you do something that will delete everything.
