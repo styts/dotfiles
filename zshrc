@@ -5,7 +5,6 @@ CASE_SENSITIVE="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 plugins=(svn django brew dircycle git history-substring-search m3e air
-#dict  # started using dict.cc.py insted
 virtualenvwrapper
 iterm2
 extract themes web-search aliases)
@@ -54,6 +53,10 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 # ubuntu vm needs the 'workon', etc. commands
 export VENVWRAPPER=/usr/share/virtualenvwrapper/virtualenvwrapper.sh
 [ -f $VENVWRAPPER ] && source $VENVWRAPPER
+
+# same on debian
+VW="/etc/bash_completion.d/virtualenvwrapper" 
+[ -f $VW ] && source $VW
 
 # ubuntu vm runs inside OSX host and needs to use gvim to share clipboard with OSX
 if [[ "$OSTYPE" == "linux-gnu" ]]; then

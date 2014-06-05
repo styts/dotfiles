@@ -22,6 +22,10 @@ set wildmenu                    " Show list instead of just completing
 set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest commonart, then all.
 set colorcolumn=80              " visually limit text length
 set smartcase                   " search case-sensitive if term includes uppercase letters
+set nobackup
+set noswapfile
+set hidden                      " allows to edit another file without first saving current one
+
 
 " Vundle
 filetype off
@@ -38,10 +42,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'cyplo/vim-colors-solarized'
-"Plugin 'valloric/YouCompleteMe' "requires vim 7.3.584+
 Plugin 'rking/ag.vim'
 Plugin 'skammer/vim-css-color'
-"Plugin 'airblade/vim-gitgutter'
 Bundle 'plasticboy/vim-markdown'
 call vundle#end()
 filetype plugin indent on
@@ -55,15 +57,13 @@ if has('clipboard')
 	endif
 endif
 
-" Backups & Undo
-set backup
+" Undo
 if has('persistent_undo')
     set undodir=~/.vim/undodir
     set undofile                " So is persistent undo ...
     set undolevels=1000         " Maximum number of changes that can be undone
     set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
 endif
-set backupdir=$HOME/.vimbackup//
 set directory=$HOME/.vimswap//
 set viewdir=$HOME/.vimviews//
 
@@ -127,10 +127,9 @@ set background=light
 colorscheme solarized
 
 " sane pasting
-"set pastetoggle=<Leader>p
+set pastetoggle=<F2>
 
 " equalize windows
-"nnoremap <Leader>= ^W=<CR>
 nnoremap <Leader>= <C-w>=<CR>
 
 " markdown

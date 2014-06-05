@@ -2,3 +2,4 @@
 *.pyc
 .ropeproject
 node_modules
+kahua/yelster/settings/local.py
