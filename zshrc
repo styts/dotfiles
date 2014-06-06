@@ -5,7 +5,7 @@ CASE_SENSITIVE="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 plugins=(svn django brew dircycle git history-substring-search m3e air
-virtualenvwrapper
+#virtualenvwrapper
 iterm2
 extract themes web-search aliases)
 

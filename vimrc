@@ -90,10 +90,10 @@ set splitright
 set splitbelow
 
 " Easy window navigation
-map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_
-map <C-L> <C-W>l<C-W>_
-map <C-H> <C-W>h<C-W>_
+map <C-J> <C-W>j<C-W>=
+map <C-K> <C-W>k<C-W>=
+map <C-L> <C-W>l<C-W>=
+map <C-H> <C-W>h<C-W>=
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
@@ -187,7 +187,7 @@ let g:ctrlp_custom_ignore = {
 
 " Pymode
 let g:pymode_warnings = 0
-let g:pymode_rope = 1
+let g:pymode_rope = 0
 let g:pymode_rope_goto_definition_bind = '<Leader>j'
 let g:pymode_rope_goto_definition_cmd = 'e'
 nnoremap <Leader>j <c-c>g<CR>
