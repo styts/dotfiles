@@ -4,10 +4,20 @@ ZSH_THEME="styts"
 CASE_SENSITIVE="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
-plugins=(svn django brew dircycle git history-substring-search m3e air
-#virtualenvwrapper
-iterm2
-extract themes web-search aliases)
+plugins=(
+    django
+    brew
+    dircycle
+    git
+    history-substring-search
+    air
+    iterm2
+    vagrant
+    extract
+    themes
+    web-search
+    aliases
+)
 
 # 10 second wait if you do something that will delete everything.
 setopt RM_STAR_WAIT
@@ -71,3 +81,7 @@ fi
 
 # enable virtualenvwrapper shims and autocompletion
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+# agent to vagrant forwarding
+key_file=~/.ssh/id_dsa
+[[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file

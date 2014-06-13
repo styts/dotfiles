@@ -50,6 +50,7 @@ Plugin 'guns/vim-clojure-highlight'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-classpath'
 Plugin 'vim-scripts/paredit.vim'
+Plugin 'ivanov/vim-ipython'
 
 call vundle#end()
 filetype plugin indent on
