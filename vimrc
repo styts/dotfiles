@@ -200,7 +200,7 @@ let g:rbpt_max = 18
 " NERDTreeTabs
 let g:nerdtree_tabs_open_on_console_startup = 0
 let NERDTreeShowBookmarks = 1
-let NERDTreeIgnore=['\.DS_Store$', '.ropeproject', '\.pyc', '\~$', '\.swo$']
+let NERDTreeIgnore=['\.DS_Store$', '.ropeproject', '\.pyc', '\~$', '\.swo$', '__pycache__']
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 map <Leader>f :NERDTreeFind<CR>
 
