@@ -40,3 +40,7 @@ Install Vundle and update the vim plugins
     mkdir ~/.vimundo
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +BundleInstall
+
+Webfaction ip
+
+    echo "37.58.75.237 wf" >> /etc/hosts
