@@ -1,0 +1,3 @@
+Host wf
+    User ksware
+    ServerAliveInterval 60

@@ -31,6 +31,7 @@ Link the dotfiles
     ln -s .dotfiles/vimrc .vimrc
     ln -s .dotfiles/zshrc .zshrc
     ln -s .dotfiles/inputrc .inputrc
+    ln -s .dotfiles/sshconfig .ssh/config
     
 Install Vundle and update the vim plugins
 
