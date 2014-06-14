@@ -1,0 +1,2 @@
+# ipython, and other readline tools (e.g. lein) should support vi keybindings
+set editing-mode vi

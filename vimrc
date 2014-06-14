@@ -51,6 +51,7 @@ Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-classpath'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'ivanov/vim-ipython'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on
@@ -204,6 +205,7 @@ let g:pymode_warnings = 0
 let g:pymode_rope = 0
 let g:pymode_rope_goto_definition_bind = '<Leader>j'
 let g:pymode_rope_goto_definition_cmd = 'e'
+let g:pymode_lint_ignore = "E501,W0401"
 nnoremap <Leader>j <c-c>g<CR>
 
 " Markdown

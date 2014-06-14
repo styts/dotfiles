@@ -21,6 +21,7 @@ Clone this repo under `~./dotfiles`
 Install gvim for clipboard over ssh support
 
     sudo apt-get install gvim-gtk
+    # or vim-gtk if that one is not found (as on ubuntu server)
     
 Link the dotfiles
 
@@ -29,6 +30,7 @@ Link the dotfiles
     ln -s .dotfiles/tmux.conf .tmux.conf
     ln -s .dotfiles/vimrc .vimrc
     ln -s .dotfiles/zshrc .zshrc
+    ln -s .dotfiles/inputrc .inputrc
     
 Install Vundle and update the vim plugins
 
