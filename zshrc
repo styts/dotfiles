@@ -10,7 +10,6 @@ plugins=(
     dircycle
     git
     history-substring-search
-    air
     iterm2
     vagrant
     extract
@@ -26,28 +25,24 @@ setopt RM_STAR_WAIT
 bindkey -s "^Z" "fg\n"
 export TERM="xterm-256color"
 
-# disable annoying autocorrect questions
-#unsetopt correct_all
-
 # Django
 export DJANGO_COLORS="dark"
 
 # Obvious...
 export EDITOR="gvim -v"
 
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/local/share/npm/bin:/bin:/usr/sbin:/sbin:/usr/bin:/usr/X11/bin:$HOME/bin
 
-# brew does not link gettext
-export PATH=/usr/local/Cellar/gettext/0.18.2/bin:$PATH
-
-# on mac, gnu utils should be before mac defaults, (otherwise ls is gls, etc.)
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-
-# wordnet path
-export PATH=/usr/local/WordNet-3.0/bin:$PATH
+if [[ `uname` == 'Darwin' ]]; then
+    # brew does not link gettext
+    export PATH=/usr/local/Cellar/gettext/0.18.2/bin:$PATH
+    # on mac, gnu utils should be before mac defaults, (otherwise ls is gls, etc.)
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    # agent to vagrant forwarding
+    key_file=~/.ssh/id_dsa
+    [[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -69,10 +64,9 @@ export VENVWRAPPER=/usr/share/virtualenvwrapper/virtualenvwrapper.sh
 # same for mac (homebrew)
 export VENVWRAPPER=/usr/local/bin/virtualenvwrapper.sh
 [ -f $VENVWRAPPER ] && source $VENVWRAPPER
-
 # same on debian
-VW="/etc/bash_completion.d/virtualenvwrapper" 
-[ -f $VW ] && source $VW
+export VENVWRAPPER="/etc/bash_completion.d/virtualenvwrapper" 
+[ -f $VENVWRAPPER ] && source $VENVWRAPPER
 
 # ubuntu vm runs inside OSX host and needs to use gvim to share clipboard with OSX
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -81,7 +75,3 @@ fi
 
 # enable virtualenvwrapper shims and autocompletion
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-
-# agent to vagrant forwarding
-key_file=~/.ssh/id_dsa
-[[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file
