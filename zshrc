@@ -16,6 +16,8 @@ plugins=(
     themes
     web-search
     aliases
+    pro
+    yellow
 )
 
 # 10 second wait if you do something that will delete everything.

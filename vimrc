@@ -146,6 +146,12 @@ au FileType md set filetype=markdown
 " gt / tg tab navigation
 nnoremap tg gT
 
+" Ruby syntax highlighting for Vagrantfiles
+augroup vagrant
+    au!
+    au BufRead,BufNewFile Vagrantfile set filetype=ruby
+augroup END
+
 "########### Plugin-specific settings ##############
 
 " Rainbow parentheses
