@@ -5,18 +5,19 @@ CASE_SENSITIVE="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 plugins=(
-    django
+    aliases
     brew
     dircycle
+    django
+    extract
     git
     history-substring-search
     iterm2
-    vagrant
-    extract
-    themes
-    web-search
-    aliases
+    pip
     pro
+    themes
+    vagrant
+    web-search
     yellow
 )
 
