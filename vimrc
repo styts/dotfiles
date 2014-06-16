@@ -31,6 +31,7 @@ set hidden                      " allows to edit another file without first savi
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
@@ -44,15 +45,15 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'cyplo/vim-colors-solarized'
 Plugin 'rking/ag.vim'
 Plugin 'skammer/vim-css-color'
-Bundle 'plasticboy/vim-markdown'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'guns/vim-clojure-static'
 Plugin 'guns/vim-clojure-highlight'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-classpath'
+Plugin 'tpope/vim-repeat'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'ivanov/vim-ipython'
 Plugin 'Valloric/YouCompleteMe'
-
 call vundle#end()
 filetype plugin indent on
 
@@ -67,13 +68,13 @@ endif
 
 " Undo
 if has('persistent_undo')
-    set undodir=~/.vim/undodir
-    set undofile                " So is persistent undo ...
+    set undodir=~/.vim/undo
+    set undofile                " persistent undo ...
     set undolevels=1000         " Maximum number of changes that can be undone
     set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
 endif
-set directory=$HOME/.vimswap//
-set viewdir=$HOME/.vimviews//
+set directory=$HOME/.vim/swap//
+set viewdir=$HOME/.vim/views//
 
 " Space leads the way
 let mapleader=" "
