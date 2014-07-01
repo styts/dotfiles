@@ -115,6 +115,11 @@ set scrolloff=9999
 cabbrev Q q
 cabbrev W w
 cabbrev X x
+if has("user_commands")
+    command! -bang Q q<bang>
+    command! -bang QA qa<bang>
+    command! -bang Qa qa<bang>
+endif
 
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
