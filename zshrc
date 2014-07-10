@@ -62,7 +62,6 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 # pass completion
 [ -f /usr/local/share/zsh/site-functions/_pass ] && source /usr/local/share/zsh/site-functions/_pass
 
-export PROJECT_HOME=$HOME/Projects
 
 # ubuntu vm needs the 'workon', etc. commands
 export VENVWRAPPER=/usr/share/virtualenvwrapper/virtualenvwrapper.sh
@@ -81,3 +80,5 @@ fi
 
 # enable virtualenvwrapper shims and autocompletion
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+export PROJECT_HOME=$HOME/Projects
