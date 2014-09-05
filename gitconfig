@@ -1,5 +1,5 @@
 [include]
-    path = ~/.gitconfig.local # this should inklude user, email and github token
+    path = ~/.gitconfig.local # this should include user, email and github token
 
 [core]
     excludesfile = ~/.gitignore
@@ -25,10 +25,6 @@
     added = yellow
     changed = green
     untracked = cyan
-
-[user]
-	name = Kirill Stytsenko
-	email = kstytsenko@yelsterdigital.com
 
 [pull]
 	rebase = true
