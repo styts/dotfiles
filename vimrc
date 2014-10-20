@@ -201,6 +201,7 @@ map <Leader>f :NERDTreeFind<CR>
 let g:NERDCustomDelimiters = {'python': {'left': '# '}}
 
 " CtrlP
+let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
@@ -225,5 +226,3 @@ let g:airline_powerline_fonts = 1  " use powerline fonts
 
 " russian specific
 :set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
-
-
