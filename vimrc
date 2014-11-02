@@ -54,6 +54,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/paredit.vim'
+Plugin 'vim-scripts/openscad.vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -137,7 +138,12 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
 " colorscheme
-set background=light
+if strftime("%H") < 16 && strftime("%H") > 8
+  "set background=light
+  set background=dark
+else
+  set background=dark
+endif
 colorscheme solarized
 map <F5> :set background=dark<CR>:let solarized_termtrans=0<CR>:colorscheme solarized<CR>
 
