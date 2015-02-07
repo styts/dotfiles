@@ -57,6 +57,7 @@ Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/openscad.vim'
 Plugin 'hylang/vim-hy'
 Plugin 'dbeniamine/todo.txt-vim'
+Plugin 'chriskempson/base16-vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -140,13 +141,8 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
 " colorscheme
-if strftime("%H") < 16 && strftime("%H") > 8
-  "set background=light
-  set background=dark
-else
-  set background=dark
-endif
-colorscheme solarized
+set background=light
+colorscheme base16-default
 map <F5> :set background=dark<CR>:let solarized_termtrans=0<CR>:colorscheme solarized<CR>
 
 " sane pasting
@@ -217,7 +213,7 @@ let g:ctrlp_custom_ignore = {
 
 " Pymode
 let g:pymode_warnings = 0
-let g:pymode_rope = 0
+let g:pymode_rope = 1
 let g:pymode_rope_goto_definition_bind = '<Leader>j'
 let g:pymode_rope_goto_definition_cmd = 'e'
 let g:pymode_lint_ignore = "E501,W0401"

@@ -84,3 +84,8 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PROJECT_HOME=$HOME/Projects
 
 export TODOTXT_DEFAULT_ACTION=ls
+
+# docker on OSX
+if [[ `uname` == "Darwin" ]]; then
+    $(boot2docker shellinit) &> /dev/null
+fi
