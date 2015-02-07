@@ -1,9 +1,9 @@
 Install common system packages
 
-    sudo apt-get -y install git tree htop zsh
+    sudo apt-get -y install vim git tree htop zsh python python-pip
     # install ffind
     git clone https://github.com/jaimebuelta/ffind.git
-    cd ffind && sudo python setup.py install && cd .. && rm -rf ffind
+    cd ffind && sudo python setup.py install && cd .. && sudo rm -rf ffind
     # TODO: install ag
 
 Change user shell to zsh

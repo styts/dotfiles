@@ -55,6 +55,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/openscad.vim'
+Plugin 'hylang/vim-hy'
+Plugin 'dbeniamine/todo.txt-vim'
 call vundle#end()
 filetype plugin indent on
 

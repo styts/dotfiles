@@ -1,3 +1,7 @@
 Host wf
     User ksware
     ServerAliveInterval 60
+
+Host odroid
+    ForwardAgent yes
+    HostName 192.168.0.15
