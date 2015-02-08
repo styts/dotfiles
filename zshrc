@@ -33,7 +33,7 @@ export TERM="xterm-256color"
 export DJANGO_COLORS="dark"
 
 # Obvious...
-export EDITOR="gvim -v"
+export EDITOR="vim"
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/local/share/npm/bin:/bin:/usr/sbin:/sbin:/usr/bin:/usr/X11/bin:$HOME/bin
@@ -74,9 +74,9 @@ export VENVWRAPPER="/etc/bash_completion.d/virtualenvwrapper"
 [ -f $VENVWRAPPER ] && source $VENVWRAPPER
 
 # ubuntu vm runs inside OSX host and needs to use gvim to share clipboard with OSX
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    alias vim="gvim -v"
-fi
+#if [[ "$OSTYPE" == "linux-gnu" ]]; then
+#    alias vim="gvim -v"
+#fi
 
 # enable virtualenvwrapper shims and autocompletion
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
