@@ -1,0 +1,18 @@
+# toggle brightness
+"~/bin/backlight.sh down"
+    m:0x0 + c:232
+    XF86MonBrightnessDown
+"~/bin/backlight.sh up"
+    m:0x0 + c:233
+    XF86MonBrightnessUp
+
+# toggle volume
+"amixer set Master toggle"
+    m:0x0 + c:121
+    XF86AudioMute
+"amixer set Master 5%-"
+    m:0x0 + c:122
+    XF86AudioLowerVolume
+"amixer set Master 5%+"
+    m:0x0 + c:123
+    XF86AudioRaiseVolume
