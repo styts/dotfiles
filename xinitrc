@@ -11,15 +11,21 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-# exec gnome-session
-# exec startkde
-# exec startxfce4
-# ...or the Window Manager of your choice
-
 # remap CAPSLOCK to ESCAPE
 setxkbmap -option caps:escape
 
 # set the key repeat rates
 xset r rate 200 30
 
+# this tool should unify the two clipboards
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
+
+# put the tilde where it belongs
+xmodmap -e 'keycode  94 = grave asciitilde grave asciitilde'
+
+# load ~/.xbindkeysrc for shortcuts for audio control, etc.
+xbindkeys
+
+# start the window manager
 exec i3
