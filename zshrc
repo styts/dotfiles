@@ -36,7 +36,7 @@ export DJANGO_COLORS="dark"
 export EDITOR="vim"
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/share/npm/bin:/bin:/usr/sbin:/sbin:/usr/bin:/usr/X11/bin:$HOME/bin
+export PATH=/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin:$HOME/bin
 
 if [[ `uname` == 'Darwin' ]]; then
     # brew does not link gettext
@@ -57,7 +57,7 @@ export LANG=en_US.UTF-8
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # pass completion
 [ -f /usr/local/share/zsh/site-functions/_pass ] && source /usr/local/share/zsh/site-functions/_pass
