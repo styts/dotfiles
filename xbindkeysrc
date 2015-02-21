@@ -1,3 +1,14 @@
+# music playback
+"mpc prev"
+    m:0x0 + c:173
+    XF86AudioPrev
+"mpc toggle"
+    m:0x0 + c:172
+    XF86AudioPlay
+"mpc next"
+    m:0x0 + c:171
+    XF86AudioNext
+
 # toggle brightness
 "~/bin/backlight.sh down"
     m:0x0 + c:232

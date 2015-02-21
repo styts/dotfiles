@@ -58,6 +58,7 @@ Plugin 'vim-scripts/openscad.vim'
 Plugin 'hylang/vim-hy'
 Plugin 'dbeniamine/todo.txt-vim'
 Plugin 'chriskempson/base16-vim'
+Plugin 'vim-scripts/rtorrent-syntax-file'
 call vundle#end()
 filetype plugin indent on
 
