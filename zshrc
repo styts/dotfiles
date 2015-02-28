@@ -89,3 +89,9 @@ export TODOTXT_DEFAULT_ACTION=ls
 if [[ `uname` == "Darwin" ]]; then
     $(boot2docker shellinit) &> /dev/null
 fi
+
+# dynamic colors
+export PATH="$HOME/.urxvt/ext/dynamic-colors/bin:$PATH"
+source $HOME/.urxvt/ext/dynamic-colors/completions/dynamic-colors.zsh
+export DYNAMIC_COLORS_ROOT="$HOME/.urxvt/ext/dynamic-colors/"
+dynamic-colors switch solarized-dark

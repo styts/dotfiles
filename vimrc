@@ -25,6 +25,7 @@ set smartcase                   " search case-sensitive if term includes upperca
 set nobackup
 set noswapfile
 set hidden                      " allows to edit another file without first saving current one
+set viminfo+=n~/.vim/viminfo
 
 
 " Vundle
@@ -59,6 +60,7 @@ Plugin 'hylang/vim-hy'
 Plugin 'dbeniamine/todo.txt-vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
+Plugin 'PotatoesMaster/i3-vim-syntax'
 call vundle#end()
 filetype plugin indent on
 

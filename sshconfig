@@ -1,3 +1,6 @@
+Host styts.com
+    HostName 151.236.11.189
+
 Host wf
     User ksware
     ServerAliveInterval 60
