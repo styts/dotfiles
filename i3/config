@@ -69,7 +69,11 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+Shift+backslash split h
 
 # split in vertical orientation
-bindsym $mod+minus split v
+bindsym $mod+underscore split v
+
+# resize
+bindsym --release $mod+minus exec --no-startup-id xdotool key --clearmodifiers ctrl+minus
+bindsym --release $mod+plus exec --no-startup-id xdotool key --clearmodifiers ctrl+plus
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
