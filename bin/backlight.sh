@@ -10,8 +10,8 @@ MAX_BRIGHTNESS="`cat ${BACKLIGHT_SYS_DIR}/max_brightness`"
 CURR_BRIGHTNESS="`cat ${BACKLIGHT_SYS_DIR}/brightness`"
 
 case "${1}" in
-	  up) DELTA="+ 20" ;;
-	down) DELTA="- 20" ;;
+	  up) DELTA="+ 10" ;;
+	down) DELTA="- 10" ;;
 	   *) exit 1 ;;
 esac 
 
