@@ -30,7 +30,7 @@ status.register("wireless",
 
 status.register("disk",
     path="/",
-    # format="{used}/{total}G [{avail}G]",)
+    display_limit=50,
     format="{avail}G",)
 
 status.register("pulseaudio",

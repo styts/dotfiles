@@ -154,7 +154,7 @@ exec google-chrome-stable
 exec mpd
 
 assign [Title="(?i)weechat"] 7 irc
-exec urxvt -e weechat -T weechat
+# exec urxvt -e weechat -T weechat
 
 assign [Title="(?i)deluge"] 8 torr
 exec deluge
