@@ -22,6 +22,5 @@ URxvt*font: xft:Monospace:pixelsize=20 ! foo
 URxvt*letterSpace: -1 ! Fix font space
 
 ! Perl extensions
-URxvt.perl-ext-common:      ...,default,matcher,font-size,keyboard-select
-urxvt*keysym.F6: perl:urxvt-colors:activate
+URxvt.perl-ext-common:      ...,default,matcher,keyboard-select
 URxvt.keysym.M-Escape: perl:keyboard-select:activate

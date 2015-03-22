@@ -38,6 +38,12 @@ export EDITOR="vim"
 # Customize to your needs...
 export PATH=/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin:$HOME/bin
 
+#ruby
+export PATH=$HOME/.gem/ruby/2.2.0/bin:$PATH
+
+#pip
+export PATH=$HOME/.local/bin:$PATH
+
 if [[ `uname` == 'Darwin' ]]; then
     # brew does not link gettext
     export PATH=/usr/local/Cellar/gettext/0.18.2/bin:$PATH
@@ -71,6 +77,9 @@ export VENVWRAPPER=/usr/local/bin/virtualenvwrapper.sh
 [ -f $VENVWRAPPER ] && source $VENVWRAPPER
 # same on debian
 export VENVWRAPPER="/etc/bash_completion.d/virtualenvwrapper" 
+[ -f $VENVWRAPPER ] && source $VENVWRAPPER
+# arch
+export VENVWRAPPER=$HOME/.local/bin/virtualenvwrapper.sh
 [ -f $VENVWRAPPER ] && source $VENVWRAPPER
 
 # ubuntu vm runs inside OSX host and needs to use gvim to share clipboard with OSX

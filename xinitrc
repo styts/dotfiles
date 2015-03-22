@@ -27,5 +27,11 @@ xmodmap -e 'keycode 94 = grave asciitilde grave asciitilde'
 # load ~/.xbindkeysrc for shortcuts for audio control, etc.
 xbindkeys
 
+# emulate mac hot corners for screen sleeping
+xdotool behave_screen_edge bottom-left \
+    exec xset dpms force off &
+xdotool behave_screen_edge bottom-right \
+    exec xset dpms force off &
+
 # start the window manager
 exec i3
