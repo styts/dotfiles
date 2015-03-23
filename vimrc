@@ -144,9 +144,14 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
 " colorscheme
-set background=dark
-colorscheme solarized
-map <F5> :set background=dark<CR>:let solarized_termtrans=0<CR>:colorscheme base16-default<CR>
+if hostname() == "debian"
+    set background=light
+    colorscheme base16-default
+else
+    set background=dark
+    colorscheme solarized
+    map <F5> :set background=dark<CR>:let solarized_termtrans=0<CR>:colorscheme base16-default<CR>
+endif
 
 " sane pasting
 set pastetoggle=<F2>
