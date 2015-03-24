@@ -14,12 +14,16 @@ plugins=(
     git
     history-substring-search
     iterm2
+    pass
     pip
     pro
     themes
     vagrant
     web-search
     yellow
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-history-substring-search
 )
 
 # 10 second wait if you do something that will delete everything.
@@ -97,10 +101,15 @@ export TODOTXT_DEFAULT_ACTION=ls
 # docker on OSX
 if [[ `uname` == "Darwin" ]]; then
     $(boot2docker shellinit) &> /dev/null
+    alias t='todo.sh -d ~/.dotfiles/todo.cfg'
 fi
 
-# dynamic colors
-export PATH="$HOME/.urxvt/ext/dynamic-colors/bin:$PATH"
-source $HOME/.urxvt/ext/dynamic-colors/completions/dynamic-colors.zsh
-export DYNAMIC_COLORS_ROOT="$HOME/.urxvt/ext/dynamic-colors/"
-dynamic-colors switch solarized-dark
+if [[ `uname` != 'Darwin' ]]; then
+    # dynamic colors
+    export PATH="$HOME/.urxvt/ext/dynamic-colors/bin:$PATH"
+    source $HOME/.urxvt/ext/dynamic-colors/completions/dynamic-colors.zsh
+    export DYNAMIC_COLORS_ROOT="$HOME/.urxvt/ext/dynamic-colors/"
+    dynamic-colors switch solarized-dark
+
+    alias t='~/bin/todo.sh -d ~/.todo.cfg'
+fi

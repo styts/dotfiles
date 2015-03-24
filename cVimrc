@@ -1,1 +1,12 @@
-map q :quit<CR>
+set nohud
+set smoothscroll
+
+set noautofocus
+set typelinkhints
+
+let hintcharacters = "asdfcnjkl"
+
+unmap h
+unmap l
+map h previousTab
+map l nextTab
