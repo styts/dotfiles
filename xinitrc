@@ -11,15 +11,18 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-# remap CAPSLOCK to ESCAPE
+# remap CAPSLOCK to ESCAPE, set the toggle layouts
 setxkbmap -option caps:escape -option grp:alt_shift_toggle us,ru
 
 # set the key repeat rates
 xset r rate 200 30
 
 # this tool should unify the two clipboards
-autocutsel -fork &
-autocutsel -selection PRIMARY -fork &
+#autocutsel -fork &
+#autocutsel -selection PRIMARY -fork &
+autocutsel -f -s PRIMARY
+autocutsel -f -s CLIPBOARD
+autocutsel -f -s SECONDARY
 
 # put the tilde where it belongs
 xmodmap -e 'keycode 94 = grave asciitilde grave asciitilde'
