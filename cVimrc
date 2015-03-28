@@ -1,12 +1,15 @@
 set nohud
 set smoothscroll
-
 set noautofocus
 set typelinkhints
-
 let hintcharacters = "asdfcnjkl"
 
+" redefine H, L for switching tabs and history forward/back
 unmap h
 unmap l
-map h previousTab
-map l nextTab
+unmap H
+unmap L
+map h goBack
+map l goForward
+map H previousTab
+map L nextTab
