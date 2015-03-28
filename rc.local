@@ -1,0 +1,7 @@
+# set default backlight brightness to `not-so-bright`
+chmod o+w /sys/class/backlight/gmux_backlight/brightness
+echo 100 > /sys/class/backlight/gmux_backlight/brightness
+
+# dropbox needs to watch many folders
+echo "fs.inotify.max_user_watches=100000" >> /etc/sysctl.conf
+sysctl -p
