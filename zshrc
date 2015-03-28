@@ -104,12 +104,21 @@ if [[ `uname` == "Darwin" ]]; then
     alias t='todo.sh -d ~/.dotfiles/todo.cfg'
 fi
 
+
 if [[ `uname` != 'Darwin' ]]; then
+    # set the $DAYLIGHT based on hour
+    source $HOME/bin/daylight.sh
+
     # dynamic colors
     export PATH="$HOME/.urxvt/ext/dynamic-colors/bin:$PATH"
     source $HOME/.urxvt/ext/dynamic-colors/completions/dynamic-colors.zsh
     export DYNAMIC_COLORS_ROOT="$HOME/.urxvt/ext/dynamic-colors/"
-    dynamic-colors switch solarized-dark
+
+    if [[ $DAYLIGHT == "false" ]]; then
+        dynamic-colors switch solarized-dark
+    else
+        dynamic-colors switch solarized-light
+    fi
 
     alias t='~/bin/todo.sh -d ~/.todo.cfg'
 fi
