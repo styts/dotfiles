@@ -1,0 +1,11 @@
+#!/bin/zsh
+# if we have arguments
+if [ -z "$1" ]; then
+    # search for clipboard
+    xdotool search --name "Chrome$" windowactivate --sync key \
+        ctrl+t ctrl+k ctrl+v Return
+else
+    # else: search for arguments
+    xdotool search --name "Chrome$" windowactivate --sync key \
+        ctrl+t && xdotool type $@ && xdotool key Return
+fi
