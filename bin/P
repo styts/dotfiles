@@ -2,10 +2,10 @@
 # if we have arguments
 if [ -z "$1" ]; then
     # search for clipboard
-    xdotool search --name "Chrome$" windowactivate --sync key \
-        ctrl+t ctrl+k ctrl+v Return
+    eval "xdotool search --name \"Chrome$\" windowactivate --sync key \
+        ctrl+t ctrl+k ctrl+v Return 2> /dev/null"
 else
     # else: search for arguments
-    xdotool search --name "Chrome$" windowactivate --sync key \
-        ctrl+t && xdotool type $@ && xdotool key Return
+    eval "xdotool search --name \"Chrome$\" windowactivate --sync key \
+        ctrl+t 2> /dev/null && xdotool type \"$@\" && xdotool key Return"
 fi
