@@ -4,3 +4,4 @@
 node_modules
 kahua/yelster/settings/local.py
 *.mo
+solweb_media_root

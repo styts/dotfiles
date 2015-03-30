@@ -104,7 +104,7 @@ if [[ `uname` == "Darwin" ]]; then
     alias t='todo.sh -d ~/.dotfiles/todo.cfg'
 fi
 
-if [[ `uname` != 'Darwin' ]]; then
+if [[ -f $HOME/.urxvt/ext/dynamic-colors ]]; then
     # dynamic colors
     export PATH="$HOME/.urxvt/ext/dynamic-colors/bin:$PATH"
     source $HOME/.urxvt/ext/dynamic-colors/completions/dynamic-colors.zsh
