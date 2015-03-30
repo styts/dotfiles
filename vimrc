@@ -60,6 +60,7 @@ Plugin 'dbeniamine/todo.txt-vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
 Plugin 'PotatoesMaster/i3-vim-syntax'
+Plugin 'mhinz/vim-startify'
 call vundle#end()
 filetype plugin indent on
 
@@ -234,3 +235,6 @@ let g:airline_powerline_fonts = 1  " use powerline fonts
 
 " russian specific
 :set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+
+" save file as root
+cmap w!! w !sudo tee > /dev/null %

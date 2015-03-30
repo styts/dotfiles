@@ -17,10 +17,12 @@ URxvt.matcher.button:       1
 URxvt.urlLauncher:          google-chrome-stable
 URxvt.cursorBlink:          true
 
-! Fonts
-URxvt*font: xft:Monospace:pixelsize=20 ! foo
-URxvt*letterSpace: -1 ! Fix font space
+! Font
+URxvt*font: xft:Monospace:pixelsize=20
+
+! Fix font space
+URxvt*letterSpace: -1
 
 ! Perl extensions
-URxvt.perl-ext-common:      ...,default,matcher,keyboard-select
+URxvt.perl-ext-common: default,matcher,keyboard-select
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
