@@ -4,7 +4,8 @@ Xft.rgba:                   rgb
 Xft.hinting:                true
 Xft.hintstyle:              hintslight
 
-URxvt.depth:                32
+! ranger needs not 32 bit to isplay images correctly
+!URxvt.depth:                32
 URxvt.geometry:             90x30
 URxvt.transparent:          false
 URxvt.fading:               0
@@ -24,5 +25,5 @@ URxvt*font: xft:Monospace:pixelsize=20
 URxvt*letterSpace: -1
 
 ! Perl extensions
-URxvt.perl-ext-common: default,matcher,keyboard-select
+URxvt.perl-ext-common: default,matcher,keyboard-select,dynamic-colors
 URxvt.keysym.M-Escape: perl:keyboard-select:activate

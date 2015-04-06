@@ -32,7 +32,7 @@ xbindkeys
 
 # emulate mac hot corners for screen sleeping
 xdotool behave_screen_edge bottom-left \
-    exec xset dpms force off &
+    exec sudo pm-suspend &
 xdotool behave_screen_edge bottom-right \
     exec xset dpms force off &
 

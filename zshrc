@@ -104,7 +104,7 @@ if [[ `uname` == "Darwin" ]]; then
     alias t='todo.sh -d ~/.dotfiles/todo.cfg'
 fi
 
-if [[ -f $HOME/.urxvt/ext/dynamic-colors ]]; then
+if [[ -d $HOME/.urxvt/ext/dynamic-colors ]]; then
     # set the $DAYLIGHT based on hour
     source $HOME/bin/daylight.sh
 
