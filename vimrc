@@ -144,7 +144,7 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
 " colorscheme
-if hostname() == "debian"
+if (hostname() == "debian") || (hostname() == "kspro.local")
     set background=light
     colorscheme base16-default
 else
@@ -214,6 +214,7 @@ let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
 "nnoremap <c-o> :CtrlPMRUFiles<CR>
 
 " Pymode
