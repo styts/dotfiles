@@ -100,7 +100,8 @@ export TODOTXT_DEFAULT_ACTION=ls
 
 # docker on OSX
 if [[ `uname` == "Darwin" ]]; then
-    $(boot2docker shellinit) &> /dev/null
+    # don't start docker vm for now
+    # $(boot2docker shellinit) &> /dev/null
     alias t='todo.sh -d ~/.dotfiles/todo.cfg'
 fi
 

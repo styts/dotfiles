@@ -46,21 +46,25 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
 Plugin 'skammer/vim-css-color'
 Plugin 'tpope/vim-classpath'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/openscad.vim'
 Plugin 'hylang/vim-hy'
 Plugin 'dbeniamine/todo.txt-vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
+Plugin 'vim-scripts/SyntaxAttr.vim'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'mhinz/vim-startify'
+Plugin 'msanders/snipmate.vim'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -239,3 +243,15 @@ let g:airline_powerline_fonts = 1  " use powerline fonts
 
 " save file as root
 cmap w!! w !sudo tee > /dev/null %
+
+" syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_args='--ignore=E501,E702'
+
+" insert current date
+map <Leader>d :r !date<CR> 
