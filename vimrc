@@ -35,8 +35,6 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'cyplo/vim-colors-solarized'
 Plugin 'gmarik/Vundle.vim'
-Plugin 'guns/vim-clojure-highlight'
-Plugin 'guns/vim-clojure-static'
 Plugin 'ivanov/vim-ipython'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
@@ -48,12 +46,12 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'skammer/vim-css-color'
+Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-classpath'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-"Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/openscad.vim'
 Plugin 'hylang/vim-hy'
@@ -62,8 +60,8 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
 Plugin 'vim-scripts/SyntaxAttr.vim'
 Plugin 'PotatoesMaster/i3-vim-syntax'
-Plugin 'mhinz/vim-startify'
-Plugin 'msanders/snipmate.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 call vundle#end()
 filetype plugin indent on
@@ -97,9 +95,6 @@ map <Leader>x :x<CR>
 
 " no highlight search
 map <Leader>h :set nohlsearch<CR>
-
-" disable folds
-set nofoldenable
 
 " edit .vimrc
 map <Leader>v :e ~/.dotfiles/vimrc<CR>
@@ -223,9 +218,11 @@ let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
 
 " Pymode
 let g:pymode_warnings = 0
-let g:pymode_rope = 1
+let g:pymode_rope = 1 
+let g:pymode_doc = 0  " don't look up documentation - i seem to trigger it involuntarily some times
 let g:pymode_rope_goto_definition_bind = '<Leader>j'
 let g:pymode_rope_goto_definition_cmd = 'e'
+let g:pymode_rope_autoimport = 0
 let g:pymode_lint_ignore = "E501,W0401"
 nnoremap <Leader>j <c-c>g<CR>
 
@@ -237,9 +234,6 @@ vmap s S
 
 " airline
 let g:airline_powerline_fonts = 1  " use powerline fonts
-
-" russian specific
-:set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
 " save file as root
 cmap w!! w !sudo tee > /dev/null %
@@ -255,3 +249,34 @@ let g:syntastic_python_flake8_args='--ignore=E501,E702'
 
 " insert current date
 map <Leader>d :r !date<CR> 
+
+" visual expand
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+" vp doesn't replace paste buffer
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
+endfunction
+function! s:Repl()
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
+endfunction
+vmap <silent> <expr> p <sid>Repl()
+
+" paste multiple times safely
+xnoremap <Leader>p "_dP
+
+" xml folding
+let g:xml_syntax_folding=1
+au FileType xml setlocal foldmethod=syntax
+" easy folding toggle
+"nnoremap zz za
+nnoremap zO zczO
+nnoremap <Leader><Leader> za
+
+" ultisnip
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
