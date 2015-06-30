@@ -33,6 +33,7 @@
 [push]
 	default = current
 
-[user]
-	name = Kirill Stytsenko
-    email = kirill@styts.com
+##############################################
+# Don't include user/email in this file,
+# use ~/.gitconfig.local instead
+##############################################
