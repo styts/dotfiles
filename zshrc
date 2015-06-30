@@ -26,6 +26,10 @@ plugins=(
     zsh-history-substring-search
 )
 
+# function path
+fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=($ZSH/functions $fpath)
+
 # 10 second wait if you do something that will delete everything.
 setopt RM_STAR_WAIT
 
@@ -51,11 +55,20 @@ export PATH=$HOME/.local/bin:$PATH
 if [[ `uname` == 'Darwin' ]]; then
     # brew does not link gettext
     export PATH=/usr/local/Cellar/gettext/0.18.2/bin:$PATH
+
     # on mac, gnu utils should be before mac defaults, (otherwise ls is gls, etc.)
     export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
     # agent to vagrant forwarding
     key_file=~/.ssh/id_dsa
     [[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file
+
+    # start docker vm
+    boot2docker ip 2>/dev/null >/dev/null || boot2docker up
+    $(boot2docker shellinit 2> /dev/null)
+
+    # todo cfg
+    alias t='todo.sh -d ~/.dotfiles/todo.cfg'
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -67,11 +80,8 @@ export LANG=en_US.UTF-8
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
-#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 # pass completion
 [ -f /usr/local/share/zsh/site-functions/_pass ] && source /usr/local/share/zsh/site-functions/_pass
-
 
 # ubuntu vm needs the 'workon', etc. commands
 export VENVWRAPPER=/usr/share/virtualenvwrapper/virtualenvwrapper.sh
@@ -86,11 +96,6 @@ export VENVWRAPPER="/etc/bash_completion.d/virtualenvwrapper"
 export VENVWRAPPER=$HOME/.local/bin/virtualenvwrapper.sh
 [ -f $VENVWRAPPER ] && source $VENVWRAPPER
 
-# ubuntu vm runs inside OSX host and needs to use gvim to share clipboard with OSX
-#if [[ "$OSTYPE" == "linux-gnu" ]]; then
-#    alias vim="gvim -v"
-#fi
-
 # enable virtualenvwrapper shims and autocompletion
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
@@ -98,13 +103,7 @@ export PROJECT_HOME=$HOME/Projects
 
 export TODOTXT_DEFAULT_ACTION=ls
 
-# docker on OSX
-if [[ `uname` == "Darwin" ]]; then
-    # don't start docker vm for now
-    # $(boot2docker shellinit) &> /dev/null
-    alias t='todo.sh -d ~/.dotfiles/todo.cfg'
-fi
-
+# works on linux
 if [[ -d $HOME/.urxvt/ext/dynamic-colors ]]; then
     # set the $DAYLIGHT based on hour
     source $HOME/bin/daylight.sh
@@ -142,3 +141,6 @@ function pytrace () {
 # journal
 setopt HIST_IGNORE_SPACE
 alias j=" jrnl"
+
+# nuff said, no more .pyc files
+export PYTHONDONTWRITEBYTECODE=1
