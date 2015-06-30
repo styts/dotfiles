@@ -143,14 +143,9 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
 " colorscheme
-if (hostname() == "debian") || (hostname() == "kspro.local")
-    set background=light
-    colorscheme base16-default
-else
-    set background=dark
-    colorscheme solarized
-    map <F5> :set background=dark<CR>:let solarized_termtrans=0<CR>:colorscheme base16-default<CR>
-endif
+set background=light
+colorscheme base16-default
+map <F5> :set background=dark<CR>:let solarized_termtrans=0<CR>:colorscheme base16-default<CR>
 
 " sane pasting
 set pastetoggle=<F2>
@@ -274,9 +269,9 @@ au FileType xml setlocal foldmethod=syntax
 " easy folding toggle
 "nnoremap zz za
 nnoremap zO zczO
-nnoremap <Leader><Leader> za
 
 " ultisnip
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsListSnippets="<c-tab>"
