@@ -61,7 +61,8 @@ if [[ `uname` == 'Darwin' ]]; then
 
     # agent to vagrant forwarding
     key_file=~/.ssh/id_dsa
-    [[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file
+    eval `ssh-agent -s` > /dev/null
+    [[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file 2> /dev/null
 
     # start docker vm
     boot2docker ip 2>/dev/null >/dev/null || boot2docker up
