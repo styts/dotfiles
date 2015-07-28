@@ -145,3 +145,9 @@ alias j=" jrnl"
 
 # nuff said, no more .pyc files
 export PYTHONDONTWRITEBYTECODE=1
+
+# auto ls on change dir
+function chpwd() {
+    emulate -L zsh
+    ls
+}
