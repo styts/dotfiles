@@ -9,3 +9,10 @@ Host wf
 Host odroid
     ForwardAgent yes
     HostName 192.168.0.15
+
+Host dev05
+   ForwardAgent yes
+   ServerAliveInterval 120
+   HostName dev05.dev.123people.com
+   Port 2202
+   User kstytsenko
