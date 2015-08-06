@@ -147,7 +147,7 @@ alias j=" jrnl"
 export PYTHONDONTWRITEBYTECODE=1
 
 # auto ls on change dir
-function chpwd() {
-    emulate -L zsh
-    ls
-}
+#function chpwd() {
+    #emulate -L zsh
+    #ls
+#}
