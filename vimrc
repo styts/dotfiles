@@ -147,7 +147,11 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
 " colorscheme
-set background=light
+if $DARK == "1"
+    set background=dark
+else
+    set background=light
+endif
 colorscheme base16-default
 map <F5> :set background=dark<CR>:let solarized_termtrans=0<CR>:colorscheme base16-default<CR>
 
@@ -244,7 +248,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args='--ignore=E501,E702'
+let g:syntastic_python_flake8_args='--ignore=E501,E702,E731'
 
 " insert current date
 map <Leader>d :r !date<CR> 
@@ -281,3 +285,5 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<C-tab>"
 
 nmap <Leader>z [s1z=<c-o>
+
+:let maplocalleader = "\\"
