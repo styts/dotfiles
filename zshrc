@@ -11,7 +11,6 @@ plugins=(
     dircycle
     django
     extract
-    git
     history-substring-search
     iterm2
     pass
