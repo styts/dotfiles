@@ -19,7 +19,7 @@ set softtabstop=4               " Let backspace delete indent
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
 set wildmenu                    " Show list instead of just completing
 set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest commonart, then all.
-set colorcolumn=80              " visually limit text length
+set colorcolumn=79              " visually limit text length
 set smartcase                   " search case-sensitive if term includes uppercase letters
 set nobackup
 set noswapfile
@@ -31,9 +31,10 @@ set viminfo+=n~/.vim/viminfo
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+"this one conflicts with python-mode: gives this: Undefined variable: b:pymode_modified
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'SirVer/ultisnips'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
@@ -41,6 +42,7 @@ Plugin 'cyplo/vim-colors-solarized'
 Plugin 'dbeniamine/todo.txt-vim'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'gmarik/Vundle.vim'
+Plugin 'henrik/vim-indexed-search'
 Plugin 'honza/vim-snippets'
 Plugin 'hylang/vim-hy'
 Plugin 'ivanov/vim-ipython'
@@ -49,12 +51,14 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim.git'
 Plugin 'klen/python-mode'
+Plugin 'nvie/vim-flake8'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'skammer/vim-css-color'
+Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-classpath'
 Plugin 'tpope/vim-fireplace'
@@ -142,10 +146,6 @@ set nu
 " no Uganda children intro
 set shortmess+=I
 
-" visually limit text at 80 chars
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
-
 " colorscheme
 if $DARK == "1"
     set background=dark
@@ -217,16 +217,16 @@ let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
-"nnoremap <c-o> :CtrlPMRUFiles<CR>
 
 " Pymode
 let g:pymode_warnings = 0
 let g:pymode_rope = 1 
+let g:pymode_lint = 1
 let g:pymode_doc = 0  " don't look up documentation - i seem to trigger it involuntarily some times
 let g:pymode_rope_goto_definition_bind = '<Leader>j'
 let g:pymode_rope_goto_definition_cmd = 'e'
 let g:pymode_rope_autoimport = 0
-let g:pymode_lint_ignore = "E501,W0401"
+let g:pymode_lint_checkers = ['flake8', 'flake8-pep257']
 nnoremap <Leader>j <c-c>g<CR>
 
 " Markdown
@@ -247,8 +247,7 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args='--ignore=E501,E702,E731'
+let g:syntastic_python_checkers=[]  " we're using flake8 for python
 
 " insert current date
 map <Leader>d :r !date<CR> 
@@ -287,3 +286,16 @@ let g:UltiSnipsListSnippets="<C-tab>"
 nmap <Leader>z [s1z=<c-o>
 
 :let maplocalleader = "\\"
+
+autocmd BufWritePost *.py call Flake8()
+let g:flake8_show_in_gutter=1
+
+" wordwrapping in org mode
+autocmd FileType org setlocal wrap "true"
+autocmd FileType org setlocal linebreak "true"
+"autocmd FileType org :OrgToggleFoldingReverse
+
+" git gutter
+let g:gitgutter_max_signs = 15000
+
+let g:instant_markdown_slow = 1

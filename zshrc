@@ -44,13 +44,16 @@ export DJANGO_COLORS="dark"
 export EDITOR="vim"
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin:$HOME/bin
+export PATH=$HOME/bin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin
 
 #ruby
 export PATH=$HOME/.gem/ruby/2.2.0/bin:$PATH
 
 #pip
 export PATH=$HOME/.local/bin:$PATH
+
+# python
+export PATH="$HOME/Library/Python/2.7/bin":$PATH
 
 if [[ `uname` == 'Darwin' ]]; then
     # brew does not link gettext
@@ -151,3 +154,8 @@ export PYTHONDONTWRITEBYTECODE=1
     #emulate -L zsh
     #ls
 #}
+#
+#
+# fix the neovim pane movement ctrl+h as described in
+# https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
+infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > /tmp/$TERM.ti && tic /tmp/$TERM.ti
