@@ -10,6 +10,9 @@ plugins=(
     brew
     dircycle
     django
+    docker
+    docker-compose
+    fabric
     extract
     history-substring-search
     iterm2

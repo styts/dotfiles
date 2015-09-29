@@ -1,0 +1,27 @@
+search Pu
+move 
+move /Applications
+mv /A
+rename server.py
+show
+h
+help
+set_option show_hidden True
+!git status
+git
+open_with m
+p
+du
+rename 
+rename Sports
+he
+un
+open_with open
+open_with l
+open_with vim
+
+open_with 
+rename Library
+rename Applications
+delete 
+search mus
