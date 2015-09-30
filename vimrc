@@ -31,16 +31,17 @@ set viminfo+=n~/.vim/viminfo
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-"this one conflicts with python-mode: gives this: Undefined variable: b:pymode_modified
-"Plugin 'Xuyuanp/nerdtree-git-plugin'
+"nerdtree-git-plugin conflicts with python-mode: gives this: Undefined variable: b:pymode_modified
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'SirVer/ultisnips'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
 Plugin 'cyplo/vim-colors-solarized'
 Plugin 'dbeniamine/todo.txt-vim'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'gerw/vim-HiLinkTrace'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'henrik/vim-indexed-search'
 Plugin 'honza/vim-snippets'
@@ -67,6 +68,8 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/SyntaxAttr.vim'
+Plugin 'vim-scripts/YankRing.vim'
+Plugin 'vim-scripts/django.vim'
 Plugin 'vim-scripts/openscad.vim'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
@@ -149,10 +152,12 @@ set shortmess+=I
 " colorscheme
 if $DARK == "1"
     set background=dark
+    let solarized_termtrans=0
+    colorscheme solarized
 else
     set background=light
+    colorscheme base16-default
 endif
-colorscheme base16-default
 map <F5> :set background=dark<CR>:let solarized_termtrans=0<CR>:colorscheme base16-default<CR>
 
 " sane pasting
@@ -299,3 +304,6 @@ autocmd FileType org setlocal linebreak "true"
 let g:gitgutter_max_signs = 15000
 
 let g:instant_markdown_slow = 1
+
+" yank ring show
+nnoremap <F10> :YRShow<CR> 
