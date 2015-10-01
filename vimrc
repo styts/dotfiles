@@ -307,3 +307,4 @@ let g:instant_markdown_slow = 1
 
 " yank ring show
 nnoremap <F10> :YRShow<CR> 
+let g:yankring_replace_n_pkey='' "yankring should not conflict with CtrlP
