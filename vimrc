@@ -105,7 +105,7 @@ map <Leader>q :bdelete<CR>
 map <Leader>x :x<CR>
 
 " no highlight search
-map <Leader>h :set nohlsearch<CR>
+map <Leader>h :set hlsearch!<CR>
 
 " edit .vimrc
 map <Leader>v :e ~/.dotfiles/vimrc<CR>
@@ -308,3 +308,6 @@ let g:instant_markdown_slow = 1
 " yank ring show
 nnoremap <F10> :YRShow<CR> 
 let g:yankring_replace_n_pkey='' "yankring should not conflict with CtrlP
+
+" yank current filename
+noremap <silent> <F4> :let @+=expand("%:p")<CR>
