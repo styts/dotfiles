@@ -70,8 +70,9 @@ if [[ `uname` == 'Darwin' ]]; then
     [[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file 2> /dev/null
 
     # start docker vm
-    boot2docker ip 2>/dev/null >/dev/null || boot2docker up
-    $(boot2docker shellinit 2> /dev/null)
+    # disable
+    #boot2docker ip 2>/dev/null >/dev/null || boot2docker up
+    #$(boot2docker shellinit 2> /dev/null)
 
     # todo cfg
     alias t='todo.sh -d ~/.dotfiles/todo.cfg'
@@ -161,3 +162,6 @@ export PYTHONDONTWRITEBYTECODE=1
 # fix the neovim pane movement ctrl+h as described in
 # https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
 infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > /tmp/$TERM.ti && tic /tmp/$TERM.ti
+
+# gnu-sed
+PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"

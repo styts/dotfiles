@@ -32,9 +32,9 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 "nerdtree-git-plugin conflicts with python-mode: gives this: Undefined variable: b:pymode_modified
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'SirVer/ultisnips'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
@@ -308,6 +308,8 @@ let g:instant_markdown_slow = 1
 " yank ring show
 nnoremap <F10> :YRShow<CR> 
 let g:yankring_replace_n_pkey='' "yankring should not conflict with CtrlP
+let g:yankring_history_dir = '/tmp' " don't want it in home dir
 
 " yank current filename
 noremap <silent> <F4> :let @+=expand("%:p")<CR>
+
