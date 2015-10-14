@@ -313,3 +313,5 @@ let g:yankring_history_dir = '/tmp' " don't want it in home dir
 " yank current filename
 noremap <silent> <F4> :let @+=expand("%:p")<CR>
 
+" show yankring
+noremap <Leader>y :YRShow<CR>
