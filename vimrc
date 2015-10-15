@@ -315,3 +315,13 @@ noremap <silent> <F4> :let @+=expand("%:p")<CR>
 
 " show yankring
 noremap <Leader>y :YRShow<CR>
+
+" fugitive git bindings, more here:
+" https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gc :Gcommit -v -q<CR>
+nnoremap <Leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>ge :Gedit<CR>
+nnoremap <Leader>gr :Gread<CR>
+nnoremap <Leader>gw :Gwrite<CR><CR>
