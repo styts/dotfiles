@@ -146,13 +146,6 @@ alias j=" jrnl"
 # nuff said, no more .pyc files
 export PYTHONDONTWRITEBYTECODE=1
 
-# auto ls on change dir
-#function chpwd() {
-    #emulate -L zsh
-    #ls
-#}
-#
-#
 # fix the neovim pane movement ctrl+h as described in
 # https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
 infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > /tmp/$TERM.ti && tic /tmp/$TERM.ti
