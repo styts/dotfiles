@@ -152,3 +152,9 @@ infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > /tmp/$TERM.ti && tic /tmp/$TERM.t
 
 # gnu-sed
 PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+# if a .colorscheme file exists, switch profile
+# this prevents eye shock by contrasting scheme
+if [[ -f ~/.colorscheme ]]; then
+    $(cat ~/.colorscheme)
+fi
