@@ -87,9 +87,6 @@ export LANG=en_US.UTF-8
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
-# pass completion
-[ -f /usr/local/share/zsh/site-functions/_pass ] && source /usr/local/share/zsh/site-functions/_pass
-
 # ubuntu vm needs the 'workon', etc. commands
 export VENVWRAPPER=/usr/share/virtualenvwrapper/virtualenvwrapper.sh
 [ -f $VENVWRAPPER ] && source $VENVWRAPPER
