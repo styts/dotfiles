@@ -126,9 +126,6 @@ if [[ -d $HOME/.urxvt/ext/dynamic-colors ]]; then
     alias t='~/bin/todo.sh -d ~/.todo.cfg'
 fi
 
-# *.pyc should be grey
-LS_COLORS=$LS_COLORS:*.pyc=37:
-
 # function for quickly rerunning a python command with pdb enabled
 function pytrace () {
     if [ "$1" != "" ]
