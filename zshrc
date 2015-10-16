@@ -158,3 +158,6 @@ PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 if [[ -f ~/.colorscheme ]]; then
     $(cat ~/.colorscheme)
 fi
+
+# generic colorizer
+source "$(brew --prefix)/etc/grc.bashrc"
