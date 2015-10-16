@@ -21,7 +21,7 @@ set wildmenu                    " Show list instead of just completing
 set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest commonart, then all.
 set colorcolumn=79              " visually limit text length
 set smartcase                   " search case-sensitive if term includes uppercase letters
-set nobackup
+set nobackup                    " Don't create backup files in same folder
 set noswapfile
 set hidden                      " allows to edit another file without first saving current one
 set viminfo+=n~/.vim/viminfo
