@@ -21,7 +21,7 @@ set wildmenu                    " Show list instead of just completing
 set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest commonart, then all.
 set colorcolumn=79              " visually limit text length
 set smartcase                   " search case-sensitive if term includes uppercase letters
-set nobackup
+set nobackup                    " Don't create backup files in same folder
 set noswapfile
 set hidden                      " allows to edit another file without first saving current one
 set viminfo+=n~/.vim/viminfo
@@ -32,9 +32,9 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 "nerdtree-git-plugin conflicts with python-mode: gives this: Undefined variable: b:pymode_modified
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'SirVer/ultisnips'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
@@ -62,6 +62,7 @@ Plugin 'skammer/vim-css-color'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-classpath'
+Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
@@ -105,7 +106,7 @@ map <Leader>q :bdelete<CR>
 map <Leader>x :x<CR>
 
 " no highlight search
-map <Leader>h :set nohlsearch<CR>
+map <Leader>h :set hlsearch!<CR>
 
 " edit .vimrc
 map <Leader>v :e ~/.dotfiles/vimrc<CR>
@@ -309,3 +310,22 @@ let g:instant_markdown_slow = 1
 " yank ring show
 nnoremap <F10> :YRShow<CR> 
 let g:yankring_replace_n_pkey='' "yankring should not conflict with CtrlP
+let g:yankring_history_dir = '/tmp' " don't want it in home dir
+
+" yank current filename
+noremap <silent> <F4> :let @+=expand("%:p")<CR>
+
+" show yankring
+noremap <Leader>y :YRShow<CR>
+
+" fugitive git bindings, more here:
+" https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gc :Gcommit -v -q<CR>
+nnoremap <Leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>ge :Gedit<CR>
+nnoremap <Leader>gr :Gread<CR>
+nnoremap <Leader>gw :Gwrite<CR><CR>
+nnoremap <Leader>gp :Dispatch! git push<CR>
+nnoremap <Leader>gl :Dispatch! git pull<CR>

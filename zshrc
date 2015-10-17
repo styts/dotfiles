@@ -70,8 +70,9 @@ if [[ `uname` == 'Darwin' ]]; then
     [[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file 2> /dev/null
 
     # start docker vm
-    boot2docker ip 2>/dev/null >/dev/null || boot2docker up
-    $(boot2docker shellinit 2> /dev/null)
+    # disable
+    #boot2docker ip 2>/dev/null >/dev/null || boot2docker up
+    #$(boot2docker shellinit 2> /dev/null)
 
     # todo cfg
     alias t='todo.sh -d ~/.dotfiles/todo.cfg'
@@ -85,9 +86,6 @@ export LANG=en_US.UTF-8
 # vim mode
 bindkey -v
 bindkey '^R' history-incremental-search-backward
-
-# pass completion
-[ -f /usr/local/share/zsh/site-functions/_pass ] && source /usr/local/share/zsh/site-functions/_pass
 
 # ubuntu vm needs the 'workon', etc. commands
 export VENVWRAPPER=/usr/share/virtualenvwrapper/virtualenvwrapper.sh
@@ -128,9 +126,6 @@ if [[ -d $HOME/.urxvt/ext/dynamic-colors ]]; then
     alias t='~/bin/todo.sh -d ~/.todo.cfg'
 fi
 
-# *.pyc should be grey
-LS_COLORS=$LS_COLORS:*.pyc=37:
-
 # function for quickly rerunning a python command with pdb enabled
 function pytrace () {
     if [ "$1" != "" ]
@@ -151,13 +146,18 @@ alias j=" jrnl"
 # nuff said, no more .pyc files
 export PYTHONDONTWRITEBYTECODE=1
 
-# auto ls on change dir
-#function chpwd() {
-    #emulate -L zsh
-    #ls
-#}
-#
-#
 # fix the neovim pane movement ctrl+h as described in
 # https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
 infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > /tmp/$TERM.ti && tic /tmp/$TERM.ti
+
+# gnu-sed
+PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+# if a .colorscheme file exists, switch profile
+# this prevents eye shock by contrasting scheme
+if [[ -f ~/.colorscheme ]]; then
+    $(cat ~/.colorscheme)
+fi
+
+# generic colorizer
+source "$(brew --prefix)/etc/grc.bashrc"
