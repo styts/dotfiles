@@ -122,6 +122,9 @@ map <C-K> <C-W>k<C-W>=
 map <C-L> <C-W>l<C-W>=
 map <C-H> <C-W>h<C-W>=
 
+" open current window in new tab
+map <C-T> <C-W>T
+
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
 noremap k gk
