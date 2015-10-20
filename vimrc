@@ -323,6 +323,7 @@ nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gc :Gcommit -v -q<CR>
 nnoremap <Leader>gt :Gcommit -v -q %:p<CR>
 nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>ge :Gedit<CR>
 nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR><CR>
