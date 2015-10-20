@@ -330,3 +330,6 @@ nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR><CR>
 nnoremap <Leader>gp :Dispatch! git push<CR>
 nnoremap <Leader>gl :Dispatch! git pull<CR>
+
+" mapping for :Ag
+nnoremap <leader>a :Ag<Space>
