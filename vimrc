@@ -333,3 +333,4 @@ nnoremap <Leader>gl :Dispatch! git pull<CR>
 
 " mapping for :Ag
 nnoremap <leader>a :Ag<Space>
+let g:ag_prg="ag --vimgrep"
