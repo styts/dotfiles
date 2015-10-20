@@ -223,6 +223,7 @@ let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'  " faster!
 
 " Pymode
 let g:pymode_warnings = 0
