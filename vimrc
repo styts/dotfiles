@@ -337,3 +337,7 @@ nnoremap <Leader>gl :Dispatch! git pull<CR>
 " mapping for :Ag
 nnoremap <leader>a :Ag<Space>
 let g:ag_prg="ag --vimgrep"
+
+
+" Identify the syntax highlighting group used at the cursor
+map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
