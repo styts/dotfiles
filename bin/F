@@ -1,5 +1,5 @@
 #!/bin/bash
-sack__vim_shortcut=$(sed -n "$1p" < /Users/kirill/.cache/sack_shortcuts)
+sack__vim_shortcut=$(sed -n "$1p" < /Users/kirill/.sack_shortcuts)
 if [ -z "$EDITOR" ]; then
     sack__editor="vim"
 else
