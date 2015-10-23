@@ -74,6 +74,7 @@ Plugin 'vim-scripts/django.vim'
 Plugin 'vim-scripts/openscad.vim'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
+Plugin 'milkypostman/vim-togglelist'
 
 call vundle#end()
 filetype plugin indent on
@@ -341,3 +342,7 @@ let g:ag_prg="ag --vimgrep"
 
 " Identify the syntax highlighting group used at the cursor
 map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" quick fix toggle
+let g:toggle_list_no_mappings = 1 " don't remap my <Leader>q
+nmap <script> <silent> cc :call ToggleQuickfixList()<CR><C-w>j
