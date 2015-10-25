@@ -74,8 +74,12 @@ Plugin 'vim-scripts/django.vim'
 Plugin 'vim-scripts/openscad.vim'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
+<<<<<<< HEAD
 Plugin 'vim-scripts/nc.vim--Eno'
 Plugin 'nelstrom/vim-markdown-folding'
+=======
+Plugin 'milkypostman/vim-togglelist'
+>>>>>>> 679bf92e8df28fccb5640cbf0edddff008fcfe8c
 
 call vundle#end()
 filetype plugin indent on
@@ -123,6 +127,9 @@ map <C-J> <C-W>j<C-W>=
 map <C-K> <C-W>k<C-W>=
 map <C-L> <C-W>l<C-W>=
 map <C-H> <C-W>h<C-W>=
+
+" open current window in new tab
+map <C-T> <C-W>T
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
@@ -188,7 +195,7 @@ map <Leader>r :RainbowParenthesesToggle<CR>
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+"au Syntax * RainbowParenthesesLoadBraces
 let g:rbpt_colorpairs = [
     \ ['brown',       'RoyalBlue3'],
     \ ['Darkblue',    'SeaGreen3'],
@@ -326,11 +333,26 @@ nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gc :Gcommit -v -q<CR>
 nnoremap <Leader>gt :Gcommit -v -q %:p<CR>
 nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>ge :Gedit<CR>
 nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR><CR>
 nnoremap <Leader>gp :Dispatch! git push<CR>
 nnoremap <Leader>gl :Dispatch! git pull<CR>
 
+<<<<<<< HEAD
 " Gcode
 au FileType gcode set syntax nc
+=======
+" mapping for :Ag
+nnoremap <leader>a :Ag<Space>
+let g:ag_prg="ag --vimgrep"
+
+
+" Identify the syntax highlighting group used at the cursor
+map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" quick fix toggle
+let g:toggle_list_no_mappings = 1 " don't remap my <Leader>q
+nmap <script> <silent> cc :call ToggleQuickfixList()<CR><C-w>j
+>>>>>>> 679bf92e8df28fccb5640cbf0edddff008fcfe8c
