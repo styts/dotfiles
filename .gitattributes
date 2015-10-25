@@ -1,2 +1,2 @@
-; vim/spell/* filter=git-crypt diff=git-crypt
-; config/ranger/* filter=git-crypt diff=git-crypt
+#vim/spell/* filter=git-crypt diff=git-crypt
+#config/ranger/* filter=git-crypt diff=git-crypt
