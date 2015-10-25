@@ -331,3 +331,6 @@ nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR><CR>
 nnoremap <Leader>gp :Dispatch! git push<CR>
 nnoremap <Leader>gl :Dispatch! git pull<CR>
+
+" Gcode
+au FileType gcode set syntax nc
