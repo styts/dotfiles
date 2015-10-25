@@ -9,7 +9,7 @@
   "highlight": true, 
   "journals": {
     "default": {
-      "journal": "/Users/kirill/Dropbox/Personal/journal.txt", 
+      "journal": "/Users/kirill/Personal/journal.txt", 
       "encrypt": true
     }
   }
