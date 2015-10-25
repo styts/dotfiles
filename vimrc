@@ -74,6 +74,8 @@ Plugin 'vim-scripts/django.vim'
 Plugin 'vim-scripts/openscad.vim'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
+Plugin 'vim-scripts/nc.vim--Eno'
+Plugin 'nelstrom/vim-markdown-folding'
 
 call vundle#end()
 filetype plugin indent on
