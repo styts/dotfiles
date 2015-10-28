@@ -74,6 +74,7 @@ Plugin 'vim-scripts/django.vim'
 Plugin 'vim-scripts/openscad.vim'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
+Plugin 'vim-scripts/vimwiki.git'
 Plugin 'milkypostman/vim-togglelist'
 
 call vundle#end()
