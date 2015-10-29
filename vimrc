@@ -297,7 +297,7 @@ nnoremap zO zczO
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsListSnippets="<C-tab>"
+"let g:UltiSnipsListSnippets="<Leader><tab>"
 
 nmap <Leader>z [s1z=<c-o>
 
