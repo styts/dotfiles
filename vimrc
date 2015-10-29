@@ -75,6 +75,8 @@ Plugin 'vim-scripts/openscad.vim'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
 Plugin 'vim-scripts/vimwiki.git'
+Plugin 'vim-scripts/nc.vim--Eno'
+Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'milkypostman/vim-togglelist'
 
 call vundle#end()
@@ -340,10 +342,12 @@ nnoremap <Leader>gw :Gwrite<CR><CR>
 nnoremap <Leader>gp :Dispatch! git push<CR>
 nnoremap <Leader>gl :Dispatch! git pull<CR>
 
+" Gcode
+au FileType gcode set syntax nc
+
 " mapping for :Ag
 nnoremap <leader>a :Ag<Space>
 let g:ag_prg="ag --vimgrep"
-
 
 " Identify the syntax highlighting group used at the cursor
 map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>

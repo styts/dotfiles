@@ -1,2 +1,0 @@
-vim/spell/* filter=git-crypt diff=git-crypt
-config/ranger/* filter=git-crypt diff=git-crypt
