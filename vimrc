@@ -351,3 +351,7 @@ map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 " quick fix toggle
 let g:toggle_list_no_mappings = 1 " don't remap my <Leader>q
 nmap <script> <silent> cc :call ToggleQuickfixList()<CR><C-w>j
+
+let g:vimwiki_list = [{'path': '~/Personal/vimwiki/',
+                     \ 'nested_syntaxes': {'python': 'python', 'sql': 'sql'}}]
+let g:vimwiki_folding='list'
