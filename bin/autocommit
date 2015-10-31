@@ -1,0 +1,6 @@
+#!/bin/bash
+# used primarily for auto-committing the vimwiki
+
+cd $@
+git add -A
+git commit -m "autocommit"
