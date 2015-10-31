@@ -1,1 +1,4 @@
+# Don't forget to reload with
+# crontab ~/.dotfiles/crontab
+
 * * * * * /Users/kirill/bin/autocommit /Users/kirill/Personal/vimwiki/
