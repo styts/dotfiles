@@ -4,3 +4,4 @@
 cd $@
 git add -A
 git commit -m "autocommit"
+rm .git/COMMIT_EDITMSG
