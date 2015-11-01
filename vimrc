@@ -359,3 +359,6 @@ nmap <script> <silent> cc :call ToggleQuickfixList()<CR><C-w>j
 let g:vimwiki_list = [{'path': '~/Personal/vimwiki/',
                      \ 'nested_syntaxes': {'python': 'python', 'sql': 'sql'}}]
 let g:vimwiki_folding='list'
+
+" fix airline issue #20
+set laststatus=2
