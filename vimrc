@@ -1,38 +1,141 @@
-" General
+" vim:foldmethod=marker:foldlevel=0
+
+" {{{ 1 important
 set nocompatible
 syntax on
+scriptencoding utf-8
+set pastetoggle=<F2>
+" }}}
+" {{{ 2 moving around, searching and patterns
+set incsearch                   " Find as you type search
+set ignorecase                  " Case insensitive search
+set smartcase                   " search case-sensitive if term includes uppercase letters
+map <Leader>h :set hlsearch!<CR>
+
+" Wrapped lines goes down/up to next row, rather than next line in file.
+noremap j gj
+noremap k gk
+
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+" }}}
+" {{{ 3 tags
+" }}}
+" {{{ 4 displaying text
+set norelativenumber
+set number
+set numberwidth=4
+set nowrap                      " Do not wrap long lines
+set scrolloff=9999              " keep current line in the middle of the screen
+" }}}
+" {{{ 5 syntax, highlighting and spelling
+set hlsearch                    " Highlight search terms
+set colorcolumn=79              " visually limit text length
+set spell
+" }}}
+" {{{ 6 multiple windows
+set hidden                      " allows to edit another file without first saving current one
+set splitright
+set splitbelow
+set laststatus=2                " fix airline issue #20
+map <C-J> <C-W>j<C-W>=
+map <C-K> <C-W>k<C-W>=
+map <C-L> <C-W>l<C-W>=
+map <C-H> <C-W>h<C-W>=
+nnoremap <Leader>= <C-w>=<CR>   " equalize windows
+" }}}
+" {{{ 7 multiple tab pages
+map <C-T> <C-W>T " open current window in new tab
+" gt / tg tab navigation
+nnoremap tg gT
+" }}}
+" {{{ 8 terminal
+" }}}
+" {{{ 9 using the mouse
 set mouse=a
 set mousehide
-scriptencoding utf-8
-set history=1000
-set spell
-set incsearch                   " Find as you type search
-set hlsearch                    " Highlight search terms
-set ignorecase                  " Case insensitive search
-set nofoldenable 	        	" Folds are annoying
-set nowrap                      " Do not wrap long lines
+" }}}
+" {{{ 10 printing
+" }}}
+" {{{ 11 messages and info
+set shortmess+=I " no Uganda children intro
+" }}}
+" {{{ 12 selecting text
+set clipboard=unnamed
+" }}}
+" {{{ 13 editing text
+set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
+set undolevels=1000         " Maximum number of changes that can be undone
+set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+" }}}
+" {{{ 14 tabs and indenting
+set tabstop=4                   " An indentation every four columns
+set softtabstop=4               " Let backspace delete indent
 set autoindent                  " Indent at the same level of the previous line
 set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
-set tabstop=4                   " An indentation every four columns
-set softtabstop=4               " Let backspace delete indent
-set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
-set wildmenu                    " Show list instead of just completing
-set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest commonart, then all.
-set colorcolumn=79              " visually limit text length
-set smartcase                   " search case-sensitive if term includes uppercase letters
+" }}}
+" {{{ 15 folding
+set nofoldenable              " Folds are annoying
+nnoremap zO zczO
+" }}}
+" {{{ 16 diff mode
+" }}}
+" {{{ 17 mapping
+" }}}
+" {{{ 18 reading and writing files
 set nobackup                    " Don't create backup files in same folder
+" }}}
+" {{{ 19 the swap file
 set noswapfile
-set hidden                      " allows to edit another file without first saving current one
+" }}}
+" {{{ 20 command line editing
+set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest commonart, then all.
+set wildmenu                    " Show list instead of just completing
+set history=1000
+set undodir=~/.vim/undo
+set undofile                " persistent undo ...
+
+" common command typos
+cabbrev Q q
+cabbrev W w
+cabbrev X x
+if has("user_commands")
+    command! -bang Q q<bang>
+    command! -bang QA qa<bang>
+    command! -bang Qa qa<bang>
+endif
+" }}}
+" {{{ 21 executing external commands
+" }}}
+" {{{ 22 running make and jumping to errors
+" }}}
+" {{{ 23 language specific
+" }}}
+" {{{ 24 multi-byte characters
+" }}}
+" {{{ 25 various
 set viminfo+=n~/.vim/viminfo
+" }}}
 
+" {{{ Filetypes
+au FileType md set filetype=markdown
+au BufRead,BufNewFile Vagrantfile set filetype=ruby
+let g:xml_syntax_folding=1
+au FileType xml setlocal foldmethod=syntax
+au FileType gcode set syntax nc
+let g:vim_markdown_folding_disabled=0
 
-" Vundle
-filetype off
+" wordwrapping in org mode
+autocmd FileType org setlocal wrap "true"
+autocmd FileType org setlocal linebreak "true"
+" }}}
+
+" {{{ Plugins
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-"nerdtree-git-plugin conflicts with python-mode: gives this: Undefined variable: b:pymode_modified
-"Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'SirVer/ultisnips'
 Plugin 'airblade/vim-gitgutter'
@@ -81,82 +184,9 @@ Plugin 'vim-scripts/vimwiki.git'
 
 call vundle#end()
 filetype plugin indent on
+" }}}
 
-" Clipboard
-if has('clipboard')
-	if has('unnamedplus')  " When possible use + register for copy-paste
-	    set clipboard=unnamed
-	else         " On mac and Windows, use * register for copy-paste
-	    set clipboard=unnamed
-	endif
-endif
-
-" Undo
-if has('persistent_undo')
-    set undodir=~/.vim/undo
-    set undofile                " persistent undo ...
-    set undolevels=1000         " Maximum number of changes that can be undone
-    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-endif
-set directory=$HOME/.vim/swap//
-set viewdir=$HOME/.vim/views//
-
-" Space leads the way
-let mapleader=" "
-
-" map common leader stuff
-map <Leader>w :w<CR>
-map <Leader>q :bdelete<CR>
-map <Leader>x :x<CR>
-
-" no highlight search
-map <Leader>h :set hlsearch!<CR>
-
-" edit .vimrc
-map <Leader>v :e ~/.dotfiles/vimrc<CR>
-map <Leader>V :source ~/.vimrc<CR>
-
-" split locations
-set splitright
-set splitbelow
-
-" Easy window navigation
-map <C-J> <C-W>j<C-W>=
-map <C-K> <C-W>k<C-W>=
-map <C-L> <C-W>l<C-W>=
-map <C-H> <C-W>h<C-W>=
-
-" open current window in new tab
-map <C-T> <C-W>T
-
-" Wrapped lines goes down/up to next row, rather than next line in file.
-noremap j gj
-noremap k gk
-
-" keep current line in the middle of the screen
-set scrolloff=9999
-
-" common command typos
-cabbrev Q q
-cabbrev W w
-cabbrev X x
-if has("user_commands")
-    command! -bang Q q<bang>
-    command! -bang QA qa<bang>
-    command! -bang Qa qa<bang>
-endif
-
-" Visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
-
-" enable line numbers
-set norelativenumber
-set nu
-
-" no Uganda children intro
-set shortmess+=I
-
+" {{{ Graphics
 " colorscheme
 if $DARK == "1"
     set background=dark
@@ -166,29 +196,35 @@ else
     set background=light
     colorscheme base16-default
 endif
-map <F5> :set background=dark<CR>:let solarized_termtrans=0<CR>:colorscheme base16-default<CR>
+" Identify the syntax highlighting group used at the cursor
+map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+" }}}
 
-" sane pasting
-set pastetoggle=<F2>
+" {{{ Mappings
+let mapleader=" "
+let maplocalleader = "\\"
 
-" equalize windows
-nnoremap <Leader>= <C-w>=<CR>
+" map common leader stuff
+map <Leader>w :w<CR>
+map <Leader>q :bdelete<CR>
+map <Leader>x :x<CR>
 
-" markdown
-au FileType md set filetype=markdown
+" edit .vimrc
+map <Leader>v :e ~/.dotfiles/vimrc<CR>
+map <Leader>V :source ~/.vimrc<CR>
 
-" gt / tg tab navigation
-nnoremap tg gT
+" save file as root
+cmap w!! w !sudo tee > /dev/null %
 
-" Ruby syntax highlighting for Vagrantfiles
-augroup vagrant
-    au!
-    au BufRead,BufNewFile Vagrantfile set filetype=ruby
-augroup END
+" correct previous misspelled word
+nmap <Leader>z [s1z=<c-o>
 
-"########### Plugin-specific settings ##############
+" yank current filename
+noremap <silent> <F4> :let @+=expand("%:p")<CR>
 
-" Rainbow parentheses
+" }}}
+
+" {{{ Plugin: Rainbow parentheses
 map <Leader>r :RainbowParenthesesToggle<CR>
 au VimEnter * RainbowParenthesesToggle
 let braces_blacklist = ['wiki', 'vimwiki']
@@ -217,27 +253,27 @@ let g:rainbow_conf = {
     \       'css': 0,
     \   }
     \}
-
-" NERDTreeTabs
+" }}}
+" {{{ Plugin: NERDTreeTabs
 let g:nerdtree_tabs_open_on_console_startup = 1
 autocmd VimEnter * NERDTree | wincmd p  " focus on main window
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore=['\.DS_Store$', '.ropeproject', '\.pyc', '\~$', '\.swo$', '__pycache__']
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 map <Leader>f :NERDTreeFind<CR>
-
-" NERDCommenter
+" }}}
+" {{{ Plugin: NERDCommenter
 let g:NERDCustomDelimiters = {'python': {'left': '# '}}
-
-" CtrlP
+" }}}
+" {{{ Plugin: CtrlP
 let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'  " faster!
-
-" Pymode
+" }}}
+" {{{ Plugin: Pymode
 let g:pymode_warnings = 0
 let g:pymode_rope = 1 
 let g:pymode_lint = 1
@@ -247,89 +283,48 @@ let g:pymode_rope_goto_definition_cmd = 'e'
 let g:pymode_rope_autoimport = 0
 let g:pymode_lint_checkers = ['flake8', 'flake8-pep257']
 nnoremap <Leader>j <c-c>g<CR>
-
-" Markdown
-let g:vim_markdown_folding_disabled=1
-
-" surround
+" }}}
+" {{{ Plugin: Surround
 vmap s S
-
-" airline
+" }}}
+" {{{ Plugin: Airline
 let g:airline_powerline_fonts = 1  " use powerline fonts
-
-" save file as root
-cmap w!! w !sudo tee > /dev/null %
-
-" syntastic
+" }}}
+" {{{ Plugin: Syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_python_checkers=[]  " we're using flake8 for python
-
-" insert current date
-map <Leader>d :r !date<CR> 
-
-" visual expand
+" }}}
+" {{{ Plugin: vim-expand-region
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
-
-" vp doesn't replace paste buffer
-function! RestoreRegister()
-  let @" = s:restore_reg
-  return ''
-endfunction
-function! s:Repl()
-  let s:restore_reg = @"
-  return "p@=RestoreRegister()\<cr>"
-endfunction
-vmap <silent> <expr> p <sid>Repl()
-
-" paste multiple times safely
-xnoremap <Leader>p "_dP
-
-" xml folding
-let g:xml_syntax_folding=1
-au FileType xml setlocal foldmethod=syntax
-" easy folding toggle
-"nnoremap zz za
-nnoremap zO zczO
-
-" ultisnip
+" }}}
+" {{{ Plugin: Ultisnip
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-"let g:UltiSnipsListSnippets="<Leader><tab>"
-
-nmap <Leader>z [s1z=<c-o>
-
-:let maplocalleader = "\\"
-
+let g:UltiSnipsListSnippets="<Leader><tab>"
+" }}}
+" {{{ Plugin: Flake8
 autocmd BufWritePost *.py call Flake8()
 let g:flake8_show_in_gutter=1
-
-" wordwrapping in org mode
-autocmd FileType org setlocal wrap "true"
-autocmd FileType org setlocal linebreak "true"
-"autocmd FileType org :OrgToggleFoldingReverse
-
-" git gutter
+" }}}
+" {{{ Plugin: git gutter
 let g:gitgutter_max_signs = 15000
-
+" }}}
+" {{{ Plugin: instant markdown 
 let g:instant_markdown_slow = 1
-
-" yank ring show
+" }}}
+" {{{ Plugin: yank ring
 nnoremap <F10> :YRShow<CR> 
 let g:yankring_replace_n_pkey='' "yankring should not conflict with CtrlP
 let g:yankring_history_dir = '/tmp' " don't want it in home dir
-
-" yank current filename
-noremap <silent> <F4> :let @+=expand("%:p")<CR>
-
-" show yankring
-noremap <Leader>y :YRShow<CR>
-
+noremap <Leader>y :YRShow<CR> " show yankring
+" }}}
+" {{{ Plugin: fugitive
 " fugitive git bindings, more here:
 " https://www.reddit.com/r/vim/comments/21f4gm/best_workflow_when_using_fugitive/
 nnoremap <Leader>gs :Gstatus<CR>
@@ -342,24 +337,18 @@ nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR><CR>
 nnoremap <Leader>gp :Dispatch! git push<CR>
 nnoremap <Leader>gl :Dispatch! git pull<CR>
-
-" Gcode
-au FileType gcode set syntax nc
-
-" mapping for :Ag
+" }}}
+" {{{ Plugin: Ag.vim
 nnoremap <leader>a :Ag<Space>
 let g:ag_prg="ag --vimgrep"
-
-" Identify the syntax highlighting group used at the cursor
-map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-" quick fix toggle
+" }}}
+" {{{ Plugin: vim-togglelist
+" (quick fix toggle)
 let g:toggle_list_no_mappings = 1 " don't remap my <Leader>q
 nmap <script> <silent> cc :call ToggleQuickfixList()<CR><C-w>j
-
+" }}}
+" {{{ Plugin: vimwiki
 let g:vimwiki_list = [{'path': '~/Personal/vimwiki/',
                      \ 'nested_syntaxes': {'python': 'python', 'sql': 'sql'}}]
 let g:vimwiki_folding='list'
-
-" fix airline issue #20
-set laststatus=2
+" }}}
