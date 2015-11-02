@@ -25,6 +25,7 @@ set nobackup                    " Don't create backup files in same folder
 set noswapfile
 set hidden                      " allows to edit another file without first saving current one
 set viminfo+=n~/.vim/viminfo
+set viewoptions=cursor,folds,slash,unix
 
 
 " Vundle
@@ -76,6 +77,7 @@ Plugin 'vim-scripts/django.vim'
 Plugin 'vim-scripts/nc.vim--Eno'
 Plugin 'vim-scripts/openscad.vim'
 Plugin 'vim-scripts/paredit.vim'
+Plugin 'vim-scripts/restore_view.vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
 Plugin 'vim-scripts/vimwiki.git'
 
