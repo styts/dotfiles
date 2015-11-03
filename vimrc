@@ -122,7 +122,6 @@ set viminfo+=n~/.vim/viminfo
 " }}}
 
 " {{{ Filetypes
-au FileType md set filetype=markdown
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
