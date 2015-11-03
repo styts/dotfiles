@@ -182,6 +182,7 @@ Plugin 'vim-scripts/openscad.vim'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
 Plugin 'vim-scripts/vimwiki.git'
+Plugin 'vim-scripts/let-modeline.vim'
 
 call vundle#end()
 filetype plugin indent on
