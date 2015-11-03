@@ -87,6 +87,7 @@ nnoremap zO zczO
 " }}}
 " {{{ 18 reading and writing files
 set nobackup                    " Don't create backup files in same folder
+set nowritebackup
 " }}}
 " {{{ 19 the swap file
 set noswapfile
