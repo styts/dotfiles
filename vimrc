@@ -78,6 +78,7 @@ set expandtab                   " Tabs are spaces, not tabs
 " }}}
 " {{{ 15 folding
 set nofoldenable              " Folds are annoying
+set foldmethod=syntax
 nnoremap zO zczO
 " }}}
 " {{{ 16 diff mode
