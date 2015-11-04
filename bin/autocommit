@@ -1,7 +1,10 @@
 #!/bin/bash
 # used primarily for auto-committing the vimwiki
+# install with:
+# crontab -e
+# * * * * * /Users/kirill/bin/autocommit /Users/kirill/Personal/vimwiki
 
 cd $@
 git add -A
 git commit -m "autocommit"
-rm .git/COMMIT_EDITMSG
+rm .git/COMMIT_EDITMSG  # prevent backup script from constantly indexing this useless file
