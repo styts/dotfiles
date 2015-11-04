@@ -119,6 +119,7 @@ endif
 " }}}
 " {{{ 25 various
 set viminfo+=n~/.vim/viminfo
+set hidden                      " allows to edit another file without first saving current one
 set viewoptions=cursor,folds,slash,unix
 " }}}
 
@@ -237,7 +238,7 @@ autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadBra
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadRound
 let g:rainbow_conf = {
     \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-    \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+    \   'ctermfgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
     \   'operators': '_,_',
     \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
     \   'separately': {
@@ -353,6 +354,6 @@ nmap <script> <silent> cc :call ToggleQuickfixList()<CR><C-w>j
 " }}}
 " {{{ Plugin: vimwiki
 let g:vimwiki_list = [{'path': '~/Personal/vimwiki/',
-                     \ 'nested_syntaxes': {'python': 'python', 'sql': 'sql'}}]
+                     \ 'nested_syntaxes': {'python': 'python', 'sql': 'sql', 'shell': 'zsh'}}]
 let g:vimwiki_folding='list'
 " }}}
