@@ -147,7 +147,6 @@ function pytrace () {
 
 # journal
 setopt HIST_IGNORE_SPACE
-alias j=" jrnl"
 
 # nuff said, no more .pyc files
 export PYTHONDONTWRITEBYTECODE=1
