@@ -81,7 +81,7 @@ if [[ `uname` == 'Darwin' ]]; then
     source "$(brew --prefix)/etc/grc.bashrc"
 
     # autojump
-    [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.eh
+    [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 fi
 
 source $ZSH/oh-my-zsh.sh
