@@ -1,4 +1,4 @@
-" vim:foldmethod=marker:foldlevel=0
+" vim:foldmethod=marker:
 
 " {{{ 1 important
 set nocompatible
@@ -138,12 +138,13 @@ autocmd FileType org setlocal linebreak "true"
 " {{{ Plugins
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'SirVer/ultisnips'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'cyplo/vim-colors-solarized'
 Plugin 'dbeniamine/todo.txt-vim'
 Plugin 'ekalinin/Dockerfile.vim'
@@ -179,14 +180,13 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/SyntaxAttr.vim'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'vim-scripts/django.vim'
+Plugin 'vim-scripts/let-modeline.vim'
 Plugin 'vim-scripts/nc.vim--Eno'
-Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'vim-scripts/openscad.vim'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/restore_view.vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
 Plugin 'vim-scripts/vimwiki.git'
-Plugin 'vim-scripts/let-modeline.vim'
 
 call vundle#end()
 filetype plugin indent on
