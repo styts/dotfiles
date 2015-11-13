@@ -180,6 +180,7 @@ Plugin 'vim-scripts/SyntaxAttr.vim'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'vim-scripts/django.vim'
 Plugin 'vim-scripts/nc.vim--Eno'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'vim-scripts/openscad.vim'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/restore_view.vim'
@@ -355,5 +356,6 @@ nmap <script> <silent> cc :call ToggleQuickfixList()<CR><C-w>j
 " {{{ Plugin: vimwiki
 let g:vimwiki_list = [{'path': '~/Personal/vimwiki/',
                      \ 'nested_syntaxes': {'python': 'python', 'sql': 'sql', 'shell': 'zsh'}}]
-let g:vimwiki_folding='list'
+let g:vimwiki_folding='expr'
+" alternatively put on top of file: %% VIM: let g:vimwiki_folding="list"
 " }}}

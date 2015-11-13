@@ -164,3 +164,4 @@ source "$(brew --prefix)/etc/grc.bashrc"
 
 # autojump
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+export JAVA_HOME=$(/usr/libexec/java_home)
