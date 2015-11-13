@@ -49,7 +49,7 @@ export EDITOR="vim"
 export PATH=$HOME/bin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin
 
 #ruby
-export PATH=$HOME/.gem/ruby/2.2.0/bin:$PATH
+#export PATH=$HOME/.gem/ruby/2.2.0/bin:$PATH
 
 #pip
 export PATH=$HOME/.local/bin:$PATH
@@ -76,6 +76,12 @@ if [[ `uname` == 'Darwin' ]]; then
 
     # todo cfg
     alias t='todo.sh -d ~/.dotfiles/todo.cfg'
+
+    # generic colorizer
+    source "$(brew --prefix)/etc/grc.bashrc"
+
+    # autojump
+    [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.eh
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -101,7 +107,7 @@ export VENVWRAPPER=$HOME/.local/bin/virtualenvwrapper.sh
 [ -f $VENVWRAPPER ] && source $VENVWRAPPER
 
 # enable virtualenvwrapper shims and autocompletion
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 export PROJECT_HOME=$HOME/Projects
 
@@ -141,7 +147,6 @@ function pytrace () {
 
 # journal
 setopt HIST_IGNORE_SPACE
-alias j=" jrnl"
 
 # nuff said, no more .pyc files
 export PYTHONDONTWRITEBYTECODE=1
@@ -165,3 +170,6 @@ source "$(brew --prefix)/etc/grc.bashrc"
 # autojump
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 export JAVA_HOME=$(/usr/libexec/java_home)
+
+# background / color scheme
+export DARK=1
