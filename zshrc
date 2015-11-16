@@ -24,7 +24,6 @@ plugins=(
     web-search
     yellow
     zsh-syntax-highlighting
-    zsh-autosuggestions
     zsh-history-substring-search
 )
 
