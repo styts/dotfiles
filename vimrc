@@ -282,12 +282,13 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'  " faster!
 " {{{ Plugin: Pymode
 let g:pymode_warnings = 0
 let g:pymode_rope = 1 
-let g:pymode_lint = 1
+let g:pymode_lint = 0
 let g:pymode_doc = 0  " don't look up documentation - i seem to trigger it involuntarily some times
 let g:pymode_rope_goto_definition_bind = '<Leader>j'
 let g:pymode_rope_goto_definition_cmd = 'e'
 let g:pymode_rope_autoimport = 0
-let g:pymode_lint_checkers = ['flake8', 'flake8-pep257']
+let g:pymode_lint_checkers = []
+let g:pymode_rope_regenerate_on_write = 0
 nnoremap <Leader>j <c-c>g<CR>
 " }}}
 " {{{ Plugin: Surround
@@ -302,7 +303,7 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
-let g:syntastic_python_checkers=[]  " we're using flake8 for python
+let g:syntastic_python_checkers=['flake8', 'flake8-pep257']  " we're using flake8 for python
 " }}}
 " {{{ Plugin: vim-expand-region
 vmap v <Plug>(expand_region_expand)
