@@ -325,10 +325,12 @@ vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 " }}}
 " {{{ Plugin: Ultisnip
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 let g:UltiSnipsListSnippets="<Leader><tab>"
+let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"] " can't name it 'snippets'
 " }}}
 " {{{ Plugin: Flake8
 autocmd BufWritePost *.py call Flake8()
@@ -374,4 +376,10 @@ let g:vimwiki_list = [{'path': '~/Personal/vimwiki/',
                      \ 'nested_syntaxes': {'python': 'python', 'sql': 'sql', 'shell': 'zsh'}}]
 let g:vimwiki_folding='expr'
 " alternatively put on top of file: %% VIM: let g:vimwiki_folding="list"
+" }}}
+" {{{ Plugin: YouCompleteMe
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 " }}}
