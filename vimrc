@@ -123,15 +123,27 @@ set viewoptions=cursor,folds,slash,unix
 " }}}
 
 " {{{ Filetypes
+" Vagrant {{{
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 au FileType gcode set syntax nc
+" }}}
+" Markdown {{{
 let g:vim_markdown_folding_disabled=0
-
-" wordwrapping in org mode
+" }}}
+" XML {{{
+let g:xml_syntax_folding=1
+au FileType xml setlocal foldmethod=syntax
+" }}}
+" Org-mode {{{
 autocmd FileType org setlocal wrap "true"
 autocmd FileType org setlocal linebreak "true"
+" }}}
+" Python {{{
+let g:virtualenv_auto_activate = 1
+autocmd BufRead *.py nmap <F6> :!python %<CR>
+" }}}
 " }}}
 
 " {{{ Plugins
