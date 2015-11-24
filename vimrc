@@ -2,7 +2,6 @@
 
 " {{{ 1 important
 set nocompatible
-syntax on
 scriptencoding utf-8
 set pastetoggle=<F2>
 " }}}
@@ -10,7 +9,7 @@ set pastetoggle=<F2>
 set incsearch                   " Find as you type search
 set ignorecase                  " Case insensitive search
 set smartcase                   " search case-sensitive if term includes uppercase letters
-map <Leader>h :set hlsearch!<CR>
+noremap <Space>h :set hlsearch!<CR>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
@@ -124,15 +123,27 @@ set viewoptions=cursor,folds,slash,unix
 " }}}
 
 " {{{ Filetypes
+" Vagrant {{{
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
+" }}}
+" Gcode {{{
+au FileType gcode set syntax nc
+" }}}
+" Markdown {{{
+let g:vim_markdown_folding_disabled=0
+" }}}
+" XML {{{
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
-au FileType gcode set syntax nc
-let g:vim_markdown_folding_disabled=0
-
-" wordwrapping in org mode
+" }}}
+" Org-mode {{{
 autocmd FileType org setlocal wrap "true"
 autocmd FileType org setlocal linebreak "true"
+" }}}
+" Python {{{
+let g:virtualenv_auto_activate = 1
+autocmd BufRead *.py nmap <F6> :!python %<CR>
+" }}}
 " }}}
 
 " {{{ Plugins
@@ -187,9 +198,13 @@ Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/restore_view.vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
 Plugin 'vim-scripts/vimwiki.git'
+Plugin 'ervandew/supertab'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'jmcantrell/vim-virtualenv'
 
 call vundle#end()
 filetype plugin indent on
+syntax on  " after  vundle#end , as workaround for ultisnips
 " }}}
 
 " {{{ Graphics
@@ -282,12 +297,13 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'  " faster!
 " {{{ Plugin: Pymode
 let g:pymode_warnings = 0
 let g:pymode_rope = 1 
-let g:pymode_lint = 1
+let g:pymode_lint = 0
 let g:pymode_doc = 0  " don't look up documentation - i seem to trigger it involuntarily some times
 let g:pymode_rope_goto_definition_bind = '<Leader>j'
 let g:pymode_rope_goto_definition_cmd = 'e'
 let g:pymode_rope_autoimport = 0
-let g:pymode_lint_checkers = ['flake8', 'flake8-pep257']
+let g:pymode_lint_checkers = []
+let g:pymode_rope_regenerate_on_write = 0
 nnoremap <Leader>j <c-c>g<CR>
 " }}}
 " {{{ Plugin: Surround
@@ -302,17 +318,19 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
-let g:syntastic_python_checkers=[]  " we're using flake8 for python
+let g:syntastic_python_checkers=['flake8', 'flake8-pep257']  " we're using flake8 for python
 " }}}
 " {{{ Plugin: vim-expand-region
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 " }}}
 " {{{ Plugin: Ultisnip
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 let g:UltiSnipsListSnippets="<Leader><tab>"
+let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"] " can't name it 'snippets'
 " }}}
 " {{{ Plugin: Flake8
 autocmd BufWritePost *.py call Flake8()
@@ -358,4 +376,10 @@ let g:vimwiki_list = [{'path': '~/Personal/vimwiki/',
                      \ 'nested_syntaxes': {'python': 'python', 'sql': 'sql', 'shell': 'zsh'}}]
 let g:vimwiki_folding='expr'
 " alternatively put on top of file: %% VIM: let g:vimwiki_folding="list"
+" }}}
+" {{{ Plugin: YouCompleteMe
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 " }}}
