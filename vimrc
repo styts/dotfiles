@@ -198,6 +198,9 @@ Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/restore_view.vim'
 Plugin 'vim-scripts/rtorrent-syntax-file'
 Plugin 'vim-scripts/vimwiki.git'
+Plugin 'ervandew/supertab'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'jmcantrell/vim-virtualenv'
 
 call vundle#end()
 filetype plugin indent on
