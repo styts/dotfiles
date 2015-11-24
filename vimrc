@@ -9,7 +9,7 @@ set pastetoggle=<F2>
 set incsearch                   " Find as you type search
 set ignorecase                  " Case insensitive search
 set smartcase                   " search case-sensitive if term includes uppercase letters
-map <Leader>h :set hlsearch!<CR>
+noremap <Space>h :set hlsearch!<CR>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
