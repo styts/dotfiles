@@ -125,8 +125,8 @@ set viewoptions=cursor,folds,slash,unix
 " {{{ Filetypes
 " Vagrant {{{
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
-let g:xml_syntax_folding=1
-au FileType xml setlocal foldmethod=syntax
+" }}}
+" Gcode {{{
 au FileType gcode set syntax nc
 " }}}
 " Markdown {{{
