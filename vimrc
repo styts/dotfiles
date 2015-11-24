@@ -2,7 +2,6 @@
 
 " {{{ 1 important
 set nocompatible
-syntax on
 scriptencoding utf-8
 set pastetoggle=<F2>
 " }}}
@@ -190,6 +189,7 @@ Plugin 'vim-scripts/vimwiki.git'
 
 call vundle#end()
 filetype plugin indent on
+syntax on  " after  vundle#end , as workaround for ultisnips
 " }}}
 
 " {{{ Graphics
