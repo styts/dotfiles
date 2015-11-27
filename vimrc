@@ -141,8 +141,10 @@ autocmd FileType org setlocal wrap "true"
 autocmd FileType org setlocal linebreak "true"
 " }}}
 " Python {{{
+" <F6> will run current file with ipython (python does not find virtualenv
+" packages for some reason)
 let g:virtualenv_auto_activate = 1
-autocmd BufRead *.py nmap <F6> :!python %<CR>
+autocmd BufRead *.py nmap <F6> :! ipython -c "\%run %"<CR>
 " }}}
 " }}}
 
