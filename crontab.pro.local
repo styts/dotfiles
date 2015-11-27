@@ -1,4 +1,11 @@
+# backup this file (Note: it's public, on github!)
 * * * * * /Users/kirill/bin/backup_crontab.sh
+
+# save the private vimwiki
 * * * * * /Users/kirill/bin/autocommit /Users/kirill/Personal/vimwiki/
+
+# download avscoins database and images from production to local laptop daily
 0 22 * * * /Users/kirill/Projects/avscoins/assets/backup_to_laptop.sh
+
+# daily backup git repos to local laptop
 0 22 * * * rsync -avz wf:repos /data/backups
