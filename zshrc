@@ -17,6 +17,7 @@ plugins=(
     history-substring-search
     iterm2
     pass
+    python
     pip
     pro
     themes
