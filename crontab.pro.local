@@ -1,0 +1,3 @@
+* * * * * /Users/kirill/bin/autocommit /Users/kirill/Personal/vimwiki/
+0 22 * * * /Users/kirill/Projects/avscoins/assets/backup_to_laptop.sh
+0 22 * * * rsync -avz wf:repos /data/backups
