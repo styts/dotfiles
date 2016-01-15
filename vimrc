@@ -4,6 +4,7 @@
 set nocompatible
 scriptencoding utf-8
 set pastetoggle=<F2>
+let mapleader=" "
 " }}}
 " {{{ 2 moving around, searching and patterns
 set incsearch                   " Find as you type search
@@ -79,6 +80,16 @@ set expandtab                   " Tabs are spaces, not tabs
 set nofoldenable              " Folds are annoying
 set foldmethod=syntax
 nnoremap zO zczO
+nnoremap <Leader>0 :set foldlevel=0<CR>
+nnoremap <Leader>1 :set foldlevel=1<CR>
+nnoremap <Leader>2 :set foldlevel=2<CR>
+nnoremap <Leader>3 :set foldlevel=3<CR>
+nnoremap <Leader>4 :set foldlevel=4<CR>
+nnoremap <Leader>5 :set foldlevel=5<CR>
+nnoremap <Leader>6 :set foldlevel=6<CR>
+nnoremap <Leader>7 :set foldlevel=7<CR>
+nnoremap <Leader>8 :set foldlevel=8<CR>
+nnoremap <Leader>9 :set foldlevel=9<CR>
 " }}}
 " {{{ 16 diff mode
 " }}}
@@ -224,7 +235,6 @@ map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 " }}}
 
 " {{{ Mappings
-let mapleader=" "
 let maplocalleader = "\\"
 
 " map common leader stuff
