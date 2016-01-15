@@ -264,6 +264,24 @@ let braces_blacklist = ['wiki', 'vimwiki']
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadSquare
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadBraces
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadRound
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['red',         'firebrick3'],
+    \ ]
 let g:rainbow_conf = {
     \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
     \   'ctermfgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
