@@ -142,6 +142,7 @@ au FileType gcode set syntax nc
 " }}}
 " Markdown {{{
 let g:vim_markdown_folding_disabled=0
+let g:markdown_fenced_languages = ['python']
 " }}}
 " XML {{{
 let g:xml_syntax_folding=1
@@ -326,7 +327,7 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'  " faster!
 " }}}
 " {{{ Plugin: Pymode
 let g:pymode_warnings = 0
-let g:pymode_rope = 1 
+let g:pymode_rope = 1
 let g:pymode_lint = 0
 let g:pymode_doc = 0  " don't look up documentation - i seem to trigger it involuntarily some times
 let g:pymode_rope_goto_definition_bind = '<Leader>j'
@@ -341,6 +342,12 @@ vmap s S
 " }}}
 " {{{ Plugin: Airline
 let g:airline_powerline_fonts = 1  " use powerline fonts
+let g:airline_section_b = ''  " don't display `branch`
+let g:airline#extensions#default#layout = [
+    \ [ 'a', 'c' ],
+    \ [ 'x', 'y', 'z', 'warning' ]
+    \ ]
+
 " }}}
 " {{{ Plugin: Syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -369,11 +376,11 @@ let g:flake8_show_in_gutter=1
 " {{{ Plugin: git gutter
 let g:gitgutter_max_signs = 15000
 " }}}
-" {{{ Plugin: instant markdown 
+" {{{ Plugin: instant markdown
 let g:instant_markdown_slow = 1
 " }}}
 " {{{ Plugin: yank ring
-nnoremap <F10> :YRShow<CR> 
+nnoremap <F10> :YRShow<CR>
 let g:yankring_replace_n_pkey='' "yankring should not conflict with CtrlP
 let g:yankring_history_dir = '/tmp' " don't want it in home dir
 noremap <Leader>y :YRShow<CR> " show yankring
