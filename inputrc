@@ -1,4 +1,5 @@
 # ipython, and other readline tools (e.g. lein) should support vi keybindings
+# http://stackoverflow.com/questions/10394302/how-do-i-use-vi-keys-in-ipython-under-nix
 set editing-mode vi
 set keymap vi
 set convert-meta on
