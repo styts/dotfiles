@@ -4,6 +4,7 @@
 set nocompatible
 scriptencoding utf-8
 set pastetoggle=<F2>
+let mapleader=" "
 " }}}
 " {{{ 2 moving around, searching and patterns
 set incsearch                   " Find as you type search
@@ -79,6 +80,16 @@ set expandtab                   " Tabs are spaces, not tabs
 set nofoldenable              " Folds are annoying
 set foldmethod=syntax
 nnoremap zO zczO
+nnoremap <Leader>0 :set foldlevel=0<CR>
+nnoremap <Leader>1 :set foldlevel=1<CR>
+nnoremap <Leader>2 :set foldlevel=2<CR>
+nnoremap <Leader>3 :set foldlevel=3<CR>
+nnoremap <Leader>4 :set foldlevel=4<CR>
+nnoremap <Leader>5 :set foldlevel=5<CR>
+nnoremap <Leader>6 :set foldlevel=6<CR>
+nnoremap <Leader>7 :set foldlevel=7<CR>
+nnoremap <Leader>8 :set foldlevel=8<CR>
+nnoremap <Leader>9 :set foldlevel=9<CR>
 " }}}
 " {{{ 16 diff mode
 " }}}
@@ -131,6 +142,7 @@ au FileType gcode set syntax nc
 " }}}
 " Markdown {{{
 let g:vim_markdown_folding_disabled=0
+let g:markdown_fenced_languages = ['python']
 " }}}
 " XML {{{
 let g:xml_syntax_folding=1
@@ -141,8 +153,10 @@ autocmd FileType org setlocal wrap "true"
 autocmd FileType org setlocal linebreak "true"
 " }}}
 " Python {{{
+" <F6> will run current file with ipython (python does not find virtualenv
+" packages for some reason)
 let g:virtualenv_auto_activate = 1
-autocmd BufRead *.py nmap <F6> :!python %<CR>
+autocmd BufRead *.py nmap <F6> :! ipython -c "\%run %"<CR>
 " }}}
 " }}}
 
@@ -222,7 +236,6 @@ map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 " }}}
 
 " {{{ Mappings
-let mapleader=" "
 let maplocalleader = "\\"
 
 " map common leader stuff
@@ -252,6 +265,24 @@ let braces_blacklist = ['wiki', 'vimwiki']
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadSquare
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadBraces
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadRound
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['red',         'firebrick3'],
+    \ ]
 let g:rainbow_conf = {
     \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
     \   'ctermfgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -296,7 +327,7 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'  " faster!
 " }}}
 " {{{ Plugin: Pymode
 let g:pymode_warnings = 0
-let g:pymode_rope = 1 
+let g:pymode_rope = 1
 let g:pymode_lint = 0
 let g:pymode_doc = 0  " don't look up documentation - i seem to trigger it involuntarily some times
 let g:pymode_rope_goto_definition_bind = '<Leader>j'
@@ -311,6 +342,12 @@ vmap s S
 " }}}
 " {{{ Plugin: Airline
 let g:airline_powerline_fonts = 1  " use powerline fonts
+let g:airline_section_b = ''  " don't display `branch`
+let g:airline#extensions#default#layout = [
+    \ [ 'a', 'c' ],
+    \ [ 'x', 'y', 'z', 'warning' ]
+    \ ]
+
 " }}}
 " {{{ Plugin: Syntastic
 let g:syntastic_always_populate_loc_list = 1
@@ -339,11 +376,11 @@ let g:flake8_show_in_gutter=1
 " {{{ Plugin: git gutter
 let g:gitgutter_max_signs = 15000
 " }}}
-" {{{ Plugin: instant markdown 
+" {{{ Plugin: instant markdown
 let g:instant_markdown_slow = 1
 " }}}
 " {{{ Plugin: yank ring
-nnoremap <F10> :YRShow<CR> 
+nnoremap <F10> :YRShow<CR>
 let g:yankring_replace_n_pkey='' "yankring should not conflict with CtrlP
 let g:yankring_history_dir = '/tmp' " don't want it in home dir
 noremap <Leader>y :YRShow<CR> " show yankring
