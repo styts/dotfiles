@@ -163,12 +163,15 @@ let g:virtualenv_auto_activate = 1
 autocmd BufRead *.py nmap <F6> :! ipython -c "\%run %"<CR>
 autocmd FileType py setlocal tw=79
 " }}}
+" Help {{{
+autocmd FileType help wincmd L " open help files in vertical split
+" }}}
 " }}}
 
 " {{{ Plugins
 call plug#begin('~/.vim/bundle')
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
@@ -179,7 +182,6 @@ Plug 'dbeniamine/todo.txt-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'henrik/vim-indexed-search'
-Plug 'honza/vim-snippets'
 Plug 'hylang/vim-hy'
 Plug 'ivanov/vim-ipython'
 Plug 'jceb/vim-orgmode'
@@ -195,16 +197,17 @@ Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'skammer/vim-css-color'
-Plug 'suan/vim-instant-markdown'
+"Plug 'skammer/vim-css-color'
+"Plug 'suan/vim-inskant-markdown'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'vim-scripts/django.vim'
 Plug 'vim-scripts/let-modeline.vim'
@@ -215,7 +218,7 @@ Plug 'vim-scripts/restore_view.vim'
 Plug 'vim-scripts/rtorrent-syntax-file'
 Plug 'vim-scripts/vimwiki'
 Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'jmcantrell/vim-virtualenv'
 call plug#end()
 " }}}
@@ -340,6 +343,8 @@ nnoremap <Leader>j <c-c>g<CR>
 vmap s S
 " }}}
 " {{{ Plugin: Airline
+"let g:airline_left_sep=''
+let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_powerline_fonts = 1  " use powerline fonts
