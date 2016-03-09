@@ -62,7 +62,7 @@ set mousehide
 set shortmess+=I " no Uganda children intro
 " }}}
 " {{{ 12 selecting text
-set clipboard^=unnamed  " prepend the unnamed register "
+set clipboard=unnamed
 " }}}
 " {{{ 13 editing text
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
@@ -128,7 +128,6 @@ endif
 " {{{ 24 multi-byte characters
 " }}}
 " {{{ 25 various
-set viminfo='1000,f1
 set viminfo+=n~/.vim/viminfo
 set hidden                      " allows to edit another file without first saving current one
 set viewoptions=cursor,folds,slash,unix
@@ -158,7 +157,6 @@ autocmd FileType org setlocal linebreak "true"
 " packages for some reason)
 let g:virtualenv_auto_activate = 1
 autocmd BufRead *.py nmap <F6> :! ipython -c "\%run %"<CR>
-autocmd FileType py setlocal tw=79
 " }}}
 " }}}
 
@@ -205,7 +203,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/SyntaxAttr.vim'
-"Plugin 'vim-scripts/YankRing.vim'
+Plugin 'vim-scripts/YankRing.vim'
 Plugin 'vim-scripts/django.vim'
 Plugin 'vim-scripts/let-modeline.vim'
 Plugin 'vim-scripts/nc.vim--Eno'
@@ -337,7 +335,6 @@ let g:pymode_rope_goto_definition_cmd = 'e'
 let g:pymode_rope_autoimport = 0
 let g:pymode_lint_checkers = []
 let g:pymode_rope_regenerate_on_write = 0
-let g:pymode_options_max_line_length = 79
 nnoremap <Leader>j <c-c>g<CR>
 " }}}
 " {{{ Plugin: Surround
