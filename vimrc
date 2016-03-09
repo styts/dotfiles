@@ -266,7 +266,7 @@ noremap <silent> <F4> :let @+=expand("%:p")<CR>
 " {{{ Plugin: Rainbow parentheses
 map <Leader>r :RainbowParenthesesToggle<CR>
 au VimEnter * RainbowParenthesesToggle
-let braces_blacklist = ['wiki', 'vimwiki']
+let braces_blacklist = ['wiki', 'vimwiki', 'htmldjango', 'css']
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadSquare
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadBraces
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadRound
@@ -306,8 +306,7 @@ let g:rainbow_conf = {
     \       },
     \       'html': {
     \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-    \       },
-    \       'css': 0,
+    \       }
     \   }
     \}
 " }}}
