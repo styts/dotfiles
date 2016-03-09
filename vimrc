@@ -129,7 +129,10 @@ endif
 " }}}
 " {{{ 25 various
 set viminfo='1000,f1
-set viminfo+=n~/.vim/viminfo
+" shada is viminfo for neovim. the file format for them is different, hence they can't use the same files
+if exists("&shada")
+    set shada+=n~/.nvim/viminfo
+endif
 set hidden                      " allows to edit another file without first saving current one
 set viewoptions=cursor,folds,slash,unix
 " }}}
@@ -344,10 +347,11 @@ nnoremap <Leader>j <c-c>g<CR>
 vmap s S
 " }}}
 " {{{ Plugin: Airline
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 let g:airline_powerline_fonts = 1  " use powerline fonts
-let g:airline_section_b = ''  " don't display `branch`
 let g:airline#extensions#default#layout = [
-    \ [ 'a', 'c' ],
+    \ [ 'a', 'b', 'c' ],
     \ [ 'x', 'y', 'z', 'warning' ]
     \ ]
 
