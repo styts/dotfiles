@@ -161,7 +161,13 @@ autocmd FileType org setlocal linebreak "true"
 " packages for some reason)
 let g:virtualenv_auto_activate = 1
 autocmd BufRead *.py nmap <F6> :! ipython -c "\%run %"<CR>
-autocmd FileType py setlocal tw=79
+autocmd FileType python setlocal tw=79
+" expand the ipdb snippet above current line with <Space>b
+autocmd FileType python nmap <Leader>b :normal Oipdb<Tab><CR>
+
+" }}}
+" Help {{{
+autocmd FileType help wincmd L " open help files in vertical split
 " }}}
 " }}}
 
