@@ -174,7 +174,7 @@ autocmd FileType help wincmd L " open help files in vertical split
 " {{{ Plugins
 call plug#begin('~/.vim/bundle')
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
@@ -185,14 +185,14 @@ Plug 'dbeniamine/todo.txt-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'henrik/vim-indexed-search'
-Plug 'honza/vim-snippets'
 Plug 'hylang/vim-hy'
 Plug 'ivanov/vim-ipython'
 Plug 'jceb/vim-orgmode'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kien/ctrlp.vim'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'klen/python-mode'
+"Plug 'klen/python-mode'
+Plug 'davidhalter/jedi-vim'
 Plug 'milkypostman/vim-togglelist'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'nvie/vim-flake8'
@@ -201,16 +201,15 @@ Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'skammer/vim-css-color'
-Plug 'suan/vim-instant-markdown'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'vim-scripts/django.vim'
 Plug 'vim-scripts/let-modeline.vim'
@@ -221,7 +220,7 @@ Plug 'vim-scripts/restore_view.vim'
 Plug 'vim-scripts/rtorrent-syntax-file'
 Plug 'vim-scripts/vimwiki'
 Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'jmcantrell/vim-virtualenv'
 call plug#end()
 " }}}
@@ -249,7 +248,7 @@ map <Leader>q :bdelete<CR>
 map <Leader>x :x<CR>
 
 " edit .vimrc
-map <Leader>v :e ~/.dotfiles/vimrc<CR>
+map <Leader>v :vsp ~/.dotfiles/vimrc<CR>
 map <Leader>V :source ~/.vimrc<CR>
 
 " save file as root
@@ -330,22 +329,34 @@ let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'  " faster!
 " }}}
 " {{{ Plugin: Pymode
+" NOTE: plan to replace this with Jedi
+let g:pymode = 0
 let g:pymode_warnings = 0
-let g:pymode_rope = 1
+let g:pymode_rope = 0
 let g:pymode_lint = 0
-let g:pymode_doc = 0  " don't look up documentation - i seem to trigger it involuntarily some times
+"let g:pymode_doc = 0  " don't look up documentation - i seem to trigger it involuntarily some times  (this does not help)
 let g:pymode_rope_goto_definition_bind = '<Leader>j'
 let g:pymode_rope_goto_definition_cmd = 'e'
-let g:pymode_rope_autoimport = 0
+let g:pymode_rope_autoimport = 1
 let g:pymode_lint_checkers = []
-let g:pymode_rope_regenerate_on_write = 0
+let g:pymode_rope_regenerate_on_write = 1
 let g:pymode_options_max_line_length = 79
 nnoremap <Leader>j <c-c>g<CR>
 " }}}
+
+" {{{ Plugin: Jedi
+let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#popup_on_dot = 0
+let g:jedi#goto_definitions_command = "<Leader>j"
+let g:jedi#usages_command = ""
+" }}}
+
 " {{{ Plugin: Surround
 vmap s S
 " }}}
 " {{{ Plugin: Airline
+"let g:airline_left_sep=''
+let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_powerline_fonts = 1  " use powerline fonts
