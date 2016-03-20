@@ -70,11 +70,12 @@ set undolevels=1000         " Maximum number of changes that can be undone
 set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
 " }}}
 " {{{ 14 tabs and indenting
-set tabstop=4                   " An indentation every four columns
-set softtabstop=4               " Let backspace delete indent
 set autoindent                  " Indent at the same level of the previous line
+set tabstop=4                   " An indentation every four columns
+set softtabstop=0               " Let backspace delete indent
 set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
+set smarttab
 " }}}
 " {{{ 15 folding
 set nofoldenable              " Folds are annoying
