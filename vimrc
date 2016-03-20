@@ -165,7 +165,8 @@ autocmd BufRead *.py nmap <F6> :! ipython -c "\%run %"<CR>
 autocmd FileType python setlocal tw=79
 " expand the ipdb snippet above current line with <Space>b
 autocmd FileType python nmap <Leader>b :normal Oipdb<Tab><CR>
-
+" from https://github.com/hdima/python-syntax
+let python_highlight_all = 1
 " }}}
 " Help {{{
 autocmd FileType help wincmd L " open help files in vertical split
@@ -185,12 +186,13 @@ Plug 'cyplo/vim-colors-solarized'
 Plug 'dbeniamine/todo.txt-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'gerw/vim-HiLinkTrace'
+Plug 'hdima/python-syntax'
 Plug 'henrik/vim-indexed-search'
 Plug 'hylang/vim-hy'
 Plug 'ivanov/vim-ipython'
 Plug 'jceb/vim-orgmode'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'kien/rainbow_parentheses.vim'
 "Plug 'klen/python-mode'
 Plug 'davidhalter/jedi-vim'
