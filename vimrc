@@ -1,5 +1,3 @@
-" vim:foldmethod=marker:
-
 " {{{ 1 important
 set nocompatible
 scriptencoding utf-8
@@ -194,7 +192,6 @@ Plug 'jceb/vim-orgmode'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'kien/rainbow_parentheses.vim'
-"Plug 'klen/python-mode'
 Plug 'davidhalter/jedi-vim'
 Plug 'milkypostman/vim-togglelist'
 Plug 'nelstrom/vim-markdown-folding'
@@ -328,7 +325,7 @@ let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
-let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+let g:ctrlp_extensions = []
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'  " faster!
 " }}}
 " {{{ Plugin: Pymode
