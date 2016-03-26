@@ -218,6 +218,7 @@ Plug 'vim-scripts/openscad.vim'
 Plug 'vim-scripts/paredit.vim'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'vim-scripts/rtorrent-syntax-file'
+Plug 'vim-scripts/tracwiki'
 Plug 'vim-scripts/vimwiki'
 Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
