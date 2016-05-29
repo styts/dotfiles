@@ -43,7 +43,7 @@ export TERM="xterm-256color"
 export DJANGO_COLORS="dark"
 
 # Obvious...
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # Customize to your needs...
 export PATH=$HOME/bin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin
