@@ -48,6 +48,9 @@ export EDITOR="nvim"
 # Customize to your needs...
 export PATH=$HOME/bin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin
 
+# include Android tools: adb, etc.
+export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
+
 #ruby
 #export PATH=$HOME/.gem/ruby/2.2.0/bin:$PATH
 
