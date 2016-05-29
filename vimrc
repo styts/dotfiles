@@ -333,7 +333,7 @@ let g:rainbow_conf = {
     \}
 " }}}
 " {{{ Plugin: NERDTreeTabs
-let g:nerdtree_tabs_open_on_console_startup = 1
+let g:nerdtree_tabs_open_on_console_startup = 0
 autocmd VimEnter * NERDTree | wincmd p  " focus on main window
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore=['\.DS_Store$', '.ropeproject', '\.pyc', '\~$', '\.swo$', '__pycache__']
