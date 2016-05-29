@@ -460,3 +460,15 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 " }}}
+
+" {{{ Plugin: vim-test
+let test#strategy = 'neovim'
+"let g:test#preserve_screen = 1
+let test#python#runner = 'pytest'
+"let test#python#pytest#options = '-q'
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+"nmap <silent> <leader>a :TestSuite<CR>
+"nmap <silent> <leader>l :TestLast<CR>
+"nmap <silent> <leader>g :TestVisit<CR>
+" }}}
