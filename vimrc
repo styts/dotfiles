@@ -267,7 +267,7 @@ let maplocalleader = "\\"
 
 " map common leader stuff
 map <Leader>w :w<CR>
-map <Leader>q :bdelete<CR>
+map <Leader>q :q<CR>
 map <Leader>x :x<CR>
 
 " edit .vimrc
