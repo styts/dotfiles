@@ -73,7 +73,7 @@ set tabstop=4                   " An indentation every four columns
 set softtabstop=0               " Let backspace delete indent
 set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
-set smarttab
+"set smarttab
 " }}}
 " {{{ 15 folding
 set nofoldenable              " Folds are annoying
@@ -393,9 +393,10 @@ let g:airline#extensions#default#layout = [
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_python_checkers=['flake8', 'flake8-pep257']  " we're using flake8 for python
+let g:syntastic_enable_html_checker = 1
 " }}}
 " {{{ Plugin: vim-expand-region
 vmap v <Plug>(expand_region_expand)
