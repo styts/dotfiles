@@ -163,6 +163,9 @@ autocmd BufRead *.py nmap <F6> :! ipython -c "\%run %"<CR>
 autocmd FileType python setlocal tw=79
 " expand the ipdb snippet above current line with <Space>b
 autocmd FileType python nmap <Leader>b :normal Oipdb<Tab><CR>
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
+"autocmd FileType python nmap <Leader>t :!py.test %<CR>
+"autocmd FileType python let b:dispatch = 'py.test %'
 " from https://github.com/hdima/python-syntax
 let python_highlight_all = 1
 " }}}
