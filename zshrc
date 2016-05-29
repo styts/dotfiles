@@ -173,3 +173,5 @@ fi
 
 # background / color scheme
 export DARK=1
+
+bindkey -s "^N" "clear\n"
