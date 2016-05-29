@@ -6,3 +6,4 @@ kahua/yelster/settings/local.py
 *.mo
 solweb_media_root
 .stfolder
+Session.vim
