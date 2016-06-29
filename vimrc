@@ -245,7 +245,7 @@ Plug 'vim-scripts/vimwiki'
 call plug#end()
 " }}}
 
-" Terminal
+" {{{ Terminal
 " do I even use this? For Dispatch and test workflow maybe?
 tnoremap <Esc> <C-\><C-n>
 tnoremap <A-h> <C-\><C-n><C-w>h
@@ -256,6 +256,7 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+" }}}
 
 " {{{ Graphics
 " colorscheme
