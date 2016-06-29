@@ -400,13 +400,17 @@ let g:airline#extensions#default#layout = [
 
 " }}}
 " {{{ Plugin: Syntastic
+let g:syntastic_debug = 0 " toggle this
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_python_checkers=['flake8', 'flake8-pep257']  " we're using flake8 for python
 let g:syntastic_enable_html_checker = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_enable_javascript_checker = 1
+
 " }}}
 " {{{ Plugin: vim-expand-region
 vmap v <Plug>(expand_region_expand)
