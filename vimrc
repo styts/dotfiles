@@ -169,6 +169,10 @@ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
 " from https://github.com/hdima/python-syntax
 let python_highlight_all = 1
 " }}}
+" Javascript {{{
+let javaScript_fold = 1
+autocmd Filetype javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2
+" }}}
 " Help {{{
 autocmd FileType help wincmd L " open help files in vertical split
 " }}}
