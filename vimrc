@@ -487,3 +487,5 @@ nmap <silent> <leader>T :TestFile<CR>
 "nmap <silent> <leader>l :TestLast<CR>
 "nmap <silent> <leader>g :TestVisit<CR>
 " }}}
+
+" vim: set foldmethod=marker:foldlevel=0:foldenable:
