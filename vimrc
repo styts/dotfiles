@@ -172,6 +172,7 @@ let python_highlight_all = 1
 " Javascript {{{
 let javaScript_fold = 1
 autocmd Filetype javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2
+au BufRead,BufNewFile *.js.ejs set filetype=javascript
 " }}}
 " Help {{{
 autocmd FileType help wincmd L " open help files in vertical split
@@ -207,8 +208,10 @@ Plug 'janko-m/vim-test'
 Plug 'jceb/vim-orgmode'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'jiangmiao/auto-pairs'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'kien/rainbow_parentheses.vim'
+"Plug 'nikvdp/ejs-syntax'
 Plug 'milkypostman/vim-togglelist'
 Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'nelstrom/vim-markdown-folding'
@@ -488,4 +491,10 @@ nmap <silent> <leader>T :TestFile<CR>
 "nmap <silent> <leader>g :TestVisit<CR>
 " }}}
 
+" {{{ Autocommands
+augroup scad
+  autocmd!
+  autocmd BufWritePost workbench.py silent !python <afile> > <afile>_output.scad
+augroup END
+" }}}
 " vim: set foldmethod=marker:foldlevel=0:foldenable:
