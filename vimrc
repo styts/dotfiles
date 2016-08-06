@@ -51,49 +51,10 @@ if exists("&shada")
     set shada+=n~/.nvim/viminfo
 endif
 " }}}
-" {{{ Filetypes
-" Vagrant {{{
-au BufRead,BufNewFile Vagrantfile set filetype=ruby
-" }}}
-" Gcode {{{
-au FileType gcode set syntax nc
-" }}}
-" Markdown {{{
-let g:vim_markdown_folding_disabled=0
-let g:markdown_fenced_languages = ['python']
-" }}}
-" XML {{{
-let g:xml_syntax_folding=1
-au FileType xml setlocal foldmethod=syntax
-" }}}
-" Org-mode {{{
-autocmd FileType org setlocal wrap "true"
-autocmd FileType org setlocal linebreak "true"
-" }}}
-" Python {{{
-" <F6> will run current file with ipython (python does not find virtualenv
-" packages for some reason)
-let g:virtualenv_auto_activate = 1
-autocmd BufRead *.py nmap <F6> :! ipython -c "\%run %"<CR>
-autocmd FileType python setlocal tw=79
-" expand the ipdb snippet above current line with <Space>b
-autocmd FileType python nmap <Leader>b :normal Oipdb<Tab><CR>
-autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
-"autocmd FileType python nmap <Leader>t :!py.test %<CR>
-"autocmd FileType python let b:dispatch = 'py.test %'
-" from https://github.com/hdima/python-syntax
-let python_highlight_all = 1
-" }}}
-" Javascript {{{
-let javaScript_fold = 1
-autocmd Filetype javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2
-au BufRead,BufNewFile *.js.ejs set filetype=javascript
-" }}}
-" Help {{{
-autocmd FileType help wincmd L " open help files in vertical split
-" }}}
-" German
-au BufNewFile,BufRead *.de.txt,*.de set filetype=german
+" {{{ Autocommands
+au BufWritePost *.scad.py silent !python <afile> > <afile>_output.scad
+au BufNewFile,BufRead *.de.txt,*.de setfiletype german
+au BufRead,BufNewFile *.js.ejs setfiletype javascript
 " }}}
 " {{{ Plugins
 call plug#begin('~/.vim/bundle')
@@ -163,6 +124,17 @@ Plug 'vim-scripts/rtorrent-syntax-file'
 Plug 'vim-scripts/tracwiki'
 Plug 'vim-scripts/vimwiki'
 call plug#end()
+
+" colorscheme needs to be loaded in a plugin, hence it's set after the plugins
+" colorscheme/background, decide between dark and light
+if $DARK == "1"
+    let solarized_termtrans=0
+    set background=dark
+else
+    set background=light
+endif
+colorscheme solarized
+
 " }}}
 " {{{ Mappings
 let maplocalleader = "\\"
@@ -192,11 +164,17 @@ nnoremap <Leader>en :setlocal spell spelllang=en<CR>
 cabbrev Q q
 cabbrev W w
 cabbrev X x
+
+" Identify the syntax highlighting group used at the cursor
+nnoremap <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 nnoremap <C-H> <C-W>h<C-W>=
 nnoremap <C-J> <C-W>j<C-W>=
 nnoremap <C-K> <C-W>k<C-W>=
 nnoremap <C-L> <C-W>l<C-W>=
+
 nnoremap <C-T> <C-W>T " open current window in new tab
+
 nnoremap <Leader>0 :set foldlevel=0<CR>
 nnoremap <Leader>1 :set foldlevel=1<CR>
 nnoremap <Leader>2 :set foldlevel=2<CR>
@@ -207,12 +185,17 @@ nnoremap <Leader>6 :set foldlevel=6<CR>
 nnoremap <Leader>7 :set foldlevel=7<CR>
 nnoremap <Leader>8 :set foldlevel=8<CR>
 nnoremap <Leader>9 :set foldlevel=9<CR>
+
 nnoremap <Leader>= <C-w>=<CR>   " equalize windows
+
 nnoremap tg gT
 nnoremap zO zczO
+
 noremap <Space>h :set hlsearch!<CR>
+
 noremap j gj
 noremap k gk
+
 vnoremap < <gv
 vnoremap > >gv
 
@@ -221,24 +204,6 @@ if has("user_commands")
     command! -bang QA qa<bang>
     command! -bang Qa qa<bang>
 endif
-" }}}
-" {{{ Graphics
-" colorscheme
-if $DARK == "1"
-    "set background=dark
-    let solarized_termtrans=0
-    colorscheme solarized
-else
-    set background=light
-    "colorscheme base16-default-light
-    colorscheme solarized
-endif
-"if filereadable(expand("~/.vimrc_background"))
-  ""let base16colorspace=256
-  "source ~/.vimrc_background
-"endif
-" Identify the syntax highlighting group used at the cursor
-map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 " }}}
 " {{{ Plugin Settings
 " {{{ Plugin: Rainbow parentheses
@@ -434,16 +399,4 @@ nnoremap <silent> <leader>T :TestFile<CR>
 "nmap <silent> <leader>l :TestLast<CR>
 "nmap <silent> <leader>g :TestVisit<CR>
 " }}}
-" }}}
-
-" {{{ Autocommands
-augroup scad
-  autocmd!
-  autocmd BufWritePost *.scad.py silent !python <afile> > <afile>_output.scad
-augroup END
-
-augroup german
-  au!
-  au BufNewFile,BufRead *.de.txt,*.de setlocal spell spelllang=de_de
-augroup END
 " }}}
