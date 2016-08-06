@@ -1,3 +1,4 @@
+" {{{ Vim Options
 " {{{ 1 important
 set nocompatible
 scriptencoding utf-8
@@ -135,7 +136,7 @@ endif
 set hidden                      " allows to edit another file without first saving current one
 set viewoptions=cursor,folds,slash,unix
 " }}}
-
+" }}}
 " {{{ Filetypes
 " Vagrant {{{
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
@@ -180,7 +181,6 @@ autocmd FileType help wincmd L " open help files in vertical split
 " German
 au BufNewFile,BufRead *.de.txt,*.de set filetype=german
 " }}}
-
 " {{{ Plugins
 call plug#begin('~/.vim/bundle')
 Plug 'tpope/vim-obsession'
