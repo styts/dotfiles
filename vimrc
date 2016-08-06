@@ -299,7 +299,7 @@ map <Leader>V :source ~/.vimrc<CR>
 cmap w!! w !sudo tee > /dev/null %
 
 " correct previous misspelled word
-nmap <Leader>z [s1z=<c-o>
+nnoremap <Leader>z [s1z=<c-o>
 
 " yank current filename
 noremap <silent> <F4> :let @+=expand("%:p")<CR>
@@ -396,7 +396,7 @@ let g:jedi#usages_command = ""
 " }}}
 
 " {{{ Plugin: Surround
-vmap s S
+vnoremap s S
 " }}}
 " {{{ Plugin: Airline
 "let g:airline_left_sep=''
@@ -427,8 +427,8 @@ let g:syntastic_text_language_check_args = '--language=de-DE'
 
 " }}}
 " {{{ Plugin: vim-expand-region
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+vnoremap v <Plug>(expand_region_expand)
+vnoremap <C-v> <Plug>(expand_region_shrink)
 " }}}
 " {{{ Plugin: Ultisnip
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -476,7 +476,7 @@ let g:ag_prg="ag --vimgrep"
 " {{{ Plugin: vim-togglelist
 " (quick fix toggle)
 let g:toggle_list_no_mappings = 1 " don't remap my <Leader>q
-nmap <script> <silent> cc :call ToggleQuickfixList()<CR><C-w>j
+nnoremap <script> <silent> cc :call ToggleQuickfixList()<CR><C-w>j
 " }}}
 " {{{ Plugin: vimwiki
 let g:vimwiki_list = [{'path': '~/Personal/vimwiki/',
@@ -496,8 +496,8 @@ let test#strategy = 'neovim'
 "let g:test#preserve_screen = 1
 let test#python#runner = 'pytest'
 "let test#python#pytest#options = '-q'
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
+nnoremap <silent> <leader>t :TestNearest<CR>
+nnoremap <silent> <leader>T :TestFile<CR>
 "nmap <silent> <leader>a :TestSuite<CR>
 "nmap <silent> <leader>l :TestLast<CR>
 "nmap <silent> <leader>g :TestVisit<CR>
