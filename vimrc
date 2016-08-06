@@ -1,86 +1,54 @@
 " {{{ Vim Options
-set nocompatible
 
+" top-options
+set nocompatible
 scriptencoding utf-8
 let mapleader=" "
 
-set incsearch                   " Find as you type search
-set ignorecase                  " Case insensitive search
-set smartcase                   " search case-sensitive if term includes uppercase letters
-set pastetoggle=<F2>            " toggle paste mode key
-noremap <Space>h :set hlsearch!<CR>
-
-noremap j gj
-noremap k gk
-
-vnoremap < <gv
-vnoremap > >gv
-set norelativenumber
-set number
-set numberwidth=4
-set nowrap                      " Do not wrap long lines
-set scrolloff=9999              " keep current line in the middle of the screen
-set hlsearch                    " Highlight search terms
+set autoindent                  " Indent at the same level of the previous line
+set clipboard^=unnamed  " prepend the unnamed register "
 set colorcolumn=79              " visually limit text length
-set spell
+set expandtab                   " Tabs are spaces, not tabs
+set foldlevel=0
+set foldmethod=syntax
 set hidden                      " allows to edit another file without first saving current one
-set splitright
-set splitbelow
+set hidden                      " allows to edit another file without first saving current one
+set history=1000
+set hlsearch                    " Highlight search terms
+set ignorecase                  " Case insensitive search
+set incsearch                   " Find as you type search
 set laststatus=2                " fix airline issue #20
-nnoremap <C-J> <C-W>j<C-W>=
-nnoremap <C-K> <C-W>k<C-W>=
-nnoremap <C-L> <C-W>l<C-W>=
-nnoremap <C-H> <C-W>h<C-W>=
-nnoremap <Leader>= <C-w>=<CR>   " equalize windows
-nnoremap <C-T> <C-W>T " open current window in new tab
-nnoremap tg gT
 set mouse=a
 set mousehide
-set shortmess+=I " no Uganda children intro
-set clipboard^=unnamed  " prepend the unnamed register "
-set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
-set undolevels=1000         " Maximum number of changes that can be undone
-set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-set autoindent                  " Indent at the same level of the previous line
-set tabstop=4                   " An indentation every four columns
-set softtabstop=0               " Let backspace delete indent
-set shiftwidth=4                " Use indents of 4 spaces
-set expandtab                   " Tabs are spaces, not tabs
-set foldmethod=syntax
-set foldlevel=0
-nnoremap zO zczO
-nnoremap <Leader>0 :set foldlevel=0<CR>
-nnoremap <Leader>1 :set foldlevel=1<CR>
-nnoremap <Leader>2 :set foldlevel=2<CR>
-nnoremap <Leader>3 :set foldlevel=3<CR>
-nnoremap <Leader>4 :set foldlevel=4<CR>
-nnoremap <Leader>5 :set foldlevel=5<CR>
-nnoremap <Leader>6 :set foldlevel=6<CR>
-nnoremap <Leader>7 :set foldlevel=7<CR>
-nnoremap <Leader>8 :set foldlevel=8<CR>
-nnoremap <Leader>9 :set foldlevel=9<CR>
 set nobackup                    " Don't create backup files in same folder
-set nowritebackup
+set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
+set norelativenumber
 set noswapfile
-set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest commonart, then all.
-set wildmenu                    " Show list instead of just completing
-set history=1000
+set nowrap                      " Do not wrap long lines
+set nowritebackup
+set number
+set numberwidth=4
+set pastetoggle=<F2>            " toggle paste mode key
+set scrolloff=9999              " keep current line in the middle of the screen
+set shiftwidth=4                " Use indents of 4 spaces
+set shortmess+=I " no Uganda children intro
+set smartcase                   " search case-sensitive if term includes uppercase letters
+set softtabstop=0               " Let backspace delete indent
+set spell
+set splitbelow
+set splitright
+set tabstop=4                   " An indentation every four columns
 set undodir=~/.vim/undo
 set undofile                " persistent undo ...
-cabbrev Q q
-cabbrev W w
-cabbrev X x
-set viminfo='1000,f1
-set hidden                      " allows to edit another file without first saving current one
+set undolevels=1000         " Maximum number of changes that can be undone
+set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
 set viewoptions=cursor,folds,slash,unix
+set viminfo='1000,f1
+set wildmenu                    " Show list instead of just completing
+set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest commonart, then all.
 " shada is viminfo for neovim. the file format for them is different, hence they can't use the same files
 if exists("&shada")
     set shada+=n~/.nvim/viminfo
-endif
-if has("user_commands")
-    command! -bang Q q<bang>
-    command! -bang QA qa<bang>
-    command! -bang Qa qa<bang>
 endif
 " }}}
 " {{{ Filetypes
@@ -220,6 +188,39 @@ noremap <silent> <F4> :let @+=expand("%:p")<CR>
 " german/english spelling
 nnoremap <Leader>de :setlocal spell spelllang=de_de<CR>
 nnoremap <Leader>en :setlocal spell spelllang=en<CR>
+
+cabbrev Q q
+cabbrev W w
+cabbrev X x
+nnoremap <C-H> <C-W>h<C-W>=
+nnoremap <C-J> <C-W>j<C-W>=
+nnoremap <C-K> <C-W>k<C-W>=
+nnoremap <C-L> <C-W>l<C-W>=
+nnoremap <C-T> <C-W>T " open current window in new tab
+nnoremap <Leader>0 :set foldlevel=0<CR>
+nnoremap <Leader>1 :set foldlevel=1<CR>
+nnoremap <Leader>2 :set foldlevel=2<CR>
+nnoremap <Leader>3 :set foldlevel=3<CR>
+nnoremap <Leader>4 :set foldlevel=4<CR>
+nnoremap <Leader>5 :set foldlevel=5<CR>
+nnoremap <Leader>6 :set foldlevel=6<CR>
+nnoremap <Leader>7 :set foldlevel=7<CR>
+nnoremap <Leader>8 :set foldlevel=8<CR>
+nnoremap <Leader>9 :set foldlevel=9<CR>
+nnoremap <Leader>= <C-w>=<CR>   " equalize windows
+nnoremap tg gT
+nnoremap zO zczO
+noremap <Space>h :set hlsearch!<CR>
+noremap j gj
+noremap k gk
+vnoremap < <gv
+vnoremap > >gv
+
+if has("user_commands")
+    command! -bang Q q<bang>
+    command! -bang QA qa<bang>
+    command! -bang Qa qa<bang>
+endif
 " }}}
 " {{{ Graphics
 " colorscheme
