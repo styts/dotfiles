@@ -54,7 +54,7 @@ endif
 " {{{ Autocommands
 au BufWritePost *.scad.py silent !python <afile> > <afile>_output.scad
 au BufNewFile,BufRead *.de.txt,*.de setfiletype german
-au BufRead,BufNewFile *.js.ejs setfiletype javascript
+au BufNewFile,BufRead *.js.ejs setfiletype javascript
 " }}}
 " {{{ Plugins
 call plug#begin('~/.vim/bundle')
