@@ -1,3 +1,4 @@
+" vim: set foldmethod=marker:foldlevel=1:foldenable:
 " {{{ Vim Options
 " {{{ 1 important
 set nocompatible
@@ -77,8 +78,9 @@ set expandtab                   " Tabs are spaces, not tabs
 "set smarttab
 " }}}
 " {{{ 15 folding
-set nofoldenable              " Folds are annoying
+"set nofoldenable              " Folds are annoying
 set foldmethod=syntax
+set foldlevel=0
 nnoremap zO zczO
 nnoremap <Leader>0 :set foldlevel=0<CR>
 nnoremap <Leader>1 :set foldlevel=1<CR>
@@ -250,26 +252,6 @@ Plug 'vim-scripts/tracwiki'
 Plug 'vim-scripts/vimwiki'
 call plug#end()
 " }}}
-
-" {{{ Graphics
-" colorscheme
-if $DARK == "1"
-    "set background=dark
-    let solarized_termtrans=0
-    colorscheme solarized
-else
-    set background=light
-    "colorscheme base16-default-light
-    colorscheme solarized
-endif
-"if filereadable(expand("~/.vimrc_background"))
-  ""let base16colorspace=256
-  "source ~/.vimrc_background
-"endif
-" Identify the syntax highlighting group used at the cursor
-map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-" }}}
-
 " {{{ Mappings
 let maplocalleader = "\\"
 
@@ -291,8 +273,29 @@ nnoremap <Leader>z [s1z=<c-o>
 " yank current filename
 noremap <silent> <F4> :let @+=expand("%:p")<CR>
 
+" german/english spelling
+nnoremap <Leader>de :setlocal spell spelllang=de_de<CR>
+nnoremap <Leader>en :setlocal spell spelllang=en<CR>
 " }}}
-
+" {{{ Graphics
+" colorscheme
+if $DARK == "1"
+    "set background=dark
+    let solarized_termtrans=0
+    colorscheme solarized
+else
+    set background=light
+    "colorscheme base16-default-light
+    colorscheme solarized
+endif
+"if filereadable(expand("~/.vimrc_background"))
+  ""let base16colorspace=256
+  "source ~/.vimrc_background
+"endif
+" Identify the syntax highlighting group used at the cursor
+map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+" }}}
+" {{{ Plugin Settings
 " {{{ Plugin: Rainbow parentheses
 map <Leader>r :RainbowParenthesesToggle<CR>
 au VimEnter * RainbowParenthesesToggle
@@ -374,14 +377,12 @@ let g:pymode_rope_regenerate_on_write = 1
 let g:pymode_options_max_line_length = 79
 nnoremap <Leader>j <c-c>g<CR>
 " }}}
-
 " {{{ Plugin: Jedi
 let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#popup_on_dot = 0
 let g:jedi#goto_definitions_command = "<Leader>j"
 let g:jedi#usages_command = ""
 " }}}
-
 " {{{ Plugin: Surround
 vnoremap s S
 " }}}
@@ -477,7 +478,6 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 " }}}
-
 " {{{ Plugin: vim-test
 let test#strategy = 'neovim'
 "let g:test#preserve_screen = 1
@@ -488,6 +488,7 @@ nnoremap <silent> <leader>T :TestFile<CR>
 "nmap <silent> <leader>a :TestSuite<CR>
 "nmap <silent> <leader>l :TestLast<CR>
 "nmap <silent> <leader>g :TestVisit<CR>
+" }}}
 " }}}
 
 " {{{ Autocommands
@@ -501,9 +502,3 @@ augroup german
   au BufNewFile,BufRead *.de.txt,*.de setlocal spell spelllang=de_de
 augroup END
 " }}}
-
-" german/english spelling
-nnoremap <Leader>de :setlocal spell spelllang=de_de<CR>
-nnoremap <Leader>en :setlocal spell spelllang=en<CR>
-
-" vim: set foldmethod=marker:foldlevel=0:foldenable:
