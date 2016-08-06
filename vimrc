@@ -285,7 +285,6 @@ let g:pymode_rope_autoimport = 1
 let g:pymode_lint_checkers = []
 let g:pymode_rope_regenerate_on_write = 1
 let g:pymode_options_max_line_length = 79
-nnoremap <Leader>j <c-c>g<CR>
 " }}}
 " {{{ Plugin: Jedi
 let g:jedi#use_splits_not_buffers = "right"
@@ -294,7 +293,7 @@ let g:jedi#goto_definitions_command = "<Leader>j"
 let g:jedi#usages_command = ""
 " }}}
 " {{{ Plugin: Surround
-vnoremap s S
+vmap s S
 " }}}
 " {{{ Plugin: Airline
 "let g:airline_left_sep=''
@@ -325,8 +324,8 @@ let g:syntastic_text_language_check_args = '--language=de-DE'
 
 " }}}
 " {{{ Plugin: vim-expand-region
-vnoremap v <Plug>(expand_region_expand)
-vnoremap <C-v> <Plug>(expand_region_shrink)
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 " }}}
 " {{{ Plugin: Ultisnip
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -400,3 +399,6 @@ nnoremap <silent> <leader>T :TestFile<CR>
 "nmap <silent> <leader>g :TestVisit<CR>
 " }}}
 " }}}
+" NEW STUFF GOES HERE {{{ "
+ 
+" }}} "
