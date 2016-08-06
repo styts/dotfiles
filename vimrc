@@ -2,23 +2,19 @@
 set nocompatible
 
 scriptencoding utf-8
-set pastetoggle=<F2>
 let mapleader=" "
+
 set incsearch                   " Find as you type search
 set ignorecase                  " Case insensitive search
 set smartcase                   " search case-sensitive if term includes uppercase letters
-
-" toogle highlight search
+set pastetoggle=<F2>            " toggle paste mode key
 noremap <Space>h :set hlsearch!<CR>
 
-" Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
 noremap k gk
 
-" Visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv
-
 set norelativenumber
 set number
 set numberwidth=4
@@ -31,12 +27,12 @@ set hidden                      " allows to edit another file without first savi
 set splitright
 set splitbelow
 set laststatus=2                " fix airline issue #20
-map <C-J> <C-W>j<C-W>=
-map <C-K> <C-W>k<C-W>=
-map <C-L> <C-W>l<C-W>=
-map <C-H> <C-W>h<C-W>=
+nnoremap <C-J> <C-W>j<C-W>=
+nnoremap <C-K> <C-W>k<C-W>=
+nnoremap <C-L> <C-W>l<C-W>=
+nnoremap <C-H> <C-W>h<C-W>=
 nnoremap <Leader>= <C-w>=<CR>   " equalize windows
-map <C-T> <C-W>T " open current window in new tab
+nnoremap <C-T> <C-W>T " open current window in new tab
 nnoremap tg gT
 set mouse=a
 set mousehide
@@ -52,7 +48,6 @@ set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
 set foldmethod=syntax
 set foldlevel=0
-
 nnoremap zO zczO
 nnoremap <Leader>0 :set foldlevel=0<CR>
 nnoremap <Leader>1 :set foldlevel=1<CR>
@@ -72,23 +67,21 @@ set wildmenu                    " Show list instead of just completing
 set history=1000
 set undodir=~/.vim/undo
 set undofile                " persistent undo ...
-
-" common command typos
 cabbrev Q q
 cabbrev W w
 cabbrev X x
+set viminfo='1000,f1
+set hidden                      " allows to edit another file without first saving current one
+set viewoptions=cursor,folds,slash,unix
+" shada is viminfo for neovim. the file format for them is different, hence they can't use the same files
+if exists("&shada")
+    set shada+=n~/.nvim/viminfo
+endif
 if has("user_commands")
     command! -bang Q q<bang>
     command! -bang QA qa<bang>
     command! -bang Qa qa<bang>
 endif
-set viminfo='1000,f1
-" shada is viminfo for neovim. the file format for them is different, hence they can't use the same files
-if exists("&shada")
-    set shada+=n~/.nvim/viminfo
-endif
-set hidden                      " allows to edit another file without first saving current one
-set viewoptions=cursor,folds,slash,unix
 " }}}
 " {{{ Filetypes
 " Vagrant {{{
