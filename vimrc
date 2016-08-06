@@ -177,6 +177,8 @@ au BufRead,BufNewFile *.js.ejs set filetype=javascript
 " Help {{{
 autocmd FileType help wincmd L " open help files in vertical split
 " }}}
+" German
+au BufNewFile,BufRead *.de.txt,*.de set filetype=german
 " }}}
 
 " {{{ Plugins
@@ -193,6 +195,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'cyplo/vim-colors-solarized'
+Plug 'Chiel92/vim-autoformat'
 Plug 'davidhalter/jedi-vim'
 Plug 'dbeniamine/todo.txt-vim'
 Plug 'dhruvasagar/vim-prosession' | Plug 'tpope/vim-obsession'
@@ -264,13 +267,18 @@ nnoremap <A-l> <C-w>l
 " {{{ Graphics
 " colorscheme
 if $DARK == "1"
-    set background=dark
+    "set background=dark
     let solarized_termtrans=0
     colorscheme solarized
 else
     set background=light
-    colorscheme base16-default
+    "colorscheme base16-default-light
+    colorscheme solarized
 endif
+"if filereadable(expand("~/.vimrc_background"))
+  ""let base16colorspace=256
+  "source ~/.vimrc_background
+"endif
 " Identify the syntax highlighting group used at the cursor
 map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 " }}}
@@ -410,9 +418,12 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_python_checkers=['flake8', 'flake8-pep257']  " we're using flake8 for python
+let g:syntastic_filetype_map = { "german": "text" }
 let g:syntastic_enable_html_checker = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_enable_javascript_checker = 1
+let g:syntastic_text_checkers = ['language_check']
+let g:syntastic_text_language_check_args = '--language=de-DE'
 
 " }}}
 " {{{ Plugin: vim-expand-region
@@ -425,7 +436,8 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 let g:UltiSnipsListSnippets="<Leader><tab>"
 let g:UltiSnipsEditSplit="vertical"
-"let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"] " can't name it 'snippets'
+let g:UltiSnipsSnippetsDir="~/Personal/UltiSnips"
+let g:UltiSnipsUsePythonVersion = 2
 " }}}
 " {{{ Plugin: Flake8
 autocmd BufWritePost *.py call Flake8()
@@ -494,7 +506,17 @@ nmap <silent> <leader>T :TestFile<CR>
 " {{{ Autocommands
 augroup scad
   autocmd!
-  autocmd BufWritePost workbench.py silent !python <afile> > <afile>_output.scad
+  autocmd BufWritePost *.scad.py silent !python <afile> > <afile>_output.scad
+augroup END
+
+augroup german
+  au!
+  au BufNewFile,BufRead *.de.txt,*.de setlocal spell spelllang=de_de
 augroup END
 " }}}
+
+" german/english spelling
+nnoremap <Leader>de :setlocal spell spelllang=de_de<CR>
+nnoremap <Leader>en :setlocal spell spelllang=en<CR>
+
 " vim: set foldmethod=marker:foldlevel=0:foldenable:
