@@ -1,15 +1,14 @@
-" vim: set foldmethod=marker:foldlevel=1:foldenable:
 " {{{ Vim Options
-" {{{ 1 important
 set nocompatible
+
 scriptencoding utf-8
 set pastetoggle=<F2>
 let mapleader=" "
-" }}}
-" {{{ 2 moving around, searching and patterns
 set incsearch                   " Find as you type search
 set ignorecase                  " Case insensitive search
 set smartcase                   " search case-sensitive if term includes uppercase letters
+
+" toogle highlight search
 noremap <Space>h :set hlsearch!<CR>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
@@ -19,22 +18,15 @@ noremap k gk
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv
-" }}}
-" {{{ 3 tags
-" }}}
-" {{{ 4 displaying text
+
 set norelativenumber
 set number
 set numberwidth=4
 set nowrap                      " Do not wrap long lines
 set scrolloff=9999              " keep current line in the middle of the screen
-" }}}
-" {{{ 5 syntax, highlighting and spelling
 set hlsearch                    " Highlight search terms
 set colorcolumn=79              " visually limit text length
 set spell
-" }}}
-" {{{ 6 multiple windows
 set hidden                      " allows to edit another file without first saving current one
 set splitright
 set splitbelow
@@ -44,43 +36,23 @@ map <C-K> <C-W>k<C-W>=
 map <C-L> <C-W>l<C-W>=
 map <C-H> <C-W>h<C-W>=
 nnoremap <Leader>= <C-w>=<CR>   " equalize windows
-" }}}
-" {{{ 7 multiple tab pages
 map <C-T> <C-W>T " open current window in new tab
-" gt / tg tab navigation
 nnoremap tg gT
-" }}}
-" {{{ 8 terminal
-" }}}
-" {{{ 9 using the mouse
 set mouse=a
 set mousehide
-" }}}
-" {{{ 10 printing
-" }}}
-" {{{ 11 messages and info
 set shortmess+=I " no Uganda children intro
-" }}}
-" {{{ 12 selecting text
 set clipboard^=unnamed  " prepend the unnamed register "
-" }}}
-" {{{ 13 editing text
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
 set undolevels=1000         " Maximum number of changes that can be undone
 set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-" }}}
-" {{{ 14 tabs and indenting
 set autoindent                  " Indent at the same level of the previous line
 set tabstop=4                   " An indentation every four columns
 set softtabstop=0               " Let backspace delete indent
 set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
-"set smarttab
-" }}}
-" {{{ 15 folding
-"set nofoldenable              " Folds are annoying
 set foldmethod=syntax
 set foldlevel=0
+
 nnoremap zO zczO
 nnoremap <Leader>0 :set foldlevel=0<CR>
 nnoremap <Leader>1 :set foldlevel=1<CR>
@@ -92,19 +64,9 @@ nnoremap <Leader>6 :set foldlevel=6<CR>
 nnoremap <Leader>7 :set foldlevel=7<CR>
 nnoremap <Leader>8 :set foldlevel=8<CR>
 nnoremap <Leader>9 :set foldlevel=9<CR>
-" }}}
-" {{{ 16 diff mode
-" }}}
-" {{{ 17 mapping
-" }}}
-" {{{ 18 reading and writing files
 set nobackup                    " Don't create backup files in same folder
 set nowritebackup
-" }}}
-" {{{ 19 the swap file
 set noswapfile
-" }}}
-" {{{ 20 command line editing
 set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest commonart, then all.
 set wildmenu                    " Show list instead of just completing
 set history=1000
@@ -120,16 +82,6 @@ if has("user_commands")
     command! -bang QA qa<bang>
     command! -bang Qa qa<bang>
 endif
-" }}}
-" {{{ 21 executing external commands
-" }}}
-" {{{ 22 running make and jumping to errors
-" }}}
-" {{{ 23 language specific
-" }}}
-" {{{ 24 multi-byte characters
-" }}}
-" {{{ 25 various
 set viminfo='1000,f1
 " shada is viminfo for neovim. the file format for them is different, hence they can't use the same files
 if exists("&shada")
@@ -137,7 +89,6 @@ if exists("&shada")
 endif
 set hidden                      " allows to edit another file without first saving current one
 set viewoptions=cursor,folds,slash,unix
-" }}}
 " }}}
 " {{{ Filetypes
 " Vagrant {{{
