@@ -112,6 +112,7 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'vim-scripts/django.vim'
@@ -379,6 +380,7 @@ nnoremap <script> <silent> cc :call ToggleQuickfixList()<CR><C-w>j
 let g:vimwiki_list = [{'path': '~/Personal/vimwiki/',
                      \ 'nested_syntaxes': {'python': 'python', 'sql': 'sql', 'shell': 'zsh'}}]
 let g:vimwiki_folding='expr'
+:let g:vimwiki_table_mappings=0
 " alternatively put on top of file: %% VIM: let g:vimwiki_folding="list"
 " }}}
 " {{{ Plugin: YouCompleteMe
