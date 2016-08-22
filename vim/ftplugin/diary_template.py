@@ -3,6 +3,9 @@
 import sys
 import datetime
 
+with open('/tmp/diary_template.log', 'a') as fp:
+    fp.write('called with {}\n'.format(sys.argv))
+
 template = """*{today}*
 
 == TODO ==

@@ -78,6 +78,8 @@ Plug 'digitaltoad/vim-pug'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'ervandew/supertab'
 Plug 'gerw/vim-HiLinkTrace'
+Plug 'guns/vim-clojure-highlight'
+Plug 'guns/vim-clojure-static'
 Plug 'hdima/python-syntax'
 Plug 'henrik/vim-indexed-search'
 Plug 'hylang/vim-hy'
@@ -89,7 +91,6 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'kien/rainbow_parentheses.vim'
-"Plug 'nikvdp/ejs-syntax'
 Plug 'milkypostman/vim-togglelist'
 Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'nelstrom/vim-markdown-folding'
@@ -112,6 +113,7 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-salve'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxAttr.vim'
@@ -123,7 +125,6 @@ Plug 'vim-scripts/paredit.vim'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'vim-scripts/rtorrent-syntax-file'
 Plug 'vim-scripts/tracwiki'
-Plug 'vim-scripts/vimwiki'
 call plug#end()
 
 " colorscheme needs to be loaded in a plugin, hence it's set after the plugins
@@ -378,7 +379,10 @@ nnoremap <script> <silent> cc :call ToggleQuickfixList()<CR><C-w>j
 " }}}
 " {{{ Plugin: vimwiki
 let g:vimwiki_list = [{'path': '~/Personal/vimwiki/',
-                     \ 'nested_syntaxes': {'python': 'python', 'sql': 'sql', 'shell': 'zsh'}}]
+                     \ 'nested_syntaxes': {'python': 'python',
+                     \'sql': 'sql',
+                     \'german': 'german',
+                     \'shell': 'zsh'}}]
 let g:vimwiki_folding='expr'
 :let g:vimwiki_table_mappings=0
 " alternatively put on top of file: %% VIM: let g:vimwiki_folding="list"
