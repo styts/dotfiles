@@ -1,2 +1,3 @@
+setlocal foldenable
 setlocal foldmethod=marker
-setlocal foldlevel=1
+setlocal foldlevel=0

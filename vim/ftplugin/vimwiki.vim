@@ -1,8 +1,16 @@
 setlocal foldlevel=9     " open all folds
 
-augroup ftplugin_vimwiki
-    autocmd!
-    au BufNewFile,BufRead *.wiki setfiletype vimwiki
-    au BufNewFile *.wiki read!python ~/.vim/ftplugin/diary_template.py <afile>
-    au BufNewFile *.wiki normal ggdd  " delete the first blank line
-augroup END
+fun! ReadDailyTemplate(afile)
+    read ! python2 ~/.vim/ftplugin/diary_template.py a:afile
+    normal ggdd
+endf
+
+" this still does not work for some reason. will use the custom command below
+" for now.
+"augroup ftpluginVimwiki
+    "autocmd!
+    "autocmd BufNewFile *.wiki ReadDailyTemplate(<afile>)
+"augroup END
+"autocmd BufNewFile *.wiki ReadDailyTemplate(expand('<afile>:p'))
+
+command! DiaryTemplate silent call ReadDailyTemplate(expand('%'))

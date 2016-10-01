@@ -17,7 +17,8 @@ template = """*{today}*
 == Notes ==
 
 == Topics ==
-Fitness: """.format(
+Fitness: 
+Typing:""".format(
     today=datetime.datetime.strftime(datetime.date.today(), '%a, %d %B %Y'))
 
 # accept the <afile> command line argument from autocmd
