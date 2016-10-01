@@ -13,6 +13,7 @@ plugins=(
     docker
     docker-compose
     fabric
+    fancy-ctrl-z
     extract
     history-substring-search
     iterm2

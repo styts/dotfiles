@@ -76,7 +76,6 @@ Plug 'dbeniamine/todo.txt-vim'
 Plug 'dhruvasagar/vim-prosession' | Plug 'tpope/vim-obsession'
 Plug 'digitaltoad/vim-pug'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'ervandew/supertab'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
@@ -89,6 +88,7 @@ Plug 'jceb/vim-orgmode'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'jiangmiao/auto-pairs'
+Plug 'leafgarland/typescript-vim'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'milkypostman/vim-togglelist'
@@ -96,6 +96,7 @@ Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'nvie/vim-flake8'
 Plug 'pangloss/vim-javascript'
+Plug 'posva/vim-vue'
 Plug 'plasticboy/vim-markdown'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -125,6 +126,7 @@ Plug 'vim-scripts/paredit.vim'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'vim-scripts/rtorrent-syntax-file'
 Plug 'vim-scripts/tracwiki'
+Plug '~/.vim/personal'
 call plug#end()
 
 " colorscheme needs to be loaded in a plugin, hence it's set after the plugins
@@ -168,7 +170,7 @@ cabbrev W w
 cabbrev X x
 
 " Identify the syntax highlighting group used at the cursor
-nnoremap <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+nnoremap <F6> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 nnoremap <C-H> <C-W>h<C-W>=
 nnoremap <C-J> <C-W>j<C-W>=
@@ -207,10 +209,13 @@ if has("user_commands")
     command! -bang Qa qa<bang>
 endif
 " }}}
+" {{{ Commands
+command! FileType execute 'vsplit ~/.vim/ftplugin/' . &ft . '.vim'
+" }}}
 " {{{ Plugin Settings
 " {{{ Plugin: Rainbow parentheses
-map <Leader>r :RainbowParenthesesToggle<CR>
-au VimEnter * RainbowParenthesesToggle
+"map <Leader>r :RainbowParenthesesToggle<CR>
+"au VimEnter * RainbowParenthesesToggle
 let braces_blacklist = ['wiki', 'vimwiki', 'htmldjango', 'css']
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadSquare
 autocmd Syntax * if index(braces_blacklist, &ft) < 0 | RainbowParenthesesLoadBraces
@@ -321,9 +326,8 @@ let g:syntastic_filetype_map = { "german": "text" }
 let g:syntastic_enable_html_checker = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_enable_javascript_checker = 1
-let g:syntastic_text_checkers = ['language_check']
-let g:syntastic_text_language_check_args = '--language=de-DE'
-
+"let g:syntastic_text_checkers = ['language_check']
+"let g:syntastic_text_language_check_args = '--language=de-DE'
 " }}}
 " {{{ Plugin: vim-expand-region
 vmap v <Plug>(expand_region_expand)
@@ -404,6 +408,14 @@ nnoremap <silent> <leader>T :TestFile<CR>
 "nmap <silent> <leader>l :TestLast<CR>
 "nmap <silent> <leader>g :TestVisit<CR>
 " }}}
+" }}}
+" Terminal {{{
+" ESC to normal mode (this breaks readline behavior)
+"tnoremap <Esc> <C-\><C-n> 
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 " }}}
 " NEW STUFF GOES HERE {{{ "
  
