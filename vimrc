@@ -18,6 +18,8 @@ set hlsearch                    " Highlight search terms
 set ignorecase                  " Case insensitive search
 set incsearch                   " Find as you type search
 set laststatus=2                " fix airline issue #20
+set list                        " show trailing whitespace and other annoyances
+set listchars=tab:>·,trail:~,extends:>,precedes:<
 set mouse=a
 set mousehide
 set nobackup                    " Don't create backup files in same folder
@@ -79,6 +81,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-sexp'
 Plug 'hdima/python-syntax'
 Plug 'henrik/vim-indexed-search'
 Plug 'hylang/vim-hy'
@@ -102,6 +105,7 @@ Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'terryma/vim-expand-region'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -115,6 +119,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-salve'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxAttr.vim'
@@ -122,7 +127,6 @@ Plug 'vim-scripts/django.vim'
 Plug 'vim-scripts/let-modeline.vim'
 Plug 'vim-scripts/nc.vim--Eno'
 Plug 'vim-scripts/openscad.vim'
-Plug 'vim-scripts/paredit.vim'
 Plug 'vim-scripts/restore_view.vim'
 Plug 'vim-scripts/rtorrent-syntax-file'
 Plug 'vim-scripts/tracwiki'
@@ -418,5 +422,7 @@ tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
 " }}}
 " NEW STUFF GOES HERE {{{ "
- 
+
+" for neovim to work with python3
+"let g:python3_host_prog = '/usr/local/bin/python3.5'
 " }}} "

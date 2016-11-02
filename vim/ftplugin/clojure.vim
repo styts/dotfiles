@@ -1,1 +1,4 @@
-let g:paredit_mode = 0
+augroup clojure
+    autocmd!
+    autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
+augroup end

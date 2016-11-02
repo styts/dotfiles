@@ -9,7 +9,7 @@ endf
 " for now.
 "augroup ftpluginVimwiki
     "autocmd!
-    "autocmd BufNewFile *.wiki ReadDailyTemplate(<afile>)
+    "autocmd BufNewFile *.wiki MaybeTemplate(expand('<afile>:p'))
 "augroup END
 "autocmd BufNewFile *.wiki ReadDailyTemplate(expand('<afile>:p'))
 
