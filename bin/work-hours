@@ -1,0 +1,2 @@
+#!/bin/bash
+java -jar /Users/kirill/Projects/work-hours/target/uberjar/work-hours-0.1.0-SNAPSHOT-standalone.jar

@@ -91,9 +91,12 @@ Plug 'jceb/vim-orgmode'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'jiangmiao/auto-pairs'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'tweekmonster/fzf-filemru'
 Plug 'leafgarland/typescript-vim'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'kchmck/vim-coffee-script'
 Plug 'milkypostman/vim-togglelist'
 Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'nelstrom/vim-markdown-folding'
@@ -101,7 +104,6 @@ Plug 'nvie/vim-flake8'
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'plasticboy/vim-markdown'
-Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -135,7 +137,8 @@ call plug#end()
 
 " colorscheme needs to be loaded in a plugin, hence it's set after the plugins
 " colorscheme/background, decide between dark and light
-if $DARK == "1"
+let s:bg = system('cat ~/.colorscheme')
+if s:bg == "dark\n"
     let solarized_termtrans=0
     set background=dark
 else
@@ -412,6 +415,7 @@ nnoremap <silent> <leader>T :TestFile<CR>
 "nmap <silent> <leader>l :TestLast<CR>
 "nmap <silent> <leader>g :TestVisit<CR>
 " }}}
+
 " }}}
 " Terminal {{{
 " ESC to normal mode (this breaks readline behavior)
@@ -425,4 +429,8 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 
 " for neovim to work with python3
 "let g:python3_host_prog = '/usr/local/bin/python3.5'
+
+"nnoremap <c-p> :FilesMru --tiebreak=index<cr>
+"vnoremap <leader>a 
+
 " }}} "

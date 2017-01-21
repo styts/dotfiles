@@ -21,6 +21,7 @@ plugins=(
     python
     pip
     pro
+    #per-directory-history
     themes
     vagrant
     web-search
@@ -163,21 +164,27 @@ infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > /tmp/$TERM.ti && tic /tmp/$TERM.t
 PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
 # if a .colorscheme file exists, switch profile
-# this prevents eye shock by contrasting scheme
+# still an issue: eye shock by contrasting scheme
 if [[ -f ~/.colorscheme ]]; then
-    $(cat ~/.colorscheme)
+    local clr=$(cat ~/.colorscheme)
+    echo -e "\033]50;SetProfile=$clr\a"
 fi
 
 if [[ -f /usr/libexec/java_home ]]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
 fi
 
-# background / color scheme
-export DARK=1
-
 bindkey -s "^N" "clear\n"
 
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-light
+export CLASSPATH=~/Library/Java
+
+compctl -g '~/.itermocil/*(:t:r)' itermocil
+
+# node version manager
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

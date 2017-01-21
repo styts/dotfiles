@@ -17,7 +17,7 @@ template = """*{today}*
 == Notes ==
 
 == Topics ==
-Fitness: 
+Fitness:
 Typing:""".format(
     today=datetime.datetime.strftime(datetime.date.today(), '%a, %d %B %Y'))
 

@@ -4,3 +4,6 @@ nmap <Leader>b :normal Oipdb<Tab><CR>
 setlocal expandtab tabstop=4 shiftwidth=4 tw=79
 let python_highlight_all = 1
 nnoremap <Leader>j <c-c>g<CR>
+
+" Scad stuff
+autocmd BufWritePost workbench.py silent !python <afile> > <afile>_output.scad
