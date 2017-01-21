@@ -130,12 +130,11 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-         ;; dotspacemacs-default-font '("Inconsolata-dz for Powerline"
    dotspacemacs-default-font '("Inconsolata for Powerline"
                                :size 15
                                :weight normal
                                :width normal
-                               :powerline-scale 1.0)
+                               :powerline-scale 1.2)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -299,8 +298,9 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; (global-linum-mode) ; Show line numbers by default
-  (setq powerline-default-separator 'slant)
+  (setq powerline-default-separator 'wave)
   (setq ns-use-native-fullscreen t)
+  (setq ns-use-srgb-colorspace nil)
   (spacemacs/toggle-fullscreen-frame-on)
   (spaceline-compile)
   (define-key evil-normal-state-map (kbd "SPC c SPC") #'comment-or-uncomment-region-or-line)
@@ -384,12 +384,6 @@ you should place your code here."
    ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"])
  '(xterm-color-names-bright
    ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"]))
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(default ((t (:background nil :family "Inconsolata-dz for Powerline" :foundry "nil" :slant normal :weight normal :height 220 :width normal)))))
 
 ; osx copy/paste
 ; http://emacs.stackexchange.com/questions/10900/copy-text-from-emacs-to-os-x-clipboard
