@@ -132,7 +132,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Inconsolata for Powerline"
-                               :size 17
+                               :size 18
                                :weight normal
                                :width normal
                                :powerline-scale 1.3)
@@ -293,6 +293,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; neotree
   (setq neo-smart-open t)
   (evil-define-key 'evilified neotree-mode-map (kbd "C-l") 'select-window-1)
+
+  ;; js
+  (setq-default js2-basic-offset 2)
+  (setq-default js-indent-level 2)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -336,6 +340,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
  '(hl-fg-colors
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+ '(js-indent-level 2)
  '(magit-diff-use-overlays nil)
  '(nrepl-message-colors
    (quote
