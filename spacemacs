@@ -319,6 +319,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   ;; g s without leader mirror SPC mapping
   (define-key evil-normal-state-map (kbd "g s") #'magit-status)
+  ;; disable files with .#
+  (setq create-lockfiles nil)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
