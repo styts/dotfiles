@@ -411,6 +411,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
 
+;; evil paste multiple times
+(defun evil-paste-after-from-0 ()
+  (interactive)
+  (let ((evil-this-register ?0))
+    (call-interactively 'evil-paste-after)))
+
+(define-key evil-visual-state-map "p" 'evil-paste-after-from-0)
+
 ;; (with-eval-after-load "ispell"
 ;;   (setq ispell-program-name "hunspell")
 ;;   (setq ispell-dictionary "en_US,hyph_de_AT,hyph_en_US,hyph_ru_RU,russian-aot")
