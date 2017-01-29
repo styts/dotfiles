@@ -319,8 +319,16 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   ;; g s without leader mirror SPC mapping
   (define-key evil-normal-state-map (kbd "g s") #'magit-status)
+
   ;; disable files with .#
   (setq create-lockfiles nil)
+
+  ;; evil paste multiple times
+  (defun evil-paste-after-from-0 ()
+    (interactive)
+    (let ((evil-this-register ?0))
+      (call-interactively 'evil-paste-after)))
+  (define-key evil-visual-state-map "p" 'evil-paste-after-from-0)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -412,14 +420,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (setq beg (region-beginning) end (region-end))
     (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
-
-;; evil paste multiple times
-(defun evil-paste-after-from-0 ()
-  (interactive)
-  (let ((evil-this-register ?0))
-    (call-interactively 'evil-paste-after)))
-
-(define-key evil-visual-state-map "p" 'evil-paste-after-from-0)
 
 ;; (with-eval-after-load "ispell"
 ;;   (setq ispell-program-name "hunspell")
