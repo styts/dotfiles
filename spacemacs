@@ -290,6 +290,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (define-key evil-normal-state-map (kbd "C-k") #'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-l") #'evil-window-right)
 
+  ;; shell on pinky
+  (define-key evil-normal-state-map (kbd "§") #'spacemacs/default-pop-shell)
+
   ;; center cursor
   (and (require 'centered-cursor-mode) (global-centered-cursor-mode +1))
 
