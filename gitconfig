@@ -37,3 +37,6 @@ default = current
 # Don't include user/email in this file,
 # use ~/.gitconfig.local instead
 ##############################################
+[github]
+	user = 
+	oauth-token = 
