@@ -333,6 +333,15 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; time tracking
   (global-wakatime-mode)
 
+  ;; ORG
+  (setq org-default-notes-file "~/Personal/notes.org")
+  (define-key global-map "\C-cc" 'org-capture)
+  (setq org-capture-templates
+        '(("t" "TODO" entry (file+headline "~/Personal/personal.org" "Tasks")
+           "* TODO %?\n %U")
+          ("e" "Emacs customization" entry (file+headline "~/Personal/work.org" "Emacs")
+             "* TODO %?\n %U")
+          ))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
