@@ -34,6 +34,7 @@ values."
      (auto-completion :variables
                       auto-completion-complete-with-key-sequence "jk"
                       auto-completion-enable-snippets-in-popup t
+                      auto-completion-tab-key-behavior 'expand
                       auto-completion-enable-help-tooltip t)
      (shell :variables shell-default-height 40 shell-default-position 'bottom)
      (version-control :variables version-control-global-margin t version-control-diff-tool 'diff-hl)
@@ -322,7 +323,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq which-key-max-description-length 60) ;; ensure full function names are shown
 
   ;; restore frames as well as buffers/windows
-  ;; (desktop-save-mode 1)
+  (desktop-save-mode 1)
 
   ;; g s without leader mirror SPC mapping
   (define-key evil-normal-state-map (kbd "g s") #'magit-status)
@@ -355,7 +356,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (add-hook 'evil-insert-state-exit-hook 'my-save-if-bufferfilename)
 
   ;; don't truncate lines
-  (spacemacs/toggle-truncate-lines-off)
+  (spacemacs/toggle-truncate-lines-on)
+
+  ;; expand region, clicking v multiple times
+  (define-key evil-visual-state-map (kbd "v") #'er/expand-region)
 
   ;; prev/next buffer
   (define-key evil-normal-state-map (kbd "[ [") #'previous-buffer)
@@ -364,15 +368,19 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; ORG
   (define-key evil-normal-state-map (kbd "<backspace>") #'org-capture)
   (define-key evil-normal-state-map (kbd "s-t") #'org-todo-list)
+  (setq org-directory "~/Personal/org")
   (setq org-default-notes-file "~/Personal/notes.org")
-  ;; (define-key global-map "\C-cc" 'org-capture)
   (setq org-capture-templates
-        '(("t" "TODO" entry (file+headline "~/Personal/personal.org" "Tasks")
-           "* TODO %?\n %U")
-          ("e" "Editor / Environment customization" entry (file+headline "~/Personal/work.org" "Emacs")
-             "* TODO %?\n %U")
-          ("w" "Work task" entry (file+headline "~/Personal/work.org" "Tasks")
-           "* TODO %? :ecs:\n %U")
+        '(("t" "TODO" entry (file+headline "personal.org" "Tasks") "* TODO %?\n %U")
+          ("e" "Editor / Environment customization" entry (file+headline "emacs.org" "Tasks") "* TODO %?\n %U")
+          ("w" "Work task" entry (file+headline "ecs.org" "Tasks") "* TODO %?\n %U")
+          ("b" "Buy")
+          ("bi" "Buy - IKEA" entry (file+headline "buy.org" "IKEA") "* %?")
+          ("ba" "Buy - Amazon" entry (file+headline "buy.org" "Amazon") "* %?")
+          ("bb" "Buy - Baumarkt, Baumax, Obi" entry (file+headline "buy.org" "Baumarkt") "* %?")
+          ("n" "Notes")
+          ("nn" "Notes - General note" entry (file+headline "personal.org" "Notes") "* %?\n%U")
+          ("np" "Notes - People" entry (file+headline "personal.org" "People") "* %?\n%U")
           ))
 )
 
@@ -469,17 +477,19 @@ before packages are loaded. If you are unsure, you should try in setting them in
 (interactive)
 (let (beg end)
 (if (region-active-p)
-      (setq beg (region-beginning) end (region-end))
+      (seq beg (region-beginning) end (region-end))
     (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
 
 ;; (with-eval-after-load "ispell"
 ;;   (setq ispell-program-name "hunspell")
-;;   (setq ispell-dictionary "en_US,hyph_de_AT,hyph_en_US,hyph_ru_RU,russian-aot")
+;;   ;; (setq ispell-dictionary "en_US,hyph_de_AT,hyph_en_US,hyph_ru_RU,russian-aot")
 ;;   ;; ispell-set-spellchecker-params has to be called
-;;   ;; before ispell-hunspell-add-multi-dic will work
+  ;; before ispell-hunspell-add-multi-dic will work
 ;;   (ispell-set-spellchecker-params)
 ;;   (ispell-hunspell-add-multi-dic "en_US,hyph_de_AT,hyph_en_US,hyph_ru_RU,russian-aot"))
+;;   (ispell-hunspell-add-multi-dic "de_AT_frami,en_US"))
+
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
