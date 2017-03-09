@@ -31,13 +31,15 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     python
      (auto-completion :variables
                       auto-completion-complete-with-key-sequence "jk"
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'expand
                       auto-completion-enable-help-tooltip t)
-     (shell :variables shell-default-height 40 shell-default-position 'bottom)
+     (shell :variables shell-default-width 30 shell-default-position 'bottom)
      (version-control :variables version-control-global-margin t version-control-diff-tool 'diff-hl)
+     clojure
      emacs-lisp
      git
      github
@@ -48,8 +50,11 @@ values."
      org
      osx
      (ranger :variables ranger-show-preview t)
+     shell-scripts
      spell-checking
      spotify
+     semantic
+     spacemacs-layouts
      syntax-checking
      )
    ;; List of additional packages that will be installed without being
@@ -64,7 +69,9 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(
+                                    ;; exec-path-from-shell
+                                    )
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -287,7 +294,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
   ;; toggle comments
-  (define-key evil-normal-state-map (kbd "SPC c SPC") #'comment-or-uncomment-region-or-line)
+  (define-key evil-normal-state-map (kbd "SPC c SPC") #'spacemacs/comment-or-uncomment-lines)
 
   ;; navigate windows nicely
   (define-key evil-normal-state-map (kbd "C-h") #'evil-window-left)
@@ -319,7 +326,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (lambda () (interactive) (shell-command "reload-chrome.sh")))
 
   ;; which-key
-  (setq which-key-idle-delay 0.1)
+  (setq which-key-idle-delay 0.4)
   (setq which-key-max-description-length 60) ;; ensure full function names are shown
 
   ;; restore frames as well as buffers/windows
@@ -349,6 +356,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; silence annoying questions
   (setq vc-follow-symlinks t)
 
+  ;; tramp fix ssh
+  (setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
+
   ;; save file when exiting insert mode
   (defun my-save-if-bufferfilename ()
     (if (buffer-file-name)
@@ -365,15 +375,23 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (define-key evil-normal-state-map (kbd "[ [") #'previous-buffer)
   (define-key evil-normal-state-map (kbd "] ]") #'next-buffer)
 
+  ;; focus into new split
+  (define-key evil-normal-state-map (kbd "SPC w v") #'split-window-right-and-focus)
+  (define-key evil-normal-state-map (kbd "SPC w h") #'split-window-below-and-focus)
+
+  ;; sync configuration
+  (define-key evil-normal-state-map (kbd "SPC f e r") #'dotspacemacs/sync-configuration-layers)
+
   ;; ORG
   (define-key evil-normal-state-map (kbd "<backspace>") #'org-capture)
   (define-key evil-normal-state-map (kbd "s-t") #'org-todo-list)
   (setq org-directory "~/Personal/org")
   (setq org-default-notes-file "~/Personal/notes.org")
   (setq org-capture-templates
-        '(("t" "TODO" entry (file+headline "personal.org" "Tasks") "* TODO %?\n %U")
-          ("e" "Editor / Environment customization" entry (file+headline "emacs.org" "Tasks") "* TODO %?\n %U")
-          ("w" "Work task" entry (file+headline "ecs.org" "Tasks") "* TODO %?\n %U")
+        '(("t" "TODO")
+          ("tt" "TODO" entry (file+headline "personal.org" "Tasks") "* TODO %?\n %U")
+          ("te" "Editor / Environment customization" entry (file+headline "emacs.org" "Tasks") "* TODO %?\n %U")
+          ("tw" "Work task" entry (file+headline "ecs.org" "Tasks") "* TODO %?\n %U")
           ("b" "Buy")
           ("bi" "Buy - IKEA" entry (file+headline "buy.org" "IKEA") "* %?")
           ("ba" "Buy - Amazon" entry (file+headline "buy.org" "Amazon") "* %?")
@@ -381,7 +399,55 @@ before packages are loaded. If you are unsure, you should try in setting them in
           ("n" "Notes")
           ("nn" "Notes - General note" entry (file+headline "personal.org" "Notes") "* %?\n%U")
           ("np" "Notes - People" entry (file+headline "personal.org" "People") "* %?\n%U")
+          ("nl" "Notes - Log" entry (file+headline "personal.org" "Log") "* %?\n%U")
           ))
+
+  ;; workaround for uncompressing issue
+  ;; https://github.com/company-mode/company-mode/issues/525#issuecomment-254981015
+  (eval-after-load 'semantic
+    (add-hook 'semantic-mode-hook
+              (lambda ()
+                (dolist (x (default-value 'completion-at-point-functions))
+                  (when (string-prefix-p "semantic-" (symbol-name x))
+                    (remove-hook 'completion-at-point-functions x))))))
+
+  ;; helm
+  (define-key helm-map (kbd "C-d") 'helm-next-page)
+  (define-key helm-map (kbd "C-u") 'helm-previous-page)
+
+  ;; spelling
+;; (add-to-list 'ispell-local-dictionary-alist '("deutsch-hunspell"
+;;                                               "[[:alpha:]]"
+;;                                               "[^[:alpha:]]"
+;;                                               "[']"
+;;                                               t
+;;                                               ("-d" "de_DE"); Dictionary file name
+;;                                               nil
+;;                                               iso-8859-1))
+
+;; (add-to-list 'ispell-local-dictionary-alist '("english-hunspell"
+;;                                               "[[:alpha:]]"
+;;                                               "[^[:alpha:]]"
+;;                                               "[']"
+;;                                               t
+;;                                               ("-d" "en_US")
+;;                                               nil
+;;                                               iso-8859-1))
+
+;; (setq ispell-program-name "hunspell"          ; Use hunspell to correct mistakes
+;;       ispell-dictionary   "english-hunspell") ; Default dictionary to use
+
+;; (defun switch-dictionary-de-en ()
+;;   "Switch german and english dictionaries."
+;;   (interactive)
+;;   (let* ((dict ispell-current-dictionary)
+;;          (new (if (string= dict "deutsch-hunspell") "english-hunspell"
+;;                 "deutsch-hunspell")))
+;;     (ispell-change-dictionary new)
+;;     (message "Switched dictionary from %s to %s" dict new)))
+
+;; (global-set-key (kbd "SPC S s") 'switch-dictionary-de-en)
+;; (define-key evil-normal-state-map (kbd "SPC S s") #'switch-dictionary-de-en)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -428,27 +494,26 @@ before packages are loaded. If you are unsure, you should try in setting them in
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(js-indent-level 2)
- '(magit-commit-arguments (quote ("--verbose")))
  '(magit-diff-use-overlays nil)
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
- '(org-agenda-files
-   (quote
-    ("~/Personal/ecs.org" "~/Personal/personal.org" "~/Personal/work.org")))
+ '(org-agenda-files (quote ("~/Personal/org")))
  '(package-selected-packages
    (quote
-    (ranger wakatime-mode spotify helm-spotify multi magit-gh-pulls github-search github-clone github-browse-file gist gh marshal logito pcache ht company-quickhelp web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data xterm-color shell-pop orgit org-present org-pomodoro alert log4e multi-term markdown-toc magit-gitflow helm-gitignore git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit magit-popup with-editor eshell-z eshell-prompt-extras esh-help diff-hl auto-dictionary smeargle org-projectile org gntp org-download mmm-mode markdown-mode htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flycheck git-commit web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode centered-cursor-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme base16-theme helm-company helm-c-yasnippet company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete color-theme-solarized color-theme-sanityinc-solarized solarized-theme paradox spinner adaptive-wrap ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line)))
+    (highlight projectile yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic async insert-shebang fish-mode company-shell stickyfunc-enhance srefactor packed smartparens evil helm helm-core avy dash clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider queue clojure-mode ranger wakatime-mode spotify helm-spotify multi magit-gh-pulls github-search github-clone github-browse-file gist gh marshal logito pcache ht company-quickhelp web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data xterm-color shell-pop orgit org-present org-pomodoro alert log4e multi-term markdown-toc magit-gitflow helm-gitignore git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit magit-popup with-editor eshell-z eshell-prompt-extras esh-help diff-hl auto-dictionary smeargle org-projectile org gntp org-download mmm-mode markdown-mode htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flycheck git-commit web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode centered-cursor-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme base16-theme helm-company helm-c-yasnippet company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete color-theme-solarized color-theme-sanityinc-solarized solarized-theme paradox spinner adaptive-wrap ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(safe-local-variable-values (quote ((eval progn (pp-buffer) (indent-buffer)))))
  '(save-place-mode t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(spacemacs-theme-comment-bg nil)
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
  '(tool-bar-mode nil)
  '(vc-annotate-background-mode nil)
  '(wakatime-cli-path "/usr/local/bin/wakatime")
+ '(web-beautify-args (quote ("--jslint-happy" "--indent-size 2" "-f" "-")) t)
  '(weechat-color-list
    (quote
     (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))
@@ -489,7 +554,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 ;;   (ispell-set-spellchecker-params)
 ;;   (ispell-hunspell-add-multi-dic "en_US,hyph_de_AT,hyph_en_US,hyph_ru_RU,russian-aot"))
 ;;   (ispell-hunspell-add-multi-dic "de_AT_frami,en_US"))
-
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

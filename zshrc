@@ -83,7 +83,8 @@ if [[ `uname` == 'Darwin' ]]; then
     alias t='todo.sh -d ~/.dotfiles/todo.cfg'
 
     # generic colorizer
-    source "$(brew --prefix)/etc/grc.bashrc"
+    # incompatible with zsh as of 2017-02-27
+    #source "$(brew --prefix)/etc/grc.bashrc"
 
     # autojump
     [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
