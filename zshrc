@@ -47,44 +47,14 @@ export DJANGO_COLORS="dark"
 # Obvious...
 export EDITOR="nvim"
 
-# Customize to your needs...
-export PATH=$HOME/bin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin
-
-# include Android tools: adb, etc.
-export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
-
-#ruby
-#export PATH=$HOME/.gem/ruby/2.2.0/bin:$PATH
-
-#pip
-export PATH=$HOME/.local/bin:$PATH
-
-# python
-export PATH="$HOME/Library/Python/2.7/bin":$PATH
-
 if [[ `uname` == 'Darwin' ]]; then
-    # brew does not link gettext
-    export PATH=/usr/local/Cellar/gettext/0.18.2/bin:$PATH
-
-    # on mac, gnu utils should be before mac defaults, (otherwise ls is gls, etc.)
-    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-
     # agent to vagrant forwarding
     key_file=~/.ssh/id_dsa
     eval `ssh-agent -s` > /dev/null
     [[ -z $(ssh-add -L | grep $key_file) ]] && ssh-add $key_file 2> /dev/null
 
-    # start docker vm
-    # disable
-    #boot2docker ip 2>/dev/null >/dev/null || boot2docker up
-    #$(boot2docker shellinit 2> /dev/null)
-
     # todo cfg
     alias t='todo.sh -d ~/.dotfiles/todo.cfg'
-
-    # generic colorizer
-    # incompatible with zsh as of 2017-02-27
-    #source "$(brew --prefix)/etc/grc.bashrc"
 
     # autojump
     [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
@@ -124,11 +94,6 @@ if [[ -d $HOME/.urxvt/ext/dynamic-colors ]]; then
     # set the $DAYLIGHT based on hour
     source $HOME/bin/daylight.sh
 
-    # dynamic colors
-    export PATH="$HOME/.urxvt/ext/dynamic-colors/bin:$PATH"
-    source $HOME/.urxvt/ext/dynamic-colors/completions/dynamic-colors.zsh
-    export DYNAMIC_COLORS_ROOT="$HOME/.urxvt/ext/dynamic-colors/"
-
     if [[ $DAYLIGHT == "false" ]]; then
         dynamic-colors switch solarized-dark
     else
@@ -160,9 +125,6 @@ export PYTHONDONTWRITEBYTECODE=1
 # fix the neovim pane movement ctrl+h as described in
 # https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
 infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > /tmp/$TERM.ti && tic /tmp/$TERM.ti
-
-# gnu-sed
-PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
 # if a .colorscheme file exists, switch profile
 # still an issue: eye shock by contrasting scheme
