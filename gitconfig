@@ -33,10 +33,14 @@ co = checkout
 [push]
 default = current
 
+[github]
+	user = 
+	oauth-token = 
+
+[commit]
+	gpgsign = true
+
 ##############################################
 # Don't include user/email in this file,
 # use ~/.gitconfig.local instead
 ##############################################
-[github]
-	user = 
-	oauth-token = 
