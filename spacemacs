@@ -534,6 +534,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(js-indent-level 2)
+ '(magit-commit-arguments (quote ("--gpg-sign=7A240185EAE40466")))
  '(magit-diff-use-overlays nil)
  '(nrepl-message-colors
    (quote
