@@ -60,7 +60,7 @@ au BufNewFile,BufRead *.js.ejs setfiletype javascript
 " }}}
 " {{{ Plugins
 call plug#begin('~/.vim/bundle')
-Plug 'tpope/vim-obsession'
+" Plug 'tpope/vim-obsession'
 " ^^^ required by others, don't sort
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -75,7 +75,7 @@ Plug 'cyplo/vim-colors-solarized'
 Plug 'Chiel92/vim-autoformat'
 Plug 'davidhalter/jedi-vim'
 Plug 'dbeniamine/todo.txt-vim'
-Plug 'dhruvasagar/vim-prosession' | Plug 'tpope/vim-obsession'
+" Plug 'dhruvasagar/vim-prosession' | Plug 'tpope/vim-obsession'
 Plug 'digitaltoad/vim-pug'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'gerw/vim-HiLinkTrace'
@@ -116,7 +116,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
-Plug 'tpope/vim-obsession'
+" Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
