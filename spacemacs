@@ -31,10 +31,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     csv
-     sql
-     yaml
-     python
      (auto-completion :disabled-for org git :variables
                       auto-completion-complete-with-key-sequence "jk"
                       auto-completion-enable-snippets-in-popup t
@@ -43,8 +39,8 @@ values."
      (shell :variables shell-default-width 30 shell-default-position 'bottom)
      (version-control :variables version-control-global-margin t version-control-diff-tool 'diff-hl)
      clojure
-              ;; clojure-enable-fancify-symbols f)
      command-log
+     csv
      emacs-lisp
      git
      github
@@ -54,17 +50,20 @@ values."
      markdown
      org
      osx
-     ;; parinfer
+     python
      (ranger :variables ranger-show-preview t)
      rcirc
+     semantic
      shell-scripts
      spell-checking
      spotify
-     semantic
      spacemacs-layouts
+     sql
      (syntax-checking :variables
                       syntax-checking-enable-tooltips nil
                       syntax-checking-use-original-bitmaps t)
+     vimscript
+     yaml
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
