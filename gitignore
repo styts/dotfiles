@@ -7,3 +7,6 @@ kahua/yelster/settings/local.py
 solweb_media_root
 .stfolder
 Session.vim
+.nrepl-*
+.cljs_rhino_repl/
+.tern-port

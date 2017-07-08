@@ -28,3 +28,9 @@ export PATH=/usr/local/Cellar/gettext/0.18.2/bin:$PATH
 # on mac, gnu utils should be before mac defaults, (otherwise ls is gls, etc.)
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
+# node version manager will append paths to PATH
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
+# haskell bins
+export PATH="$HOME/Library/Haskell/bin:$PATH"

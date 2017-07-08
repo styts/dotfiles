@@ -45,7 +45,7 @@ export TERM="xterm-256color"
 export DJANGO_COLORS="dark"
 
 # Obvious...
-export EDITOR="nvim"
+export EDITOR="emacsclient"
 
 if [[ `uname` == 'Darwin' ]]; then
     # agent to vagrant forwarding
@@ -146,8 +146,17 @@ export CLASSPATH=~/Library/Java
 
 compctl -g '~/.itermocil/*(:t:r)' itermocil
 
-# node version manager
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/kirill/.nvm/versions/node/v7.9.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/kirill/.nvm/versions/node/v7.9.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/kirill/.nvm/versions/node/v7.9.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/kirill/.nvm/versions/node/v7.9.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+
+# serverless / AWS Lambda
+export AWS_ACCESS_KEY_ID=AKIAJZKVPO65CCFNZZOQ
+export AWS_SECRET_ACCESS_KEY=$(pass aws/serverless-admin)
+export AWS_GITHUB_TOKEN=$(pass aws/github-token)
