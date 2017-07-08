@@ -89,7 +89,7 @@ Plug 'ivanov/vim-ipython'
 Plug 'janko-m/vim-test'
 Plug 'jceb/vim-orgmode'
 Plug 'jelera/vim-javascript-syntax'
-Plug 'jistr/vim-nerdtree-tabs'
+" Plug 'jistr/vim-nerdtree-tabs'
 Plug 'jiangmiao/auto-pairs'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'tweekmonster/fzf-filemru'
@@ -105,7 +105,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'terryma/vim-expand-region'
@@ -269,7 +269,7 @@ let g:rainbow_conf = {
 " }}}
 " {{{ Plugin: NERDTreeTabs
 let g:nerdtree_tabs_open_on_console_startup = 0
-autocmd VimEnter * NERDTree | wincmd p  " focus on main window
+" autocmd VimEnter * NERDTree | wincmd p  " focus on main window
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore=['\.DS_Store$', '.ropeproject', '\.pyc', '\~$', '\.swo$', '__pycache__']
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
