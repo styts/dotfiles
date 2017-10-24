@@ -30,7 +30,21 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 # node version manager will append paths to PATH
 export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+# . "/usr/local/opt/nvm/nvm.sh"
 
 # haskell bins
 export PATH="$HOME/Library/Haskell/bin:$PATH"
+
+# latex
+export PATH="/Library/TeX/Root/bin/x86_64-darwin:$PATH"
+
+# npm bins
+export PATH="./node_modules/.bin:$PATH"
+
+# tezos
+export PATH="$HOME/src/tezos:$PATH"
+export PATH="$HOME/src/tezos/scripts:$PATH"
+
+# Android
+export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
+export ANDROID_HOME=/usr/local/share/android-sdk
