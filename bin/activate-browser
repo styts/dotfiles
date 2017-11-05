@@ -1,0 +1,7 @@
+#!/bin/sh
+exec <"$0" || exit; read v; read v; exec /usr/bin/osascript - "$@"; exit
+
+-- the above is some shell trickery that lets us write the rest of
+-- the file in plain applescript
+
+tell application "Google Chrome" to activate
