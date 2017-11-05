@@ -10,3 +10,4 @@ Session.vim
 .nrepl-*
 .cljs_rhino_repl/
 .tern-port
+package-lock.json
