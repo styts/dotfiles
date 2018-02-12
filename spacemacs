@@ -1,5 +1,3 @@
-;; -*- mode: emacs-lisp -*-
-;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
 (defun dotspacemacs/layers ()
@@ -38,7 +36,10 @@ values."
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'expand
                       auto-completion-enable-help-tooltip t)
-     (shell :variables shell-default-width 30 shell-default-position 'bottom)
+     (shell :variables shell-default-width 30
+            shell-enable-smart-eshell t
+            shell-default-position 'right
+            shell-default-shell 'eshell)
      (version-control :variables version-control-global-margin t version-control-diff-tool 'diff-hl)
      clojure
      command-log
@@ -81,8 +82,11 @@ values."
                                       free-keys
                                       nodejs-repl
                                       prettier-js
+                                      keyfreq
                                       solarized-theme
                                       wakatime-mode
+                                      restclient
+                                      deferred
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -336,6 +340,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; disable spacemacs initial buffer
   )
 
+(defun save-buffer-always ()
+  "Save the buffer even if it is not modified."
+  (interactive)
+  (set-buffer-modified-p t)
+  (save-buffer))
+
 (defun dotspacemacs/user-config ()
   ;; (spacemacs/toggle-truncate-lines-on)
   ;; (add-hook 'text-mode-hook 'spacemacs/toggle-visual-line-navigation-on)
@@ -353,6 +363,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; open file in project
   (define-key evil-normal-state-map (kbd "r") 'helm-projectile-find-file)
 
+  ;; save buffer even if it has not been modified
+  (define-key evil-normal-state-map (kbd "SPC f s") 'save-buffer-always)
+
   ;; scroll by visual line
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
@@ -360,15 +373,32 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; toggle comments
   (define-key evil-normal-state-map (kbd "SPC c SPC") #'spacemacs/comment-or-uncomment-lines)
 
+  ;; server edit
+  (define-key evil-normal-state-map (kbd "SPC f S") #'server-edit)
+
   ;; navigate windows nicely
   (define-key evil-normal-state-map (kbd "C-h") #'evil-window-left)
-  (define-key evil-normal-state-map (kbd "C-j") #'evil-window-down)
-  (define-key evil-normal-state-map (kbd "C-k") #'evil-window-up)
+  ;; (define-key evil-normal-state-map (kbd "C-j") #'evil-window-down)
+  ;; (define-key evil-normal-state-map (kbd "C-k") #'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-l") #'evil-window-right)
   (define-key evil-normal-state-map (kbd "H-h") #'evil-window-left)
   (define-key evil-normal-state-map (kbd "H-j") #'evil-window-down)
   (define-key evil-normal-state-map (kbd "H-k") #'evil-window-up)
   (define-key evil-normal-state-map (kbd "H-l") #'evil-window-right)
+
+  ;; scrolling with cmd-u, cmd-d
+  (define-key (current-global-map) (kbd "C-j") #'evil-scroll-down)
+  (define-key (current-global-map) (kbd "C-k") #'evil-scroll-up)
+  (define-key evil-normal-state-map (kbd "C-j") #'evil-scroll-down)
+  (define-key evil-normal-state-map (kbd "C-k") #'evil-scroll-up)
+  (define-key evil-normal-state-map (kbd "H-u") #'evil-scroll-up)
+  (define-key evil-normal-state-map (kbd "H-d") #'evil-scroll-down)
+
+  ;; search-default-mode
+  (setq evil-search-module 'evil-search)
+
+  ;; SPC-q-q should not kill the emacs server
+  (evil-leader/set-key "q q" #'spacemacs/frame-killer)
 
   ;; shell on pinky
   (define-key evil-normal-state-map (kbd "§") #'spacemacs/default-pop-shell)
@@ -380,6 +410,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq neo-smart-open t)
   (evil-define-key 'evilified neotree-mode-map (kbd "C-l") 'select-window-1)
 
+  ;; keyfeq statistics
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1)
+
   ;; js
   (setq-default
    ;; js2-mode
@@ -390,7 +424,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
    web-mode-attr-indent-offset 2)
-  (setq tern-command '("/Users/kirill/.nvm/versions/node/v7.9.0/lib/node_modules/tern/bin"))
+
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+  (setq exec-path (append exec-path '("/usr/local/bin")))
+  ;; (setenv "PATH" (concat (getenv "PATH") ":/Users/kirill/.nvm/versions/node/v7.9.0/bin"))
+  ;; (setq exec-path (append exec-path '("/Users/kirill/.nvm/versions/node/v7.9.0/bin")))
+  ;; (setq tern-command '("/Users/kirill/.nvm/versions/node/v7.9.0/lib/node_modules/tern/bin/tern"))
   (with-eval-after-load 'mode-local
     (setq-mode-local json-mode web-beautify-args (quote ("--indent-size 2" "-f" "-"))))
   (with-eval-after-load 'js2-mode
@@ -417,6 +456,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
       "end tell\n")))
   (define-key evil-normal-state-map (kbd "H-i") #'iterm-repeat-last-command)
 
+  (define-key evil-normal-state-map (kbd "H-t")
+    (lambda () (interactive) (shell-command "restart-tropy.sh")))
+
   ;; js-repl
   (spacemacs/set-leader-keys-for-major-mode 'js2-mode
     "e e" 'nodejs-repl-send-last-sexp
@@ -438,7 +480,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq which-key-max-description-length 60) ;; ensure full function names are shown
 
   ;; restore frames as well as buffers/windows
-  (desktop-save-mode 1)
+  ;; (desktop-save-mode 1)
 
   ;; g s without leader mirror SPC mapping
   (define-key evil-normal-state-map (kbd "g s") #'magit-status)
@@ -499,6 +541,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "co" 'org-clock-out)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "cp" 'org-pomodoro)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "ef" 'org-html-export-to-html)
+
+  ;; tezos
+  (load-file "/Users/kirill/Projects/tz/code/emacs/michelson-mode.el")
+  (setq michelson-client-command "/usr/local/bin/alphanet.sh client")
+  (setq michelson-alphanet t)
 
   (setq org-want-todo-bindings t)
   (setq org-directory "~/Personal/org")
@@ -652,7 +699,7 @@ This function is called at the very end of Spacemacs initialization."
  '(cljr-warn-on-eval nil)
  '(column-number-mode t)
  '(compilation-message-face (quote default))
- '(css-indent-offset 2)
+ '(css-indent-offset 2 t)
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
@@ -695,7 +742,7 @@ This function is called at the very end of Spacemacs initialization."
  '(magit-diff-use-overlays nil)
  '(magit-log-arguments
    (quote
-    ("--graph" "--color" "--decorate" "--show-signature" "-n512")))
+    ("--graph" "--color" "--decorate" "--show-signature" "-n128")))
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
@@ -703,7 +750,7 @@ This function is called at the very end of Spacemacs initialization."
  '(org-use-speed-commands t)
  '(package-selected-packages
    (quote
-    (ttl-mode sparql-mode org-category-capture org-brain evil-org vimrc-mode powerline prettier-js evil-lion editorconfig diminish browse-at-remote iedit goto-chg undo-tree window-purpose imenu-list seq utop tuareg caml ocp-indent merlin phpunit phpcbf php-extras php-auto-yasnippets drupal-mode company-php ac-php-core xcscope php-mode tide typescript-mode add-node-modules-path angular-snippets csv-mode command-log-mode nodejs-repl flycheck-clojure f winum fuzzy sql-indent yaml-mode rcirc-notify rcirc-color highlight projectile yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic async insert-shebang fish-mode company-shell stickyfunc-enhance srefactor packed smartparens evil helm helm-core avy dash clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider queue clojure-mode ranger wakatime-mode spotify helm-spotify multi magit-gh-pulls github-search github-clone github-browse-file gist gh marshal logito pcache ht company-quickhelp web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data xterm-color shell-pop orgit org-present org-pomodoro alert log4e multi-term markdown-toc magit-gitflow helm-gitignore git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit magit-popup with-editor eshell-z eshell-prompt-extras esh-help diff-hl auto-dictionary smeargle org-projectile org gntp org-download mmm-mode markdown-mode htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flycheck git-commit web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode centered-cursor-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme base16-theme helm-company helm-c-yasnippet company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete color-theme-solarized color-theme-sanityinc-solarized solarized-theme paradox spinner adaptive-wrap ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line)))
+    (deferred restclient s keyfreq ttl-mode sparql-mode org-category-capture org-brain evil-org vimrc-mode powerline prettier-js evil-lion editorconfig diminish browse-at-remote iedit goto-chg undo-tree window-purpose imenu-list seq utop tuareg caml ocp-indent merlin phpunit phpcbf php-extras php-auto-yasnippets drupal-mode company-php ac-php-core xcscope php-mode tide typescript-mode add-node-modules-path angular-snippets csv-mode command-log-mode nodejs-repl flycheck-clojure f winum fuzzy sql-indent yaml-mode rcirc-notify rcirc-color highlight projectile yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic async insert-shebang fish-mode company-shell stickyfunc-enhance srefactor packed smartparens evil helm helm-core avy dash clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider queue clojure-mode ranger wakatime-mode spotify helm-spotify multi magit-gh-pulls github-search github-clone github-browse-file gist gh marshal logito pcache ht company-quickhelp web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data xterm-color shell-pop orgit org-present org-pomodoro alert log4e multi-term markdown-toc magit-gitflow helm-gitignore git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit magit-popup with-editor eshell-z eshell-prompt-extras esh-help diff-hl auto-dictionary smeargle org-projectile org gntp org-download mmm-mode markdown-mode htmlize gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flycheck git-commit web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode centered-cursor-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme base16-theme helm-company helm-c-yasnippet company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete color-theme-solarized color-theme-sanityinc-solarized solarized-theme paradox spinner adaptive-wrap ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(safe-local-variable-values (quote ((eval progn (pp-buffer) (indent-buffer)))))

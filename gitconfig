@@ -3,7 +3,7 @@ path = ~/.gitconfig.local # this should include user, email and github token
 
 [core]
 excludesfile = ~/.gitignore
-editor = nvim
+editor = emacsclient
 
 [color]
 branch = auto
@@ -39,6 +39,15 @@ default = current
 
 [commit]
 	gpgsign = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Kirill Stytsenko
+	email = kirstyts@gmail.com
 
 ##############################################
 # Don't include user/email in this file,

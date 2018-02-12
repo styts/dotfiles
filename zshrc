@@ -62,7 +62,7 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-export LC_ALL=en_US.UTF-8  
+export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # vim mode
@@ -76,7 +76,7 @@ export VENVWRAPPER=/usr/share/virtualenvwrapper/virtualenvwrapper.sh
 export VENVWRAPPER=/usr/local/bin/virtualenvwrapper.sh
 [ -f $VENVWRAPPER ] && source $VENVWRAPPER
 # same on debian
-export VENVWRAPPER="/etc/bash_completion.d/virtualenvwrapper" 
+export VENVWRAPPER="/etc/bash_completion.d/virtualenvwrapper"
 [ -f $VENVWRAPPER ] && source $VENVWRAPPER
 # arch
 export VENVWRAPPER=$HOME/.local/bin/virtualenvwrapper.sh
@@ -167,3 +167,13 @@ export AWS_GITHUB_TOKEN=$(pass aws/github-token)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+function chpwd() {
+  if [[ $PWD == '/Users/kirill/Projects/tropy' ]]; then
+    tab-color 150 150 256
+  elif [[ $PWD == '/Users/kirill/Projects/tropy-omeka' ]]; then
+    tc orange
+  else
+    tc
+  fi
+}
