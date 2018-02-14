@@ -177,3 +177,5 @@ function chpwd() {
     tc
   fi
 }
+
+RPS1="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
