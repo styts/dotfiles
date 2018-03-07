@@ -69,19 +69,6 @@ export LANG=en_US.UTF-8
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
-# ubuntu vm needs the 'workon', etc. commands
-export VENVWRAPPER=/usr/share/virtualenvwrapper/virtualenvwrapper.sh
-[ -f $VENVWRAPPER ] && source $VENVWRAPPER
-# same for mac (homebrew)
-export VENVWRAPPER=/usr/local/bin/virtualenvwrapper.sh
-[ -f $VENVWRAPPER ] && source $VENVWRAPPER
-# same on debian
-export VENVWRAPPER="/etc/bash_completion.d/virtualenvwrapper"
-[ -f $VENVWRAPPER ] && source $VENVWRAPPER
-# arch
-export VENVWRAPPER=$HOME/.local/bin/virtualenvwrapper.sh
-[ -f $VENVWRAPPER ] && source $VENVWRAPPER
-
 # enable virtualenvwrapper shims and autocompletion
 #if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
@@ -142,8 +129,6 @@ bindkey -s "^N" "clear\n"
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-export CLASSPATH=~/Library/Java
-
 compctl -g '~/.itermocil/*(:t:r)' itermocil
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -154,7 +139,7 @@ export AWS_SECRET_ACCESS_KEY=$(pass aws/serverless-admin)
 export AWS_GITHUB_TOKEN=$(pass aws/github-token)
 
 # OCaml
-. ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+# . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
