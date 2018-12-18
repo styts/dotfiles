@@ -45,11 +45,14 @@ default = current
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
 [user]
-	name = Kirill Stytsenko
-	email = kirstyts@gmail.com
+name = Kirill Stytsenko
+email = kirstyts@gmail.com
 
 ##############################################
 # Don't include user/email in this file,
 # use ~/.gitconfig.local instead
 ##############################################
+[branch]
+	autosetuprebase = always

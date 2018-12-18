@@ -5,7 +5,7 @@ PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
 export PATH
 
 # nix
-. /Users/kirill/.nix-profile/etc/profile.d/nix.sh
+# . /Users/kirill/.nix-profile/etc/profile.d/nix.sh
 
 # Customize to your needs...
 export PATH=$HOME/bin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin

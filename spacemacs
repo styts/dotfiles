@@ -3,8 +3,9 @@
 ;; It must be stored in your home directory.
 
 (defun dotspacemacs/layers ()
-  "Layer configuration:
-This function should only modify configuration layer settings."
+  "Configuration Layers declaration.
+You should not put any user code in this function besides modifying the variable
+values."
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
@@ -34,40 +35,26 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     typescript
+     csv
      nginx
      ocaml
-     ;; php
-     ;; typescript
-     (auto-completion :disabled-for org git :variables
-                      auto-completion-complete-with-key-sequence "jk"
+     (auto-completion :disabled-for org spacemacs-org git react :variables
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-tab-key-behavior 'expand
                       auto-completion-enable-help-tooltip t)
-     ;; (shell :variables shell-default-width 30
-     ;;        shell-enable-smart-eshell t
-     ;;        shell-default-position 'right
-     ;;        shell-default-shell 'eshell)
-     ;; (version-control :variables version-control-global-margin t version-control-diff-tool 'diff-hl)
-     ;; clojure
-     ;; command-log
-     ;; csv
      emacs-lisp
      git
-     github
      helm
      html
      javascript
      markdown
      (org :variables org-use-speed-commands t)
-     ;; osx
-     ;; python
      (ranger :variables ranger-show-preview t)
-     ;; react
-     ;; semantic
-     ;; semantic-web
+     osx
+     react
      shell-scripts
      spell-checking
-     ;; spotify
      spacemacs-layouts
      sql
      (syntax-checking :variables
@@ -91,9 +78,12 @@ This function should only modify configuration layer settings."
                                       prettier-js
                                       keyfreq
                                       solarized-theme
-                                      wakatime-mode
+                                      ;; wakatime-mode
                                       restclient
                                       deferred
+                                      scad-mode
+                                      request
+                                      editorconfig
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -129,23 +119,7 @@ It should only modify the values of Spacemacs settings."
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
    dotspacemacs-elpa-timeout 5
-
-   ;; Set `gc-cons-threshold' and `gc-cons-percentage' when startup finishes.
-   ;; This is an advanced option and should not be changed unless you suspect
-   ;; performance issues due to garbage collection operations.
-   ;; (default '(100000000 0.1))
-   dotspacemacs-gc-cons '(100000000 0.1)
-
-   ;; If non-nil then Spacelpa repository is the primary source to install
-   ;; a locked version of packages. If nil then Spacemacs will install the
-   ;; latest version of packages from MELPA. (default nil)
-   dotspacemacs-use-spacelpa nil
-
-   ;; If non-nil then verify the signature for downloaded Spacelpa archives.
-   ;; (default nil)
-   dotspacemacs-verify-spacelpa-archives nil
-
-   ;; If non-nil then spacemacs will check for updates at startup
+   ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
    ;; whenever you start Emacs. (default nil)
@@ -197,9 +171,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
-
+   dotspacemacs-themes '(spacemacs-light
+                         spacemacs-dark)
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
    ;; are spaceline themes. `vanilla' is default Emacs mode-line. `custom' is a
@@ -417,7 +390,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
 
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
@@ -547,22 +520,24 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1)
 
+  (define-key evil-normal-state-map (kbd "SPC s n") #'yas-new-snippet)
+  (define-key evil-normal-state-map (kbd "SPC s v") #'yas-visit-snippet-file)
+
   ;; js
   (setq-default
    ;; js2-mode
-   js2-basic-offset 2
+   ;; js2-basic-offset 2
    ;; web-mode
    css-indent-offset 2
    web-mode-markup-indent-offset 2
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
    web-mode-attr-indent-offset 2)
+  (setq js2-strict-missing-semi-warning nil)
+  (setq-default typescript-indent-level 2)
 
   (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
   (setq exec-path (append exec-path '("/usr/local/bin")))
-  ;; (setenv "PATH" (concat (getenv "PATH") ":/Users/kirill/.nvm/versions/node/v7.9.0/bin"))
-  ;; (setq exec-path (append exec-path '("/Users/kirill/.nvm/versions/node/v7.9.0/bin")))
-  ;; (setq tern-command '("/Users/kirill/.nvm/versions/node/v7.9.0/lib/node_modules/tern/bin/tern"))
   (with-eval-after-load 'mode-local
     (setq-mode-local json-mode web-beautify-args (quote ("--indent-size 2" "-f" "-"))))
   (with-eval-after-load 'js2-mode
@@ -588,8 +563,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
       "    end tell\n"
       "end tell\n")))
   (define-key evil-normal-state-map (kbd "H-i") #'iterm-repeat-last-command)
-
-  (define-key evil-normal-state-map (kbd "H-t")
+  (define-key evil-normal-state-map (kbd "s-t")
     (lambda () (interactive) (shell-command "restart-tropy.sh")))
 
   ;; js-repl
@@ -629,7 +603,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (define-key evil-visual-state-map "p" 'evil-paste-after-from-0)
 
   ;; time tracking
-  (global-wakatime-mode)
+  ;; (global-wakatime-mode)
 
   ;; ranger  / dired file manager
   (setq ranger-override-dired t)
@@ -667,7 +641,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   ;; ORG
   (define-key evil-normal-state-map (kbd "<backspace>") #'org-capture)
-  (define-key evil-normal-state-map (kbd "s-t") #'org-todo-list)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "p" 'org-priority)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "c" nil)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "ci" 'org-clock-in)
@@ -676,9 +649,9 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "ef" 'org-html-export-to-html)
 
   ;; tezos
-  (load-file "/Users/kirill/Projects/tz/code/emacs/michelson-mode.el")
-  (setq michelson-client-command "/usr/local/bin/alphanet.sh client")
-  (setq michelson-alphanet t)
+  ;; (load-file "/Users/kirill/Projects/tz/code/emacs/michelson-mode.el")
+  ;; (setq michelson-client-command "/usr/local/bin/alphanet.sh client")
+  ;; (setq michelson-alphanet t)
 
   (setq org-want-todo-bindings t)
   (setq org-directory "~/Personal/org")
@@ -709,6 +682,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   ;; helm
   (setq helm-ff-newfile-prompt-p nil) ;; prevent the prompt: "File does not exist, create buffer?"
+  (setq helm-use-frame-when-more-than-two-windows nil)
   (with-eval-after-load 'helm
     (define-key helm-map (kbd "C-d") 'helm-next-page)
     (define-key helm-map (kbd "C-u") 'helm-previous-page))
@@ -721,50 +695,11 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (spacemacs/set-leader-keys-for-major-mode 'clojure-mode "w"
     (lambda () (interactive) (lisp-state-wrap)))
 
-  ;; (defun insert-euro ()
-  ;;   "Inserts a euro into the buffer"
-  ;;   (interactive "p")
-  ;;   (kmacro-exec-ring-item (quote ([24 56 return 35 120 50 48 65 67 return] 0 "%d")) arg))
-  ;; (bind-key* "M-e" (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([24 56 return 35 120 50 48 65 67 return] 0 "%d")) arg)))
+  (defun insert-date ()
+    (interactive)
+    (insert (format-time-string "%Y-%m-%d %H:%m")))
 
-
-  ;; flycheck
-  (with-eval-after-load 'flycheck
-    (flycheck-pos-tip-mode))
-
-  ;; spelling
-;; (add-to-list 'ispell-local-dictionary-alist '("deutsch-hunspell"
-;;                                               "[[:alpha:]]"
-;;                                               "[^[:alpha:]]"
-;;                                               "[']"
-;;                                               t
-;;                                               ("-d" "de_DE"); Dictionary file name
-;;                                               nil
-;;                                               iso-8859-1))
-
-;; (add-to-list 'ispell-local-dictionary-alist '("english-hunspell"
-;;                                               "[[:alpha:]]"
-;;                                               "[^[:alpha:]]"
-;;                                               "[']"
-;;                                               t
-;;                                               ("-d" "en_US")
-;;                                               nil
-;;                                               iso-8859-1))
-
-;; (setq ispell-program-name "hunspell"          ; Use hunspell to correct mistakes
-;;       ispell-dictionary   "english-hunspell") ; Default dictionary to use
-
-;; (defun switch-dictionary-de-en ()
-;;   "Switch german and english dictionaries."
-;;   (interactive)
-;;   (let* ((dict ispell-current-dictionary)
-;;          (new (if (string= dict "deutsch-hunspell") "english-hunspell"
-;;                 "deutsch-hunspell")))
-;;     (ispell-change-dictionary new)
-;;     (message "Switched dictionary from %s to %s" dict new)))
-
-;; (global-set-key (kbd "SPC S s") 'switch-dictionary-de-en)
-;; (define-key evil-normal-state-map (kbd "SPC S s") #'switch-dictionary-de-en)
+  (with-eval-after-load 'flycheck (flycheck-pos-tip-mode))
 )
 
 ; osx copy/paste
@@ -802,15 +737,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     (when (and eslint (file-executable-p eslint))
       (setq-local flycheck-javascript-eslint-executable eslint))))
 
-;; (with-eval-after-load "ispell"
-;;   (setq ispell-program-name "hunspell")
-;;   ;; (setq ispell-dictionary "en_US,hyph_de_AT,hyph_en_US,hyph_ru_RU,russian-aot")
-;;   ;; ispell-set-spellchecker-params has to be called
-  ;; before ispell-hunspell-add-multi-dic will work
-;;   (ispell-set-spellchecker-params)
-;;   (ispell-hunspell-add-multi-dic "en_US,hyph_de_AT,hyph_en_US,hyph_ru_RU,russian-aot"))
-;;   (ispell-hunspell-add-multi-dic "de_AT_frami,en_US"))
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -831,9 +757,9 @@ This function is called at the very end of Spacemacs initialization."
  '(js2-mode-show-strict-warnings nil)
  '(package-selected-packages
    (quote
-    (yasnippet-snippets yaml-mode ws-butler winum web-mode web-beautify wakatime-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen utop tuareg caml toc-org tagedit symon string-inflection sql-indent spaceline-all-the-icons all-the-icons memoize spaceline powerline solarized-theme smeargle slim-mode scss-mode sass-mode restclient restart-emacs ranger rainbow-delimiters pug-mode prettier-js popwin persp-mode pcre2el password-generator paradox overseer orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file ocp-indent nodejs-repl nginx-mode neotree nameless move-text mmm-mode merlin markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode skewer-mode linum-relative link-hint less-css-mode keyfreq json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang indent-guide impatient-mode simple-httpd hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht gh-md fuzzy free-keys flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clojure cider seq spinner queue clojure-mode flycheck-bashate flycheck flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu highlight emmet-mode elisp-slime-nav editorconfig dumb-jump diff-hl define-word deferred dactyl-mode counsel-projectile projectile counsel swiper ivy pkg-info epl company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-quickhelp pos-tip company column-enforce-mode coffee-mode clean-aindent-mode centered-cursor-mode browse-at-remote f auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed angular-snippets dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core ac-ispell auto-complete popup which-key use-package org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async)))
+    (yasnippet-snippets yaml-mode ws-butler winum web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen utop tuareg caml toc-org tagedit symon string-inflection sql-indent spaceline-all-the-icons all-the-icons memoize spaceline powerline solarized-theme smeargle slim-mode scss-mode sass-mode restclient restart-emacs ranger rainbow-delimiters pug-mode prettier-js popwin persp-mode pcre2el password-generator paradox overseer orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file ocp-indent nodejs-repl nginx-mode neotree nameless move-text mmm-mode merlin markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode skewer-mode linum-relative link-hint less-css-mode keyfreq json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang indent-guide impatient-mode simple-httpd hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht gh-md fuzzy free-keys flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clojure cider seq spinner queue clojure-mode flycheck-bashate flycheck flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu highlight emmet-mode elisp-slime-nav editorconfig dumb-jump diff-hl define-word deferred dactyl-mode counsel-projectile projectile counsel swiper ivy pkg-info epl company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-quickhelp pos-tip company column-enforce-mode coffee-mode clean-aindent-mode centered-cursor-mode browse-at-remote f auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed angular-snippets dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core ac-ispell auto-complete popup which-key use-package org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async)))
  '(wakatime-cli-path "/usr/local/bin/wakatime")
- '(wakatime-python-bin nil))
+ '(wakatime-python-bin "/usr/local/bin/python3.6"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -846,6 +772,12 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(company-minimum-prefix-length 2)
+ '(evil-want-Y-yank-to-eol nil)
+ '(exec-path-from-shell-check-startup-files nil)
+ '(js-indent-level 2)
+ '(org-agenda-files '("~/org/tezos-red.org"))
  '(package-selected-packages
-   (quote
-    (yaml-mode ws-butler winum which-key web-mode web-beautify wakatime-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen utop use-package tuareg caml toc-org tagedit sql-indent spaceline powerline solarized-theme smeargle slim-mode scss-mode sass-mode restclient restart-emacs ranger rainbow-delimiters pug-mode prettier-js popwin persp-mode pcre2el paradox orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file ocp-indent nodejs-repl nginx-mode neotree move-text mmm-mode merlin markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode skewer-mode simple-httpd linum-relative link-hint less-css-mode keyfreq json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang indent-guide hydra hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh marshal logito pcache ht gh-md fuzzy free-keys flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clojure cider seq spinner queue clojure-mode flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight emmet-mode elisp-slime-nav dumb-jump f diminish define-word deferred dactyl-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-quickhelp pos-tip company column-enforce-mode coffee-mode clean-aindent-mode centered-cursor-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed angular-snippets dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))))
+   '(tide typescript-mode editorconfig scad-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl csv-mode yaml-mode ws-butler winum which-key web-mode web-beautify wakatime-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen utop use-package tuareg caml toc-org tagedit sql-indent spaceline powerline solarized-theme smeargle slim-mode scss-mode sass-mode restclient restart-emacs ranger rainbow-delimiters pug-mode prettier-js popwin persp-mode pcre2el paradox orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file ocp-indent nodejs-repl nginx-mode neotree move-text mmm-mode merlin markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode skewer-mode simple-httpd linum-relative link-hint less-css-mode keyfreq json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang indent-guide hydra hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh marshal logito pcache ht gh-md fuzzy free-keys flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clojure cider seq spinner queue clojure-mode flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight emmet-mode elisp-slime-nav dumb-jump f diminish define-word deferred dactyl-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-quickhelp pos-tip company column-enforce-mode coffee-mode clean-aindent-mode centered-cursor-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed angular-snippets dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))
+ '(wakatime-cli-path "/usr/local/Cellar/wakatime-cli/8.0.3/libexec/bin/wakatime")
+ '(wakatime-python-bin nil))

@@ -9,7 +9,7 @@ tell application "iTerm2"
   activate
   -- delay 0.2
   tell current session of current window
-    write text "cd ~/Projects/tropy && npm start -- ~/Documents/Art.tpy"
+    write text "cd ~/Projects/tropy && npm start -- ~/Documents/Small.tpy"
     tell application "System Events" to key code 36 -- enter
   end tell
 end tell

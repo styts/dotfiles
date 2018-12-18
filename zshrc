@@ -139,7 +139,7 @@ export AWS_SECRET_ACCESS_KEY=$(pass aws/serverless-admin)
 export AWS_GITHUB_TOKEN=$(pass aws/github-token)
 
 # OCaml
-# . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+. ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -156,3 +156,4 @@ function chpwd() {
 }
 
 RPS1="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
