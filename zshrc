@@ -3,13 +3,14 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="styts"
 CASE_SENSITIVE="true"
 export DISABLE_AUTO_TITLE="true"
-DISABLE_AUTO_UPDATE="true"
+DISABLE_UPDATE_PROMPT=true
 COMPLETION_WAITING_DOTS="true"
 plugins=(
     aliases
     brew
     dircycle
     django
+    dotenv
     docker
     docker-compose
     fabric
@@ -21,7 +22,7 @@ plugins=(
     python
     pip
     pro
-    #per-directory-history
+    # per-directory-history
     themes
     vagrant
     web-search
@@ -29,6 +30,7 @@ plugins=(
     zsh-syntax-highlighting
     zsh-history-substring-search
 )
+# export PER_DIRECTORY_HISTORY_TOGGLE="^X"
 
 # function path
 fpath=(/usr/local/share/zsh-completions $fpath)
@@ -131,15 +133,10 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 compctl -g '~/.itermocil/*(:t:r)' itermocil
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # serverless / AWS Lambda
 export AWS_ACCESS_KEY_ID=$(pass aws/access-key-id)
 export AWS_SECRET_ACCESS_KEY=$(pass aws/serverless-admin)
 export AWS_GITHUB_TOKEN=$(pass aws/github-token)
-
-# OCaml
-. ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

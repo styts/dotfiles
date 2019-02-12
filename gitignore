@@ -11,3 +11,5 @@ Session.vim
 .cljs_rhino_repl/
 .tern-port
 package-lock.json
+alphanet.sh
+zeronet.sh

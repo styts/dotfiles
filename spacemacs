@@ -34,10 +34,11 @@ values."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(php
      typescript
      csv
      nginx
+     (chrome :variables chrome-exec-path "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
      ocaml
      (auto-completion :disabled-for org spacemacs-org git react :variables
                       auto-completion-enable-snippets-in-popup t
@@ -49,7 +50,9 @@ values."
      html
      javascript
      markdown
-     (org :variables org-use-speed-commands t)
+     (org :variables
+          org-use-speed-commands t
+          org-want-todo-bindings t)
      (ranger :variables ranger-show-preview t)
      osx
      react
@@ -256,7 +259,7 @@ It should only modify the values of Spacemacs settings."
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
-   dotspacemacs-large-file-size 1
+   dotspacemacs-large-file-size 0.9
 
    ;; Location where to auto-save files. Possible values are `original' to
    ;; auto-save the file in-place, `cache' to auto-save the file to another
@@ -753,13 +756,15 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(company-minimum-prefix-length 2)
  '(evil-want-Y-yank-to-eol nil)
- '(js2-mode-show-strict-warnings nil)
+ '(exec-path-from-shell-check-startup-files nil)
+ '(js-indent-level 2)
+ '(org-agenda-files '("~/org/tezos-red.org"))
  '(package-selected-packages
-   (quote
-    (yasnippet-snippets yaml-mode ws-butler winum web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen utop tuareg caml toc-org tagedit symon string-inflection sql-indent spaceline-all-the-icons all-the-icons memoize spaceline powerline solarized-theme smeargle slim-mode scss-mode sass-mode restclient restart-emacs ranger rainbow-delimiters pug-mode prettier-js popwin persp-mode pcre2el password-generator paradox overseer orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file ocp-indent nodejs-repl nginx-mode neotree nameless move-text mmm-mode merlin markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode skewer-mode linum-relative link-hint less-css-mode keyfreq json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang indent-guide impatient-mode simple-httpd hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht gh-md fuzzy free-keys flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clojure cider seq spinner queue clojure-mode flycheck-bashate flycheck flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu highlight emmet-mode elisp-slime-nav editorconfig dumb-jump diff-hl define-word deferred dactyl-mode counsel-projectile projectile counsel swiper ivy pkg-info epl company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-quickhelp pos-tip company column-enforce-mode coffee-mode clean-aindent-mode centered-cursor-mode browse-at-remote f auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed angular-snippets dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core ac-ispell auto-complete popup which-key use-package org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async)))
- '(wakatime-cli-path "/usr/local/bin/wakatime")
- '(wakatime-python-bin "/usr/local/bin/python3.6"))
+   '(gmail-message-mode ham-mode html-to-markdown flymd edit-server tide typescript-mode editorconfig scad-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl csv-mode yaml-mode ws-butler winum which-key web-mode web-beautify wakatime-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen utop use-package tuareg caml toc-org tagedit sql-indent spaceline powerline solarized-theme smeargle slim-mode scss-mode sass-mode restclient restart-emacs ranger rainbow-delimiters pug-mode prettier-js popwin persp-mode pcre2el paradox orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file ocp-indent nodejs-repl nginx-mode neotree move-text mmm-mode merlin markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode skewer-mode simple-httpd linum-relative link-hint less-css-mode keyfreq json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang indent-guide hydra hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh marshal logito pcache ht gh-md fuzzy free-keys flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clojure cider seq spinner queue clojure-mode flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight emmet-mode elisp-slime-nav dumb-jump f diminish define-word deferred dactyl-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-quickhelp pos-tip company column-enforce-mode coffee-mode clean-aindent-mode centered-cursor-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed angular-snippets dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))
+ '(wakatime-cli-path "/usr/local/Cellar/wakatime-cli/8.0.3/libexec/bin/wakatime")
+ '(wakatime-python-bin nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
