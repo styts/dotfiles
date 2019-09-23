@@ -6,7 +6,7 @@ export DISABLE_AUTO_TITLE="true"
 DISABLE_UPDATE_PROMPT=true
 COMPLETION_WAITING_DOTS="true"
 plugins=(
-    aliases
+    # aliases
     brew
     dircycle
     django
@@ -21,14 +21,14 @@ plugins=(
     pass
     python
     pip
-    pro
+    # pro
     # per-directory-history
     themes
     vagrant
     web-search
-    yellow
-    zsh-syntax-highlighting
-    zsh-history-substring-search
+    # yellow
+    # zsh-syntax-highlighting
+    # zsh-history-substring-search
 )
 # export PER_DIRECTORY_HISTORY_TOGGLE="^X"
 
