@@ -34,7 +34,8 @@ values."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(php
+   '(python
+     php
      typescript
      csv
      nginx
@@ -50,6 +51,9 @@ values."
      html
      javascript
      markdown
+     (node :variable node-add-modules-path)
+     (vue :variables vue-backend 'lsp)
+     lsp
      (org :variables
           org-use-speed-commands t
           org-want-todo-bindings t)
@@ -85,8 +89,15 @@ values."
                                       restclient
                                       deferred
                                       scad-mode
+                                      sparql-mode
                                       request
                                       editorconfig
+                                      ;; next 4 are for vue.js
+                                      ;; vue-mode
+                                      ;; lsp-mode
+                                      ;; lsp-vue
+                                      ;; company-lsp
+                                      (stylus-mode :location (recipe :fetcher github :repo "vladh/stylus-mode"))
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -545,6 +556,8 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     (setq-mode-local json-mode web-beautify-args (quote ("--indent-size 2" "-f" "-"))))
   (with-eval-after-load 'js2-mode
     (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules))
+  (with-eval-after-load 'vue-mode
+    (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules))
   ;; 2 space indent also for element's attributes, concatenations and contiguous function calls:
   (with-eval-after-load 'web-mode
     (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
@@ -576,6 +589,11 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     "e r" 'nodejs-repl-send-region
     "s s" 'nodejs-repl-switch-to-repl
     )
+
+  (spacemacs/set-leader-keys-for-major-mode 'vue-mode
+    "e e" 'eslint-fix-file)
+  (spacemacs/set-leader-keys-for-major-mode 'js2-mode
+    "e e" 'eslint-fix-file)
 
   ;; auto-completion, snippets
   (global-company-mode)
@@ -645,6 +663,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; ORG
   (define-key evil-normal-state-map (kbd "<backspace>") #'org-capture)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "p" 'org-priority)
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode "z" 'hide-sublevels)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "c" nil)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "ci" 'org-clock-in)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "co" 'org-clock-out)
@@ -703,6 +722,30 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     (insert (format-time-string "%Y-%m-%d %H:%m")))
 
   (with-eval-after-load 'flycheck (flycheck-pos-tip-mode))
+
+  ;; Vue.js
+  ;; (require 'vue-mode)
+  ;; (add-to-list 'vue-mode-hook #'smartparens-mode)
+  ;; (require 'lsp-mode)
+  ;; (require 'lsp-vue)
+  ;; (add-hook 'vue-mode-hook #'lsp-vue-mmm-enable)
+  ;; (with-eval-after-load 'lsp-mode
+  ;; (require 'lsp-flycheck))
+  ;; (require 'company-lsp)
+  ;; (push 'company-lsp company-backends)
+
+  ;; Umlauts
+  (global-unset-key (kbd "M-s"))
+  (global-set-key (kbd "M-s") (lambda () "Insert ß." (interactive) (insert "ß")))
+  (global-unset-key (kbd "M-u"))
+  (global-set-key (kbd "M-u a") (lambda () "Insert ä." (interactive) (insert "ä")))
+  (global-set-key (kbd "M-u A") (lambda () "Insert Ä." (interactive) (insert "Ä")))
+  (global-set-key (kbd "M-u o") (lambda () "Insert ö." (interactive) (insert "ö")))
+  (global-set-key (kbd "M-u O") (lambda () "Insert Ö." (interactive) (insert "Ö")))
+  (global-set-key (kbd "M-u u") (lambda () "Insert ü." (interactive) (insert "ü")))
+  (global-set-key (kbd "M-u U") (lambda () "Insert Ü." (interactive) (insert "Ü")))
+
+  (add-to-list 'auto-mode-alist '("\\.sparql$" . sparql-mode))
 )
 
 ; osx copy/paste
@@ -729,6 +772,16 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
       (seq beg (region-beginning) end (region-end))
     (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
+
+(defun copy-filename-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename))))
 
 (defun my/use-eslint-from-node-modules ()
   (let* ((root (locate-dominating-file
@@ -762,7 +815,7 @@ This function is called at the very end of Spacemacs initialization."
  '(js-indent-level 2)
  '(org-agenda-files '("~/org/tezos-red.org"))
  '(package-selected-packages
-   '(gmail-message-mode ham-mode html-to-markdown flymd edit-server tide typescript-mode editorconfig scad-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl csv-mode yaml-mode ws-butler winum which-key web-mode web-beautify wakatime-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen utop use-package tuareg caml toc-org tagedit sql-indent spaceline powerline solarized-theme smeargle slim-mode scss-mode sass-mode restclient restart-emacs ranger rainbow-delimiters pug-mode prettier-js popwin persp-mode pcre2el paradox orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file ocp-indent nodejs-repl nginx-mode neotree move-text mmm-mode merlin markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode skewer-mode simple-httpd linum-relative link-hint less-css-mode keyfreq json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang indent-guide hydra hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh marshal logito pcache ht gh-md fuzzy free-keys flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clojure cider seq spinner queue clojure-mode flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight emmet-mode elisp-slime-nav dumb-jump f diminish define-word deferred dactyl-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-quickhelp pos-tip company column-enforce-mode coffee-mode clean-aindent-mode centered-cursor-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed angular-snippets dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))
+   '(lsp-ui lsp-treemacs lv lsp-python-ms helm-lsp company-lsp lsp-mode tide typescript-mode editorconfig scad-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl csv-mode yaml-mode ws-butler winum which-key web-mode web-beautify wakatime-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen utop use-package tuareg caml toc-org tagedit sql-indent spaceline powerline solarized-theme smeargle slim-mode scss-mode sass-mode restclient restart-emacs ranger rainbow-delimiters pug-mode prettier-js popwin persp-mode pcre2el paradox orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file ocp-indent nodejs-repl nginx-mode neotree move-text mmm-mode merlin markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode skewer-mode simple-httpd linum-relative link-hint less-css-mode keyfreq json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang indent-guide hydra hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh marshal logito pcache ht gh-md fuzzy free-keys flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clojure cider seq spinner queue clojure-mode flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight emmet-mode elisp-slime-nav dumb-jump f diminish define-word deferred dactyl-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-quickhelp pos-tip company column-enforce-mode coffee-mode clean-aindent-mode centered-cursor-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed angular-snippets dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))
  '(wakatime-cli-path "/usr/local/Cellar/wakatime-cli/8.0.3/libexec/bin/wakatime")
  '(wakatime-python-bin nil))
 (custom-set-faces
@@ -786,3 +839,8 @@ This function is called at the very end of Spacemacs initialization."
    '(tide typescript-mode editorconfig scad-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl csv-mode yaml-mode ws-butler winum which-key web-mode web-beautify wakatime-mode volatile-highlights vimrc-mode vi-tilde-fringe uuidgen utop use-package tuareg caml toc-org tagedit sql-indent spaceline powerline solarized-theme smeargle slim-mode scss-mode sass-mode restclient restart-emacs ranger rainbow-delimiters pug-mode prettier-js popwin persp-mode pcre2el paradox orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file ocp-indent nodejs-repl nginx-mode neotree move-text mmm-mode merlin markdown-toc markdown-mode magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode skewer-mode simple-httpd linum-relative link-hint less-css-mode keyfreq json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang indent-guide hydra hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh marshal logito pcache ht gh-md fuzzy free-keys flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clojure cider seq spinner queue clojure-mode flycheck pkg-info epl flx-ido flx fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight emmet-mode elisp-slime-nav dumb-jump f diminish define-word deferred dactyl-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-quickhelp pos-tip company column-enforce-mode coffee-mode clean-aindent-mode centered-cursor-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed angular-snippets dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))
  '(wakatime-cli-path "/usr/local/Cellar/wakatime-cli/8.0.3/libexec/bin/wakatime")
  '(wakatime-python-bin nil))
+
+(defun eslint-fix-file ()
+  (interactive)
+  (message "eslint --fixing the file" (buffer-file-name))
+  (shell-command (concat flycheck-javascript-eslint-executable " --fix " (buffer-file-name))))

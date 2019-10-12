@@ -48,6 +48,7 @@ export DJANGO_COLORS="dark"
 
 # Obvious...
 export EDITOR="emacsclient"
+export ALTERNATE_EDITOR="vim"
 
 if [[ `uname` == 'Darwin' ]]; then
     # agent to vagrant forwarding
@@ -154,3 +155,5 @@ function chpwd() {
 
 RPS1="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
